@@ -1,5 +1,6 @@
 package com.kt.digicobus.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -20,6 +21,11 @@ class LoginActivity : AppCompatActivity() {
         val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
         binding.spinner.adapter = myAdapter
 
+
+        binding.tvJoin.setOnClickListener{
+            val intent = Intent(this, JoinActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
