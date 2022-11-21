@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="로그인"
             android:textSize="32dp"
+            android:textColor="@color/black"
             android:layout_marginTop="130dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             app:layout_constraintTop_toTopOf="parent"
