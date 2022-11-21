@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="login_spinner_array">
+        <item>그룹사 선택</item>
+        <item>kt</item>
+        <item>kt ds</item>
+        <item>kt estate</item>
+    </string-array>
+</resources>

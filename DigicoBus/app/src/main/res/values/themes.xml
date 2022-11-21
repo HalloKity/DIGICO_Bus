@@ -14,5 +14,7 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="editTextStyle">@style/customTextViewFontStyle</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>
