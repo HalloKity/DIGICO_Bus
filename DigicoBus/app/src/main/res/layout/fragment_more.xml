@@ -3,11 +3,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MoreFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="more" />
+        android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/img_junghwan"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="박정환"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/img_profile"/>
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_logout2"
+                android:includeFontPadding="false"
+                android:text="로그아웃"
+                android:textSize="10dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_large_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IT부문"
+                android:textSize="16dp"
+                android:layout_marginLeft="40dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                app:layout_constraintLeft_toRightOf="@id/img_profile" />
+            <TextView
+                android:id="@+id/tv_small_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IT 전략본부 IT협력팀"
+                android:textSize="16dp"
+                android:layout_marginLeft="40dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_large_group"
+                app:layout_constraintLeft_toRightOf="@id/img_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/constraint_top"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_70"
+            app:layout_constraintTop_toBottomOf="@id/constraint_top"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
