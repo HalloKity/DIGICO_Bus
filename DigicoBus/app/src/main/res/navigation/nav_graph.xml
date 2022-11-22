@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/CommuteFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/CommuteFragment"
+        android:name="com.kt.digicobus.fragment.CommuteFragment"
+        android:label="fragment_commute"
+        tools:layout="@layout/fragment_commute" />
+    <fragment
+        android:id="@+id/ReservationConfirmFragment"
+        android:name="com.kt.digicobus.fragment.ReservationConfirmFragment"
+        android:label="fragment_reservation_confirm"
+        tools:layout="@layout/fragment_reservation_confirm" />
+    <fragment
+        android:id="@+id/ShuttleFragment"
+        android:name="com.kt.digicobus.fragment.ShuttleFragment"
+        android:label="fragment_shuttle"
+        tools:layout="@layout/fragment_shuttle" />
+    <fragment
+        android:id="@+id/MoreFragment"
+        android:name="com.kt.digicobus.fragment.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" />
+</navigation>

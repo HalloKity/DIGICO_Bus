@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/CommuteFragment"
+        android:icon="@drawable/img_commute"
+        android:iconTint="@color/gray_70"
+        android:title="통근버스"/>
+    <item
+        android:id="@+id/ReservationConfirmFragment"
+        android:icon="@drawable/img_reservation"
+        android:iconTint="@color/gray_70"
+        android:title="예약확인"/>
+    <item
+        android:id="@+id/ShuttleFragment"
+        android:icon="@drawable/img_shuttle"
+        android:iconTint="@color/gray_70"
+        android:title="셔틀버스"/>
+    <item
+        android:id="@+id/MoreFragment"
+        android:icon="@drawable/img_more"
+        android:iconTint="@color/gray_70"
+        android:title="더보기"/>
+</menu>
