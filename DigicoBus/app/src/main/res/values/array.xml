@@ -6,4 +6,10 @@
         <item>kt ds</item>
         <item>kt estate</item>
     </string-array>
+
+    <string-array name="shuttle_spinner_array">
+        <item>판교 사옥</item>
+        <item>광화문 사옥</item>
+        <item>양재 우면 연구소</item>
+    </string-array>
 </resources>

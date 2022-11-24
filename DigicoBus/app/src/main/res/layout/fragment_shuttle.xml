@@ -3,12 +3,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ShuttleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="shuttle" />
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/icon_location"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_location_shuttle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/icon_location"
+            app:layout_constraintStart_toEndOf="@+id/icon_location"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/google_map"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@color/gray_70"
+            app:layout_constraintTop_toBottomOf="@id/spinner"
+            app:layout_constraintStart_toStartOf="parent"/>
+        
+        <TextView
+            android:id="@+id/tv_shuttle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="셔틀버스"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/google_map"/>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/tab_view"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            app:elevation="1dp"
+            app:menu="@menu/shuttle_tab_menu"
+            app:labelVisibilityMode="labeled"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_shuttle"/>
+
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintTop_toBottomOf="@id/tab_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:navGraph="@navigation/nav_graph_shuttle"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/ShuttleInfoGoToWorkFragment"
+    android:id="@+id/nav_graph_shuttle">
+
+    <fragment
+        android:id="@+id/ShuttleInfoGoToWorkFragment"
+        android:name="com.kt.digicobus.fragment.ShuttleInfoGoToWorkFragment"
+        android:label="fragment_shuttle_info_go_to_work"
+        tools:layout="@layout/fragment_shuttle_info_go_to_work" />
+    <fragment
+        android:id="@+id/ShuttleInfoGoToHomeFragment"
+        android:name="com.kt.digicobus.fragment.ShuttleInfoGoToHomeFragment"
+        android:label="fragment_shuttle_info_go_to_home"
+        tools:layout="@layout/fragment_shuttle_info_go_to_home" />
+
+</navigation>
