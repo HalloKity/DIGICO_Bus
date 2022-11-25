@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MoreListAdapter
+import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.icon_list
+import com.kt.digicobus.data.data.Companion.icon_name_list
 import com.kt.digicobus.databinding.FragmentMoreBinding
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
@@ -37,9 +40,6 @@ class MoreFragment : Fragment() {
     }
 
     private fun setAdapter(){
-        var icon_list = mutableListOf(R.drawable.icon_speaker, R.drawable.icon_booking, R.drawable.icon_question, R.drawable.icon_setting)
-        var icon_name_list = mutableListOf("공지사항","예약내역","FAQ","설정")
-
         // RecyclerView 객체 생성
         recyclerView = binding.recyclerview
         recyclerView.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
