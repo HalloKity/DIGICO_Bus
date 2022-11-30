@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CommuteFragment"
-        android:name="com.kt.digicobus.fragment.CommuteFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteFragment"
         android:label="fragment_commute"
         tools:layout="@layout/fragment_commute" />
     <fragment

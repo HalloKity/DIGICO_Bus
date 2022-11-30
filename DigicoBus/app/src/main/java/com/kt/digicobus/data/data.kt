@@ -12,6 +12,11 @@ data class TicketContent(
     var tv_end_time: String,
 )
 
+data class BusStopContent(
+    var tv_bus_stop_location:String,
+    var tv_departure_time:String
+)
+
 class data{
     companion object{
         //MoreFragment
@@ -20,5 +25,8 @@ class data{
 
         //commuteFragment
         var ticketList = mutableListOf<TicketContent>()
+
+        //commuteBusChoiceFragment
+        var busStopList = mutableListOf<BusStopContent>()
     }
 }

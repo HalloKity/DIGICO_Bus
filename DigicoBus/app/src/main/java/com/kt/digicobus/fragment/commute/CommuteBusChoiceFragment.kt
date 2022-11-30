@@ -1,60 +1,86 @@
 package com.kt.digicobus.fragment.commute
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
+import com.kt.digicobus.adapter.BusStopListAdapter
+import com.kt.digicobus.adapter.TicketListAdapter
+import com.kt.digicobus.data.BusStopContent
+import com.kt.digicobus.data.TicketContent
+import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.busStopList
+import com.kt.digicobus.databinding.FragmentCommuteBinding
+import com.kt.digicobus.databinding.FragmentCommuteBusChoiceBinding
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CommuteBusChoiceFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+//통근버스 2
 class CommuteBusChoiceFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding : FragmentCommuteBusChoiceBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var busStopListAdapter: BusStopListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var ctx: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ctx = context
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_commute_bus_choice, container, false)
+        binding = FragmentCommuteBusChoiceBinding.inflate(layoutInflater)
+
+        val items = resources.getStringArray(R.array.go_to_work_and_home_array)
+        val myAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, items)
+        binding.spinner.adapter = myAdapter
+
+        setAdapter()
+
+        //뒤로가기
+        binding.btnBack.setOnClickListener{
+            container?.findNavController()?.navigate(R.id.action_CommuteBusChoiceFragment_to_CommuteMainFragment)
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CommuteBusChoiceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CommuteBusChoiceFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setAdapter(){
+        fillData()
+
+        // RecyclerView 객체 생성
+        recyclerView = binding.recyclerview
+        recyclerView.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
+        // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
+        busStopListAdapter = BusStopListAdapter(ctx, R.layout.listview_detail_bus_info, busStopList)
+
+        // 3. RecyclerView와 Adapter 연결
+        recyclerView.adapter = busStopListAdapter
+    }
+
+    fun fillData(){
+        busStopList.clear()
+        busStopList.add(BusStopContent("간선오거리역 1번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("부평역 1번출구 맞은편\n큰거리 고은성모의원앞","(07:00)"))
+        busStopList.add(BusStopContent("숙대입구역 1번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("안국역 3번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("정자역 7번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("부평역 3번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("정자역 2번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("간선오거리역 1번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("간석육거리역 3번출구\n버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("간선칠거리역 4번출구\n버스정류장 앞","(06:50)"))
+
     }
 }

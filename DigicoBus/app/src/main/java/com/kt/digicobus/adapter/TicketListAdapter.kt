@@ -1,14 +1,20 @@
 package com.kt.digicobus.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
+import com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment
+import com.kt.digicobus.fragment.commute.CommuteFragment
+import com.kt.digicobus.fragment.commute.CommuteMainFragment
 
 class TicketListAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<TicketHolder>() {
@@ -17,6 +23,12 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(resource, parent, false)
 
+        itemView.setOnClickListener{
+            //fragment간 이동 with nav_graph action
+            parent.findNavController().navigate(R.id.action_CommuteMainFragment_to_CommuteBusChoiceFragment2)
+
+            //값 넘기는 거 확인해보기
+        }
         return TicketHolder(itemView)
     }
 
@@ -28,6 +40,7 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
         holder.tv_start_time.text = ticketContentsList[position].tv_start_time
         holder.tv_end_place_name.text = ticketContentsList[position].tv_end_place_name
         holder.tv_end_time.text = ticketContentsList[position].tv_end_time
+
     }
 
     override fun getItemCount(): Int {
@@ -36,10 +49,14 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
 }
 
 class TicketHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    var constraint : ConstraintLayout = itemView!!.findViewById(R.id.constraint)
+
     var tv_large_place: TextView = itemView!!.findViewById(R.id.tv_large_place)
     var tv_small_place: TextView = itemView!!.findViewById(R.id.tv_small_place)
     var tv_start_place_name: TextView = itemView!!.findViewById(R.id.tv_start_place_name)
     var tv_start_time: TextView = itemView!!.findViewById(R.id.tv_start_time)
     var tv_end_place_name: TextView = itemView!!.findViewById(R.id.tv_end_place_name)
     var tv_end_time: TextView = itemView!!.findViewById(R.id.tv_end_time)
+
+
 }

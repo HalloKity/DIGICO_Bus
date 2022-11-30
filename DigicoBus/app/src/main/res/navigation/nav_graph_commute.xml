@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_commute"
+    app:startDestination="@id/CommuteMainFragment">
+    <fragment
+        android:id="@+id/CommuteMainFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteMainFragment"
+        android:label="fragment_commute_main"
+        tools:layout="@layout/fragment_commute_main" >
+        <action
+            android:id="@+id/action_CommuteMainFragment_to_CommuteBusChoiceFragment2"
+            app:destination="@id/CommuteBusChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CommuteBusChoiceFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment"
+        android:label="fragment_commute_bus_choice"
+        tools:layout="@layout/fragment_commute_bus_choice" >
+        <action
+            android:id="@+id/action_CommuteBusChoiceFragment_to_CommuteCalendarChoiceFragment"
+            app:destination="@id/CommuteCalendarChoiceFragment" />
+        <action
+            android:id="@+id/action_CommuteBusChoiceFragment_to_CommuteMainFragment"
+            app:destination="@id/CommuteMainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CommuteCalendarChoiceFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteCalendarChoiceFragment"
+        android:label="fragment_commute_calendar_choice"
+        tools:layout="@layout/fragment_commute_calendar_choice" >
+        <action
+            android:id="@+id/action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment"
+            app:destination="@id/CommuteBusChoiceFragment" />
+    </fragment>
+</navigation>

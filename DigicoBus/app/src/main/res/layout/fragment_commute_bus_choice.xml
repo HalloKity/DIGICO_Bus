@@ -3,12 +3,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.commute.CommuteBusChoiceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_back"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="버스예약"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintLeft_toRightOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@id/btn_back"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <FrameLayout
+            android:id="@+id/layout_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/img_ticket"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_ticket" />
+            <TextView
+                android:id="@+id/tv_large_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인천"
+                android:textColor="@color/black"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_small_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="남동구/인천 부평구/부천/시흥"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_frame"
+            app:layout_constraintLeft_toRightOf="@id/layout_frame"
+            app:layout_constraintTop_toBottomOf="@id/spinner" />
+        <TextView
+            android:id="@+id/tv_bus_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경기71 아8551"
+            android:textColor="@color/black"
+            android:textSize="9dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_small_place"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_reserve"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_frame" />
+
+        <Button
+            android:id="@+id/btn_reserve"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="날짜 확인하기"
+            android:textSize="14dp"
+            android:includeFontPadding="false"
+            android:enabled="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:background="@color/mint"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
