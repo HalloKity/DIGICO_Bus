@@ -40,9 +40,9 @@ class CommuteBusChoiceFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteBusChoiceBinding.inflate(layoutInflater)
 
-        val items = resources.getStringArray(R.array.go_to_work_and_home_array)
-        val myAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, items)
-        binding.spinner.adapter = myAdapter
+//        val items = resources.getStringArray(R.array.go_to_work_and_home_array)
+//        val myAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, items)
+//        binding.spinner.adapter = myAdapter
 
         setAdapter()
 
