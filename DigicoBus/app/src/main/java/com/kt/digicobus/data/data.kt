@@ -17,6 +17,11 @@ data class BusStopContent(
     var tv_departure_time:String
 )
 
+data class User(
+    val id: String,
+    val pw: String
+)
+
 class data{
     companion object{
         //MoreFragment
@@ -28,5 +33,8 @@ class data{
 
         //commuteBusChoiceFragment
         var busStopList = mutableListOf<BusStopContent>()
+
+        // login
+        val userList = mutableListOf(User("10150000", "1234"))
     }
 }
