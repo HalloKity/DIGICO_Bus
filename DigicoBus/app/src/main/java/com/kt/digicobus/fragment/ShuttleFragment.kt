@@ -11,12 +11,17 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.kt.digicobus.R
 import com.kt.digicobus.databinding.FragmentShuttleBinding
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 
-class ShuttleFragment : Fragment() {
+class ShuttleFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding : FragmentShuttleBinding
     private lateinit var ctx: Context
+    private lateinit var naverMap : MapView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,7 +44,30 @@ class ShuttleFragment : Fragment() {
 //        OverScrollDecoratorHelper.setUpOverScroll(R.id.nav_host, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
         NavigationUI.setupWithNavController(binding.tabView, navController)
 
+        // 네이버 지도
+        naverMap = binding.naverMap
+        naverMap.onCreate(savedInstanceState)
+        naverMap.getMapAsync(this)
+
         return binding.root
+    }
+
+    override fun onMapReady(naverMap: NaverMap) {
+        // 판교 사옥 위치
+        // 판교역 37.394769, 127.111194
+        val latlng = LatLng(37.406325, 127.090831)
+
+        // camera position
+        val cameraUpdate = CameraUpdate.scrollTo(latlng)
+        naverMap.moveCamera(cameraUpdate)
+
+        // 마커 표시
+        val marker = Marker()
+        marker.position = latlng
+        marker.width = Marker.SIZE_AUTO
+        marker.height = Marker.SIZE_AUTO
+        marker.captionText = "KT 판교사옥"
+        marker.map = naverMap
     }
 
 }
