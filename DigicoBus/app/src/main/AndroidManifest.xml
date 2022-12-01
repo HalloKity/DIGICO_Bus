@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DigicoBus"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="${NAVER_MAP_CLIENT_ID}" />
         <activity
             android:name=".login.JoinActivity"
             android:exported="false">

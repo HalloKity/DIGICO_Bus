@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def NAVER_MAP_CLIENT_ID = properties.getProperty('NAVER_MAP_CLIENT_ID')
+
 android {
     namespace 'com.kt.digicobus'
     compileSdk 32
@@ -15,6 +19,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // AndroidManifest 에서 쓸수 있도록 지정
+        manifestPlaceholders = [NAVER_MAP_CLIENT_ID:NAVER_MAP_CLIENT_ID]
     }
 
     buildTypes {
@@ -52,5 +59,8 @@ dependencies {
 
     // 자연스러운 스크롤
     implementation 'io.github.everythingme:overscroll-decor-android:1.1.1'
+
+    // 네이버 지도 SDK
+    implementation "com.naver.maps:map-sdk:3.16.0"
 
 }
