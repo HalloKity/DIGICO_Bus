@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import kotlinx.android.synthetic.main.list_item_day.view.*
@@ -29,12 +27,23 @@ class DayAdapter(val tempMonth:Int, val dayList: MutableList<Date>): RecyclerVie
         }
         holder.layout.item_day_text.text = dayList[position].date.toString()
 
-//        holder.layout.item_day_text.setTextColor(when(position % 7) {
-//            0 -> Color.RED
-//            6 -> Color.BLUE
-//            else -> Color.BLACK
-//        })
+        //좌석 0개면 배경화면 및 좌석 색 회색으로 처리
+        if(holder.layout.tv_left_seat.text == "0"){
+            holder.layout.item_day_layout.setBackgroundColor(Color.argb(70,170,170,170))
+            holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
+            holder.layout.tv_middle.setTextColor(Color.rgb(170,170,170))
+            holder.layout.tv_total_seat.setTextColor(Color.rgb(170,170,170))
+        }
 
+        //좌석 클릭시 배경 변환
+        holder.layout.item_day_layout.setOnClickListener{
+            //좌석 없을 경우 배경 변환 없음
+            if(holder.layout.tv_left_seat.text != "0"){
+                holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
+            }
+        }
+
+        //전월, 다음월 일 경우 날짜 색 회색 처리
         if(tempMonth != dayList[position].month) {
             holder.layout.item_day_text.alpha = 0.4f
         }

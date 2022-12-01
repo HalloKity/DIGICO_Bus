@@ -33,5 +33,8 @@
         <action
             android:id="@+id/action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment"
             app:destination="@id/CommuteBusChoiceFragment" />
+        <action
+            android:id="@+id/action_CommuteCalendarChoiceFragment_to_CommuteMainFragment"
+            app:destination="@id/CommuteMainFragment" />
     </fragment>
 </navigation>

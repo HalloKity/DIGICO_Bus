@@ -3,16 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_day_layout"
     android:layout_width="match_parent"
-    android:gravity="right"
-    android:layout_height="60dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="5dp">
+    android:layout_height="64dp"
+    android:gravity="right|center_vertical"
+    android:paddingRight="5dp"
+    android:background="@drawable/border_gray"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/item_day_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="9"/>
+        android:textSize="14sp"
+        android:textColor="#E23C3B3B"
+        android:text="7"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_left_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textSize="24dp"
+            android:textColor="@color/mint_check"/>
+
+        <TextView
+            android:id="@+id/tv_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"/>
+
+        <TextView
+            android:id="@+id/tv_total_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="44"
+            android:textSize="14dp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

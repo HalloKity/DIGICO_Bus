@@ -33,6 +33,7 @@ class MonthAdapter: RecyclerView.Adapter<MonthAdapter.MonthView>() {
 
         var dayList: MutableList<Date> = MutableList(6*7){ Date() }
 
+        //필요한 모든 일 수 받기
         for(i in 0..5) {
             for(k in 0..6) {
                 calendar.add(Calendar.DAY_OF_MONTH, (1-calendar.get(Calendar.DAY_OF_WEEK)) + k)
@@ -41,18 +42,40 @@ class MonthAdapter: RecyclerView.Adapter<MonthAdapter.MonthView>() {
             calendar.add(Calendar.WEEK_OF_MONTH, 1)
         }
 
-        var dayListNoWeek: MutableList<Date> = mutableListOf()
-        println("dayWithWeek : ${dayList.size}")
+        // 토요일과 일요일 빼고 다시 리스트에 날짜 저장
+        var dayListNoSatSun: MutableList<Date> = mutableListOf()
         for(i in 0 until dayList.count()){
+            //일요일과 토요일이 아닐때 리스트에 넣기
             if(i%7 != 0 && i%7 != 6){
-                dayListNoWeek.add(dayList[i])
+                dayListNoSatSun.add(dayList[i])
             }
         }
-        println("dayNoWeek : ${dayListNoWeek.size}")
+
+//        dayList = mutableListOf()
+//        for(i in 0 until dayListNoSatSun.count()){
+//            //날짜가 전 날보다 큰데 월요일이면 리스트에 넣지 않기\
+//            // 임시로 일단 20일 보다 크면으로 조건 넣어놈, + 마지막 날도 아니면~
+//            println(dayListNoSatSun[i].date)
+//
+//            println("i : $i , daylistnosatsun[i].date : ${dayListNoSatSun[i].date} , i%5 : ${i%5}")
+//            if(i == dayListNoSatSun.count()-1){
+//                dayList.add(dayListNoSatSun.get(i))
+//                break
+//            }
+//            // 금욜 날짜 > 월요일날짜 ,
+//            else if(i >= 10 && dayListNoSatSun[i].date>dayListNoSatSun[i+1].date && i%5 == 4){
+//                println("daylist in ${dayListNoSatSun[i].date}")
+//                dayList.add(dayListNoSatSun.get(i))
+//                break
+//            }else{
+//                dayList.add(dayListNoSatSun.get(i))
+//            }
+//        }
 
 
         val dayListManager = GridLayoutManager(holder.layout.context, 5)
-        val dayListAdapter = DayAdapter(tempMonth, dayListNoWeek)
+        //주말없는 일수를 어댑터에 적용
+        val dayListAdapter = DayAdapter(tempMonth, dayListNoSatSun)
 
         holder.layout.item_month_day_list.apply {
             layoutManager = dayListManager

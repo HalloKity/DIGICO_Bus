@@ -9,7 +9,11 @@
         android:id="@+id/CommuteFragment"
         android:name="com.kt.digicobus.fragment.commute.CommuteFragment"
         android:label="fragment_commute"
-        tools:layout="@layout/fragment_commute" />
+        tools:layout="@layout/fragment_commute" >
+        <action
+            android:id="@+id/action_CommuteFragment_to_ReservationConfirmFragment"
+            app:destination="@id/ReservationConfirmFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ReservationConfirmFragment"
         android:name="com.kt.digicobus.fragment.ReservationConfirmFragment"
@@ -17,7 +21,7 @@
         tools:layout="@layout/fragment_reservation_confirm" />
     <fragment
         android:id="@+id/ShuttleFragment"
-        android:name="com.kt.digicobus.fragment.ShuttleFragment"
+        android:name="com.kt.digicobus.fragment.shuttle.ShuttleFragment"
         android:label="fragment_shuttle"
         tools:layout="@layout/fragment_shuttle" />
     <fragment
