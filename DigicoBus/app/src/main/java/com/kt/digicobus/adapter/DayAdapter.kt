@@ -37,6 +37,9 @@ class DayAdapter(val tempMonth:Int, val dayList: MutableList<Date>): RecyclerVie
 
         //좌석 클릭시 배경 변환
         holder.layout.item_day_layout.setOnClickListener{
+            // 이전에 선택된 좌석말고 다른 곳 클릭 시 이전 곳 배경 다시 흰색으로 변환하고 선택한 곳 색깔 변환
+
+
             //좌석 없을 경우 배경 변환 없음
             if(holder.layout.tv_left_seat.text != "0"){
                 holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
