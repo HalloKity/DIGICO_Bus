@@ -17,6 +17,11 @@
         android:iconTint="@color/gray_70"
         android:title="셔틀버스"/>
     <item
+        android:id="@+id/CarPoolFragment"
+        android:icon="@drawable/icon_car"
+        android:iconTint="@color/gray_70"
+        android:title="카풀"/>
+    <item
         android:id="@+id/MoreFragment"
         android:icon="@drawable/img_more"
         android:iconTint="@color/gray_70"
