@@ -1,4 +1,4 @@
-package com.kt.digicobus.fragment
+package com.kt.digicobus.fragment.shuttle
 
 import android.content.Context
 import android.graphics.Color

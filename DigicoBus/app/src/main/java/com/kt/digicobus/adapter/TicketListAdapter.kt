@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
@@ -15,6 +16,7 @@ import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment
 import com.kt.digicobus.fragment.commute.CommuteFragment
 import com.kt.digicobus.fragment.commute.CommuteMainFragment
+import kotlinx.android.synthetic.main.listview_ticket.view.*
 
 class TicketListAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<TicketHolder>() {
@@ -34,6 +36,9 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
 
     override fun onBindViewHolder(holder: TicketHolder, position: Int) {
 
+        holder.icon_favorite.setOnClickListener{
+            holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
+        }
         holder.tv_large_place.text = ticketContentsList[position].tv_large_place
         holder.tv_small_place.text = ticketContentsList[position].tv_small_place
         holder.tv_start_place_name.text = ticketContentsList[position].tv_start_place_name
@@ -51,6 +56,7 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
 class TicketHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var constraint : ConstraintLayout = itemView!!.findViewById(R.id.constraint)
 
+    var icon_favorite: ImageView = itemView!!.findViewById(R.id.icon_favorite)
     var tv_large_place: TextView = itemView!!.findViewById(R.id.tv_large_place)
     var tv_small_place: TextView = itemView!!.findViewById(R.id.tv_small_place)
     var tv_start_place_name: TextView = itemView!!.findViewById(R.id.tv_start_place_name)

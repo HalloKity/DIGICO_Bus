@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:theme="?attr/actionBarTheme"
-        app:title="DIGICO BUS"
+        app:title="GO GENIE"
         app:titleCentered="true"
         app:titleTextColor="@color/white"
         android:elevation="4dp"

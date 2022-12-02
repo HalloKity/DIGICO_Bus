@@ -1,4 +1,4 @@
-package com.kt.digicobus.login
+package com.kt.digicobus.dialog
 
 import android.app.Activity
 import android.app.Dialog
@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.os.Bundle
 import android.widget.Button
-import com.kt.digicobus.MainActivity
 import com.kt.digicobus.R
+import com.kt.digicobus.login.JoinActivity
 
 
 class MyDialog(context: Context?) : Dialog(context!!) {

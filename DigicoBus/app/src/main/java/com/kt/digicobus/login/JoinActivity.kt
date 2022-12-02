@@ -1,11 +1,9 @@
 package com.kt.digicobus.login
 
-import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kt.digicobus.R
 import com.kt.digicobus.databinding.ActivityJoinBinding
-import com.kt.digicobus.databinding.ActivityLoginBinding
+import com.kt.digicobus.dialog.MyDialog
 
 class JoinActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJoinBinding
