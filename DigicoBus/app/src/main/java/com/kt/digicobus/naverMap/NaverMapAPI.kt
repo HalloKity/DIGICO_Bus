@@ -1,4 +1,4 @@
-package com.kt.digicobus
+package com.kt.digicobus.naverMap
 
 import com.kt.digicobus.data.ResultPath
 import retrofit2.Call
