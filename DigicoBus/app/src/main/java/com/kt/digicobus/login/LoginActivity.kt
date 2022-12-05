@@ -20,10 +20,10 @@ class LoginActivity : AppCompatActivity() {
         val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
         binding.spinner.adapter = myAdapter
 
-        binding.tvJoin.setOnClickListener{
-            val intent = Intent(this, JoinActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.tvJoin.setOnClickListener{
+//            val intent = Intent(this, JoinActivity::class.java)
+//            startActivity(intent)
+//        }
 
         binding.btnLogin.setOnClickListener{
             // 로그인
