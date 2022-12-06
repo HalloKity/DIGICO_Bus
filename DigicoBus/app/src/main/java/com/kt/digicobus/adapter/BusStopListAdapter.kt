@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
 import com.kt.digicobus.dialog.MyBottomDialogStopLocation
+import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.listview_detail_bus_info.view.*
 
 class BusStopListAdapter(var context: Context, private val resource: Int,  var busStopList: MutableList<BusStopContent>)
@@ -38,10 +39,21 @@ class BusStopListAdapter(var context: Context, private val resource: Int,  var b
         holder.tv_departure_time.text = busStopList[position].tv_departure_time
 
         //지도 클릭시 넘어감
-        holder.btn_map.setOnClickListener{
-            Log.d("[d] 버튼 클릭여부 확인", "지도 클릭")
-            val bottomDialog = MyBottomDialogStopLocation()
-            bottomDialog.show((holder.itemView.context as FragmentActivity).supportFragmentManager, bottomDialog.tag)
+        holder.btn_map.setOnClickListener {
+
+            val bottomDialog = MyBottomDialogStopLocation(
+                busStopList[position].tv_bus_stop_location,
+                busStopList[position].tv_departure_time,
+                LatLng(
+                    busStopList[position].tv_location_latitude,
+                    busStopList[position].tv_location_longitude
+                )
+            )
+
+            bottomDialog.show(
+                (holder.itemView.context as FragmentActivity).supportFragmentManager,
+                bottomDialog.tag
+            )
         }
     }
 
