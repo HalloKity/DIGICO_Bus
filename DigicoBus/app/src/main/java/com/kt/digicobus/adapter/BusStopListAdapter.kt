@@ -64,16 +64,6 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusCh
             holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
         }
 
-
-//        for(i in busStopList){
-//            if(busStopList[position].isClick){
-//                holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
-//            }else if(!busStopList[position].isClick){
-//                holder.constraint.setBackgroundColor(context.getColor(R.color.white))
-//            }
-//        }
-//        notifyDataSetChanged()
-
         //지도 클릭시 넘어감
         holder.btn_map.setOnClickListener {
 
