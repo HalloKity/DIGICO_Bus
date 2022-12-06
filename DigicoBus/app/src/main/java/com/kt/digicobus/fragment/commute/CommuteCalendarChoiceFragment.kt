@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
+import com.kt.digicobus.data.data
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import com.kt.digicobus.dialog.MyDialogAfterSeatChoice
 
@@ -38,6 +39,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
         // 뒤로가기
         binding.btnBack.setOnClickListener{
+            data.busChoiceInfo = -1
             container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment)
         }
 
@@ -54,6 +56,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 //            //이동하기 코드 작성
             // 확인버튼일 시에만 화면 이동
 //            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+            data.busChoiceInfo = -1
         }
 
         return binding.root

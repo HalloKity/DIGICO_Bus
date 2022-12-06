@@ -1,13 +1,16 @@
 package com.kt.digicobus.dialog
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import com.kt.digicobus.R
@@ -26,6 +29,7 @@ class MyDialogAfterSeatChoice(context: Context?,container: ViewGroup?) : Dialog(
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.custom_dialog_after_seat_choice)
