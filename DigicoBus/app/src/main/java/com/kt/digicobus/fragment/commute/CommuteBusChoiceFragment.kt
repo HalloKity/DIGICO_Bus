@@ -73,16 +73,16 @@ class CommuteBusChoiceFragment : Fragment() {
 
     fun fillData(){
         busStopList.clear()
-        busStopList.add(BusStopContent("간선오거리역 1번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("부평역 1번출구 맞은편 큰거리 고은성모의원앞","(07:00)"))
-        busStopList.add(BusStopContent("숙대입구역 1번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("안국역 3번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("정자역 7번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("부평역 3번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("정자역 2번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("간선오거리역 1번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("간석육거리역 3번출구 버스정류장 앞","(06:50)"))
-        busStopList.add(BusStopContent("간선칠거리역 4번출구 버스정류장 앞","(06:50)"))
+        busStopList.add(BusStopContent("간선오거리역 1번출구 버스정류장 앞","(06:50)", 37.469526, 126.708172))
+        busStopList.add(BusStopContent("부평역 1번출구 맞은편 큰거리 고은성모의원앞","(07:00)", 37.488875, 126.723969))
+        busStopList.add(BusStopContent("숙대입구역 1번출구 버스정류장 앞","(06:50)", 37.546516, 126.972094))
+        busStopList.add(BusStopContent("안국역 3번출구 버스정류장 앞","(06:50)", 37.577335, 126.986010))
+        busStopList.add(BusStopContent("정자역 7번출구 버스정류장 앞","(06:50)", 37.366767, 127.108334))
+        busStopList.add(BusStopContent("부평역 3번출구 버스정류장 앞","(06:50)", 37.488875, 126.723969))
+        busStopList.add(BusStopContent("정자역 2번출구 버스정류장 앞","(06:50)", 37.366767, 127.108334))
+        busStopList.add(BusStopContent("간선오거리역 1번출구 버스정류장 앞","(06:50)", 37.469526, 126.708172))
+        busStopList.add(BusStopContent("간석육거리역 3번출구 버스정류장 앞","(06:50)", 37.469526, 126.708172))
+        busStopList.add(BusStopContent("간선칠거리역 4번출구 버스정류장 앞","(06:50)", 37.469526, 126.708172))
 
     }
 }

@@ -15,7 +15,9 @@ data class TicketContent(
 
 data class BusStopContent(
     var tv_bus_stop_location:String,
-    var tv_departure_time:String
+    var tv_departure_time:String,
+    val tv_location_latitude:Double,
+    val tv_location_longitude:Double
 )
 
 data class User(

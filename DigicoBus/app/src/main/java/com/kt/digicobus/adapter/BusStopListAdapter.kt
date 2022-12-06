@@ -2,6 +2,7 @@ package com.kt.digicobus.adapter
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
+import com.kt.digicobus.dialog.MyBottomDialogStopLocation
+import com.naver.maps.geometry.LatLng
+import androidx.core.view.get
 import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.busChoiceInfo
 import com.kt.digicobus.databinding.FragmentCommuteBusChoiceBinding
@@ -64,8 +68,21 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusCh
         }
 
         //지도 클릭시 넘어감
-        holder.btn_map.setOnClickListener{
-            println("지도 클릭")
+        holder.btn_map.setOnClickListener {
+
+            val bottomDialog = MyBottomDialogStopLocation(
+                busStopList[position].tv_bus_stop_location,
+                busStopList[position].tv_departure_time,
+                LatLng(
+                    busStopList[position].tv_location_latitude,
+                    busStopList[position].tv_location_longitude
+                )
+            )
+
+            bottomDialog.show(
+                (holder.itemView.context as FragmentActivity).supportFragmentManager,
+                bottomDialog.tag
+            )
         }
     }
 
