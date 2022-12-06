@@ -205,11 +205,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:text="031-112-1122"
+                android:text="111-111-1111"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@id/tv_question"
                 app:layout_constraintTop_toBottomOf="@id/tv_bus_number" />
+
+            <ImageView
+                android:id="@+id/icon_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_telephone_call"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_bus_number_content"
+                app:layout_constraintLeft_toRightOf="@id/tv_car_number_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_location"/>
 
             <TextView
                 android:id="@+id/tv_location"
