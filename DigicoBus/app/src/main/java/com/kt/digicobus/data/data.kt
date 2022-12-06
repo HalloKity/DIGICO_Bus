@@ -10,6 +10,7 @@ data class TicketContent(
     var tv_start_time: String,
     var tv_end_place_name: String,
     var tv_end_time: String,
+    var isFavorite: Boolean,
 )
 
 data class BusStopContent(
@@ -38,5 +39,7 @@ class data{
 
         // login
         val userList = mutableListOf(User("10150000", "1234"), User("1","1"), User("", ""))
+
+        var busChoiceInfo = -1
     }
 }

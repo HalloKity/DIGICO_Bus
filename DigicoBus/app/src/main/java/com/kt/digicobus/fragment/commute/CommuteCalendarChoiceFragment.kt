@@ -1,6 +1,7 @@
 package com.kt.digicobus.fragment.commute
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,7 +42,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
         }
 
         //알림창 띄우기
-        var dialog_listener = MyDialogAfterSeatChoice(ctx); //다이얼로그 선언
+        var dialog_listener = MyDialogAfterSeatChoice(ctx, container); //다이얼로그 선언
         //신청하기
         binding.btnChoice.setOnClickListener{
             //예약내역 백엔드로 보내기
@@ -51,7 +52,8 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
 //            val view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_after_seat_choice, con, false)
 //            //이동하기 코드 작성
-            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+            // 확인버튼일 시에만 화면 이동
+//            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
         return binding.root
@@ -59,7 +61,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
     private fun makeCalendar() {
         val monthListManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
-        val monthListAdapter = MonthAdapter()
+        val monthListAdapter = MonthAdapter(ctx,binding)
 
         binding.calendarCustom.apply {
             layoutManager = monthListManager
