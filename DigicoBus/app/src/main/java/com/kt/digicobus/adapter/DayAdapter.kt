@@ -14,8 +14,9 @@ import kotlinx.android.synthetic.main.list_item_day.view.*
 import java.util.*
 
 
-class DayAdapter(context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int, val dayList: MutableList<Date>): RecyclerView.Adapter<DayAdapter.DayView>() {
-    val context = context
+class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int, val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>)
+    : RecyclerView.Adapter<DayAdapter.DayView>() {
+
     val ROW = 6
 
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
@@ -42,14 +43,25 @@ class DayAdapter(context:Context, var binding: FragmentCommuteCalendarChoiceBind
         //좌석 클릭시 배경 변환
         holder.layout.item_day_layout.setOnClickListener{
             // 이전에 선택된 좌석말고 다른 곳 클릭 시 이전 곳 배경 다시 흰색으로 변환하고 선택한 곳 색깔 변환
+            dayClickCheckList[position] = true
+            holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
 
-
-            //좌석 있을 경우 배경 민트 변환
-            if(holder.layout.tv_left_seat.text != "0"){
-                holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
-                binding.btnChoice.isEnabled = true
+            for(i in 0 until dayClickCheckList.size){
+                if(i != position){
+                    dayClickCheckList[i]= false
+                }
             }
+            binding.btnChoice.isEnabled = true
+
+            notifyDataSetChanged()
         }
+
+        if(!dayClickCheckList[position]){
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.white))
+        }else if(dayClickCheckList[position]){
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.mint))
+        }
+
 
         //전월, 다음월 일 경우 날짜 색 회색 처리
         if(tempMonth != dayList[position].month) {
@@ -66,7 +78,7 @@ class DayAdapter(context:Context, var binding: FragmentCommuteCalendarChoiceBind
 
         //이번달 지난날 , 지난 달 날짜
         if((date.date > dayList[position].date && date.month == dayList[position].month) ||
-                    (date.year > dayList[position].year && date.month > dayList[position].month) ){
+            (date.year > dayList[position].year && date.month > dayList[position].month) ){
             holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
             holder.layout.item_day_layout.isClickable = false
             holder.layout.tv_left_seat.text = ""

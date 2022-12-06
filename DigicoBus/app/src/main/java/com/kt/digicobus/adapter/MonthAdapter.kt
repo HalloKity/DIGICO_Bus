@@ -55,31 +55,11 @@ class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoi
             }
         }
 
-//        dayList = mutableListOf()
-//        for(i in 0 until dayListNoSatSun.count()){
-//            //날짜가 전 날보다 큰데 월요일이면 리스트에 넣지 않기\
-//            // 임시로 일단 20일 보다 크면으로 조건 넣어놈, + 마지막 날도 아니면~
-//            println(dayListNoSatSun[i].date)
-//
-//            println("i : $i , daylistnosatsun[i].date : ${dayListNoSatSun[i].date} , i%5 : ${i%5}")
-//            if(i == dayListNoSatSun.count()-1){
-//                dayList.add(dayListNoSatSun.get(i))
-//                break
-//            }
-//            // 금욜 날짜 > 월요일날짜 ,
-//            else if(i >= 10 && dayListNoSatSun[i].date>dayListNoSatSun[i+1].date && i%5 == 4){
-//                println("daylist in ${dayListNoSatSun[i].date}")
-//                dayList.add(dayListNoSatSun.get(i))
-//                break
-//            }else{
-//                dayList.add(dayListNoSatSun.get(i))
-//            }
-//        }
-
+        var dayClickCheckList = MutableList(dayListNoSatSun.size, { i -> false})
 
         val dayListManager = GridLayoutManager(holder.layout.context, 5)
         //주말없는 일수를 어댑터에 적용
-        val dayListAdapter = DayAdapter(context, binding, tempMonth, dayListNoSatSun)
+        val dayListAdapter = DayAdapter(context, binding, tempMonth, dayListNoSatSun,dayClickCheckList)
 
         holder.layout.item_month_day_list.apply {
             layoutManager = dayListManager
@@ -95,6 +75,8 @@ class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoi
         holder.layout.item_right_arrow.setOnClickListener{
 
         }
+
+
     }
 
     override fun getItemCount(): Int {
