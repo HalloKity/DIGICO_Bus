@@ -85,7 +85,7 @@ class NaverMapAPIService(naverMapParam: NaverMap) {
             }
 
             override fun onFailure(call: Call<ResultPath>, t: Throwable) {
-                TODO("Not yet implemented")
+               //주석 지움
             }
         })
     }

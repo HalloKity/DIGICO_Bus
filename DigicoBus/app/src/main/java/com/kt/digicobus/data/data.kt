@@ -36,5 +36,7 @@ class data{
 
         // login
         val userList = mutableListOf(User("10150000", "1234"), User("1","1"), User("", ""))
+
+        var busChoiceInfo = -1
     }
 }

@@ -1,5 +1,6 @@
 package com.kt.digicobus.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
+import com.kt.digicobus.data.data
+import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import java.util.*
 
 
-class DayAdapter(val tempMonth:Int, val dayList: MutableList<Date>): RecyclerView.Adapter<DayAdapter.DayView>() {
+class DayAdapter(context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int, val dayList: MutableList<Date>): RecyclerView.Adapter<DayAdapter.DayView>() {
+    val context = context
     val ROW = 6
 
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
@@ -40,15 +44,56 @@ class DayAdapter(val tempMonth:Int, val dayList: MutableList<Date>): RecyclerVie
             // 이전에 선택된 좌석말고 다른 곳 클릭 시 이전 곳 배경 다시 흰색으로 변환하고 선택한 곳 색깔 변환
 
 
-            //좌석 없을 경우 배경 변환 없음
+            //좌석 있을 경우 배경 민트 변환
             if(holder.layout.tv_left_seat.text != "0"){
                 holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
+                binding.btnChoice.isEnabled = true
             }
         }
 
         //전월, 다음월 일 경우 날짜 색 회색 처리
         if(tempMonth != dayList[position].month) {
             holder.layout.item_day_text.alpha = 0.4f
+        }
+
+        //오늘 날짜일 경우 빨간색으로 처리
+        var date = Date()
+        if(date.date == dayList[position].date && date.month == dayList[position].month){
+            holder.layout.item_day_text.setTextColor(Color.RED)
+        }
+
+        //지난 날짜인 경우 마감처리
+
+        //이번달 지난날 , 지난 달 날짜
+        if((date.date > dayList[position].date && date.month == dayList[position].month) ||
+                    (date.year > dayList[position].year && date.month > dayList[position].month) ){
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
+            holder.layout.item_day_layout.isClickable = false
+            holder.layout.tv_left_seat.text = ""
+            holder.layout.tv_middle.text = ""
+            holder.layout.tv_total_seat.text = ""
+        }
+
+        //오늘이 25일 이전이면
+        if(date.date < 25){
+            // 다음달 오픈 x
+            // 이번달 25일 이후 또는 다음달 이상
+            if(
+                (date.year >= dayList[position].year && dayList[position].date >=25) ||
+                date.year < dayList[position].year ||
+                (date.year == dayList[position].year && date.month < dayList[position].month) ||
+                (date.year == dayList[position].year && date.month > dayList[position].month)
+            ){
+                holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
+                holder.layout.item_day_layout.isClickable = false
+                holder.layout.tv_left_seat.text = ""
+                holder.layout.tv_middle.text = ""
+                holder.layout.tv_total_seat.text = ""
+            }
+        }
+        // 오늘이 25일 이후면 풀어주기 코드
+        else if(date.date >= 25){
+            //아직 구현 안함
         }
     }
 

@@ -16,6 +16,7 @@ import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.BusStopContent
 import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.busChoiceInfo
 import com.kt.digicobus.data.data.Companion.busStopList
 import com.kt.digicobus.databinding.FragmentCommuteBinding
 import com.kt.digicobus.databinding.FragmentCommuteBusChoiceBinding
@@ -64,7 +65,7 @@ class CommuteBusChoiceFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        busStopListAdapter = BusStopListAdapter(ctx, R.layout.listview_detail_bus_info, busStopList)
+        busStopListAdapter = BusStopListAdapter(ctx,binding, R.layout.listview_detail_bus_info, busStopList)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = busStopListAdapter

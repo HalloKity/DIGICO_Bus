@@ -1,15 +1,19 @@
 package com.kt.digicobus.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
+import com.kt.digicobus.data.data
+import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
+import kotlinx.android.synthetic.main.list_item_day.view.*
 import kotlinx.android.synthetic.main.list_item_month.view.*
 import java.util.*
 
-class MonthAdapter: RecyclerView.Adapter<MonthAdapter.MonthView>() {
+class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoiceBinding): RecyclerView.Adapter<MonthAdapter.MonthView>() {
     val center = Int.MAX_VALUE / 2
     private var calendar = Calendar.getInstance()
 
@@ -75,11 +79,21 @@ class MonthAdapter: RecyclerView.Adapter<MonthAdapter.MonthView>() {
 
         val dayListManager = GridLayoutManager(holder.layout.context, 5)
         //주말없는 일수를 어댑터에 적용
-        val dayListAdapter = DayAdapter(tempMonth, dayListNoSatSun)
+        val dayListAdapter = DayAdapter(context, binding, tempMonth, dayListNoSatSun)
 
         holder.layout.item_month_day_list.apply {
             layoutManager = dayListManager
             adapter = dayListAdapter
+        }
+
+        //지난달 보여주기
+        holder.layout.item_left_arrow.setOnClickListener{
+
+        }
+
+        //다음달 보여주기
+        holder.layout.item_right_arrow.setOnClickListener{
+
         }
     }
 
