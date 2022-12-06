@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
+import com.kt.digicobus.dialog.MyBottomDialogTicketInfo
 import com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment
 import com.kt.digicobus.fragment.commute.CommuteFragment
 import com.kt.digicobus.fragment.commute.CommuteMainFragment
@@ -29,7 +31,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
     }
 
     override fun onBindViewHolder(holder: ReservationHolder, position: Int) {
-
+        holder.img_info.setOnClickListener{
+            val bottomDialog = MyBottomDialogTicketInfo()
+            bottomDialog.show((holder.itemView.context as FragmentActivity).supportFragmentManager, bottomDialog.tag)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +44,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
 
 class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tv_date: TextView = itemView!!.findViewById(R.id.tv_date)
+    val img_info : ImageView = itemView!!.findViewById(R.id.img_info)
     val img_qr_code: ImageView = itemView!!.findViewById(R.id.img_qr_code)
     val tv_to_place: TextView = itemView!!.findViewById(R.id.tv_to_place)
     val tv_from_place: TextView = itemView!!.findViewById(R.id.tv_from_place)
