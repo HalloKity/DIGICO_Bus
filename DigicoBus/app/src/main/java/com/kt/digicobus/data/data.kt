@@ -10,6 +10,7 @@ data class TicketContent(
     var tv_start_time: String,
     var tv_end_place_name: String,
     var tv_end_time: String,
+    var isFavorite: Boolean,
 )
 
 data class BusStopContent(

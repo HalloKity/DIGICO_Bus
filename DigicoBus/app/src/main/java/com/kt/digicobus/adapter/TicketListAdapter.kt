@@ -37,8 +37,25 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
     override fun onBindViewHolder(holder: TicketHolder, position: Int) {
 
         holder.icon_favorite.setOnClickListener{
-            holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
+            if(!ticketContentsList[position].isFavorite){
+                holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
+                ticketContentsList[position].isFavorite = true
+                ticketContentsList.add(0,ticketContentsList.removeAt(position))
+            }else{
+                holder.icon_favorite.setImageResource(R.drawable.icon_nonfavorite)
+                ticketContentsList[position].isFavorite = false
+                ticketContentsList.add(ticketContentsList.lastIndex,ticketContentsList.removeAt(position))
+            }
+
+            notifyDataSetChanged()
         }
+
+        if(ticketContentsList[position].isFavorite){
+            holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
+        }else if(!ticketContentsList[position].isFavorite){
+            holder.icon_favorite.setImageResource(R.drawable.icon_nonfavorite)
+        }
+
         holder.tv_large_place.text = ticketContentsList[position].tv_large_place
         holder.tv_small_place.text = ticketContentsList[position].tv_small_place
         holder.tv_start_place_name.text = ticketContentsList[position].tv_start_place_name

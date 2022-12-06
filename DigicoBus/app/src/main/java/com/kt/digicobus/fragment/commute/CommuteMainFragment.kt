@@ -65,15 +65,15 @@ class CommuteMainFragment : Fragment() {
 
     fun fillData(){
         data.ticketList.clear()
-        data.ticketList.add(TicketContent("인천","남동구/인천 부평구/부천/시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30"))
-        data.ticketList.add(TicketContent("목동","목동/오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40"))
-        data.ticketList.add(TicketContent("인천","남동구/인천 부평구/부천/시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30"))
-        data.ticketList.add(TicketContent("목동","목동/오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40"))
-        data.ticketList.add(TicketContent("인천","남동구/인천 부평구/부천/시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30"))
-        data.ticketList.add(TicketContent("목동","목동/오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40"))
-        data.ticketList.add(TicketContent("인천","남동구/인천 부평구/부천/시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30"))
-        data.ticketList.add(TicketContent("목동","목동/오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40"))
-        data.ticketList.add(TicketContent("인천","남동구/인천 부평구/부천/시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30"))
-        data.ticketList.add(TicketContent("목동","목동/오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40"))
+        data.ticketList.add(TicketContent("인천","남동구>부평구>부천>시흥","간선오거리역 1번출구","06:30","판교 사옥","08:30",false))
+        data.ticketList.add(TicketContent("목동","목동>오목교역","목동사옥 세신비젼프라자앞","07:10","판교 사옥","08:40",false))
+        data.ticketList.add(TicketContent("강북","창동>태릉입구>잠실","창동역 1번출구 프레스티지 앞","06:30","판교 사옥","08:30",false))
+        data.ticketList.add(TicketContent("신도림","신도림>마포>서울역","신도림역","07:10","판교 사옥","08:40",false))
+        data.ticketList.add(TicketContent("사당","사당역","사당역 1번출구 옆 공용주차장","06:30","판교 사옥","08:30",false))
+        data.ticketList.add(TicketContent("양재","양재역","양재역 5번출구","07:10","판교 사옥","08:40",false))
+        data.ticketList.add(TicketContent("대전","유성온천역>온천교>궁동","유성온천역 3번출구","06:30","판교 사옥","08:30",false))
+        data.ticketList.add(TicketContent("용인","보정>죽전>오리>미금>정자","보정역 1번출구","07:10","판교 사옥","08:40",false))
+        data.ticketList.add(TicketContent("부산","해운대>광안리>송정","부산역 12번 출구","06:30","판교 사옥","08:30",false))
+        data.ticketList.add(TicketContent("홍대","홍대입구","홍대입구역 3번출구","07:10","판교 사옥","08:40",false))
     }
 }
