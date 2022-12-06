@@ -2,17 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/bottom_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="10dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_stop_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="15dp"
         android:text="간선오거리역 1번출구 버스정류장 앞"
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -53,29 +52,27 @@
 
     </LinearLayout>
 
-<!--    <com.naver.maps.map.MapView-->
-<!--        android:id="@+id/station_map"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="150dp"-->
-<!--        android:layout_marginTop="60dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/layout_stop_time" />-->
+    <com.naver.maps.map.MapView
+        android:id="@+id/station_map"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_stop_time" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/btn_close"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="닫기"
         android:textSize="14dp"
         android:textColor="@color/white"
-        android:elevation="0dp"
         android:backgroundTint="@color/mint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_stop_time" />
+        app:layout_constraintTop_toBottomOf="@+id/station_map"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

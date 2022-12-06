@@ -16,6 +16,7 @@
         <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
         <item name="editTextStyle">@style/customTextViewFontStyle</item>
         <item name="android:includeFontPadding">false</item>
+        <item name="bottomSheetDialogTheme">@style/BottomDialogTheme</item>
     </style>
 
     <style name="EditText.Join" parent="Widget.AppCompat.EditText">
@@ -38,7 +39,10 @@
         <item name="android:background">@drawable/dialog_background_round</item>
     </style>
 
-    <style name="bottom_dialog">
+    <style name="BottomDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomDialogStyle</item>
+    </style>
+    <style name="BottomDialogStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_dialog_background_round</item>
     </style>
 
