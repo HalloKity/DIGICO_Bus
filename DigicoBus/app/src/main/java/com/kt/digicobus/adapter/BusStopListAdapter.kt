@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
 import com.kt.digicobus.databinding.FragmentCommuteBusEntireRouteBinding
+import com.kt.digicobus.naverMap.NaverMapAPIService
 import kotlinx.android.synthetic.main.listview_detail_bus_info.view.*
 
 class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEntireRouteBinding, private val resource: Int, var busStopList: MutableList<BusStopContent>)
@@ -44,7 +45,6 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEn
 
         holder.constraint.setOnClickListener{
             busStopList[position].isClick = true
-            holder.constraint.setBackgroundColor(context.getColor(R.color.gray_70))
 
             for(i in 0 until busStopList.size){
                 if(i != position){
