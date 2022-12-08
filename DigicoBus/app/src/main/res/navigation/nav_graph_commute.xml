@@ -15,9 +15,9 @@
     </fragment>
     <fragment
         android:id="@+id/CommuteBusChoiceFragment"
-        android:name="com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteBusEntireRoute"
         android:label="fragment_commute_bus_choice"
-        tools:layout="@layout/fragment_commute_bus_choice" >
+        tools:layout="@layout/fragment_commute_bus_entire_route" >
         <action
             android:id="@+id/action_CommuteBusChoiceFragment_to_CommuteCalendarChoiceFragment"
             app:destination="@id/CommuteCalendarChoiceFragment" />
