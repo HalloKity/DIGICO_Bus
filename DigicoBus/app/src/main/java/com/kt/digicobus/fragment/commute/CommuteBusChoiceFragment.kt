@@ -43,17 +43,6 @@ class CommuteBusChoiceFragment : Fragment() {
 
         setAdapter()
 
-        //뒤로가기
-        binding.btnBack.setOnClickListener{
-            data.busChoiceInfo = -1
-            container?.findNavController()?.navigate(R.id.action_CommuteBusChoiceFragment_to_CommuteMainFragment)
-        }
-
-        //날짜 확인하기
-        binding.btnReserve.setOnClickListener{
-            container?.findNavController()?.navigate(R.id.action_CommuteBusChoiceFragment_to_CommuteCalendarChoiceFragment)
-        }
-
         return binding.root
     }
 

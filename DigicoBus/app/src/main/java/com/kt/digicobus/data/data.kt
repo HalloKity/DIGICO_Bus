@@ -4,12 +4,10 @@ import android.widget.TextView
 import com.kt.digicobus.R
 
 data class TicketContent(
-    var tv_large_place: String,
-    var tv_small_place: String,
-    var tv_start_place_name:String,
-    var tv_start_time: String,
-    var tv_end_place_name: String,
-    var tv_end_time: String,
+    var tv_line: String,
+    var tv_main_place: String,
+    var tv_detail_place: String,
+    var tv_departure_time: String,
     var isFavorite: Boolean,
 )
 

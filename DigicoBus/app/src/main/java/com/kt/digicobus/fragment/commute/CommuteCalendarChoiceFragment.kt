@@ -40,7 +40,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
         // 뒤로가기
         binding.btnBack.setOnClickListener{
             data.busChoiceInfo = -1
-            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment)
+            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
         //알림창 띄우기

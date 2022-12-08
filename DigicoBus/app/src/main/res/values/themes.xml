@@ -47,5 +47,16 @@
         <item name="android:background">@drawable/bottom_dialog_background_round</item>
     </style>
 
+    <!--바텀네비게이션 뷰 글자크기 키우기-->
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">18dp</item>
+<!--        <item name="android:textViewStyle">@style/customTextViewFontStyle.bold</item>-->
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">18dp</item>
+<!--        <item name="android:textViewStyle">@style/customTextViewFontStyle.bold</item>-->
+    </style>
+
 
 </resources>

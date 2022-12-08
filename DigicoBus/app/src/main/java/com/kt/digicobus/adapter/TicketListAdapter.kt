@@ -25,43 +25,39 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(resource, parent, false)
 
-        itemView.setOnClickListener{
-            //fragment간 이동 with nav_graph action
-            parent.findNavController().navigate(R.id.action_CommuteMainFragment_to_CommuteBusChoiceFragment2)
-
-            //값 넘기는 거 확인해보기
-        }
+//        itemView.setOnClickListener{
+//            //fragment간 이동 with nav_graph action
+//            parent.findNavController().navigate(R.id.action_CommuteMainFragment_to_CommuteBusChoiceFragment2)
+//
+//            //값 넘기는 거 확인해보기
+//        }
         return TicketHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: TicketHolder, position: Int) {
 
-        holder.icon_favorite.setOnClickListener{
-            if(!ticketContentsList[position].isFavorite){
-                holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
-                ticketContentsList[position].isFavorite = true
-                ticketContentsList.add(0,ticketContentsList.removeAt(position))
-            }else{
-                holder.icon_favorite.setImageResource(R.drawable.icon_nonfavorite)
-                ticketContentsList[position].isFavorite = false
-                ticketContentsList.add(ticketContentsList.lastIndex,ticketContentsList.removeAt(position))
-            }
-
-            notifyDataSetChanged()
-        }
+//        holder.icon_favorite.setOnClickListener{
+//            if(!ticketContentsList[position].isFavorite){
+//                holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
+//                ticketContentsList[position].isFavorite = true
+//                ticketContentsList.add(0,ticketContentsList.removeAt(position))
+//            }else{
+//                holder.icon_favorite.setImageResource(R.drawable.icon_nonfavorite)
+//                ticketContentsList[position].isFavorite = false
+//                ticketContentsList.add(ticketContentsList.lastIndex,ticketContentsList.removeAt(position))
+//            }
+//
+//            notifyDataSetChanged()
+//        }
 
         if(ticketContentsList[position].isFavorite){
-            holder.icon_favorite.setImageResource(R.drawable.icon_favorite)
-        }else if(!ticketContentsList[position].isFavorite){
-            holder.icon_favorite.setImageResource(R.drawable.icon_nonfavorite)
+            holder.icon_favorite.setImageResource(R.drawable.icon_yellow_star)
         }
 
-        holder.tv_large_place.text = ticketContentsList[position].tv_large_place
-        holder.tv_small_place.text = ticketContentsList[position].tv_small_place
-        holder.tv_start_place_name.text = ticketContentsList[position].tv_start_place_name
-        holder.tv_start_time.text = ticketContentsList[position].tv_start_time
-        holder.tv_end_place_name.text = ticketContentsList[position].tv_end_place_name
-        holder.tv_end_time.text = ticketContentsList[position].tv_end_time
+        holder.tv_line.text = ticketContentsList[position].tv_line
+        holder.tv_main_place.text = ticketContentsList[position].tv_main_place
+        holder.tv_detail_place.text = ticketContentsList[position].tv_detail_place
+        holder.tv_departure_time.text = ticketContentsList[position].tv_departure_time
 
     }
 
@@ -71,15 +67,9 @@ class TicketListAdapter(var context: Context, private val resource: Int,  var ti
 }
 
 class TicketHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var constraint : ConstraintLayout = itemView!!.findViewById(R.id.constraint)
-
-    var icon_favorite: ImageView = itemView!!.findViewById(R.id.icon_favorite)
-    var tv_large_place: TextView = itemView!!.findViewById(R.id.tv_large_place)
-    var tv_small_place: TextView = itemView!!.findViewById(R.id.tv_small_place)
-    var tv_start_place_name: TextView = itemView!!.findViewById(R.id.tv_start_place_name)
-    var tv_start_time: TextView = itemView!!.findViewById(R.id.tv_start_time)
-    var tv_end_place_name: TextView = itemView!!.findViewById(R.id.tv_end_place_name)
-    var tv_end_time: TextView = itemView!!.findViewById(R.id.tv_end_time)
-
-
+    var icon_favorite: ImageView = itemView!!.findViewById(R.id.icon_star)
+    var tv_line: TextView = itemView!!.findViewById(R.id.tv_line)
+    var tv_main_place: TextView = itemView!!.findViewById(R.id.tv_main_place)
+    var tv_detail_place: TextView = itemView!!.findViewById(R.id.tv_detail_place)
+    var tv_departure_time: TextView = itemView!!.findViewById(R.id.tv_departure_time)
 }

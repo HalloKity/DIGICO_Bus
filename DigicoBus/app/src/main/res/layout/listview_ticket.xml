@@ -2,122 +2,112 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/constraint"
-    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/icon_favorite"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/icon_nonfavorite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <FrameLayout
-        android:id="@+id/layout_frame"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/icon_favorite"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/img_ticket"
-            android:layout_width="80dp"
-            android:layout_height="60dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_ticket" />
-
-        <TextView
-            android:id="@+id/tv_large_place"
+        <FrameLayout
+            android:id="@+id/frame_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginRight="5dp"
-            android:text="인천"
-            android:textColor="@color/black" />
-    </FrameLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_small_place"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:text="남동구>인천 부평구>부천>시흥>남동구"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintLeft_toRightOf="@id/layout_frame"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <FrameLayout
+                android:id="@+id/frame_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp">
 
-    <TextView
-        android:id="@+id/tv_start_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="기점"
-        android:textSize="14dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tv_small_place"
-        app:layout_constraintLeft_toRightOf="@id/layout_frame"/>
-    <TextView
-        android:id="@+id/tv_start_place_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="간선오거리역 1번출구"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_small_place"
-        app:layout_constraintLeft_toRightOf="@id/tv_start_place"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/rectangle_border_gray" />
 
-    <TextView
-        android:id="@+id/tv_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:text="06:50"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_small_place"
-        app:layout_constraintTop_toBottomOf="@id/tv_small_place" />
+                <TextView
+                    android:id="@+id/tv_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:text="신도림행"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/tv_end_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="종점"
-        android:textSize="14dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tv_start_place"
-        app:layout_constraintLeft_toRightOf="@id/layout_frame"/>
-    <TextView
-        android:id="@+id/tv_end_place_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="판교 사옥"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_start_place"
-        app:layout_constraintLeft_toRightOf="@id/tv_end_place"/>
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/tv_end_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:text="08:30"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_small_place"
-        app:layout_constraintTop_toBottomOf="@id/tv_start_time" />
+            <ImageView
+                android:id="@+id/icon_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@null" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_main_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="간석오거리역"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:layout_marginLeft="10dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/frame_main"/>
+
+        <TextView
+            android:id="@+id/tv_detail_place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="1번출구 버스정류장 앞 의자의 네거리의 앞의 사거리 옆"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/frame_main"
+            app:layout_constraintTop_toBottomOf="@id/tv_main_place"
+            app:layout_constraintRight_toLeftOf="@id/tv_departure_time"/>
+
+        <TextView
+            android:id="@+id/tv_departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="06:50"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/icon_more"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/icon_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_more_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_line"
+        app:layout_constraintTop_toBottomOf="@id/constraint"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
