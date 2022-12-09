@@ -10,7 +10,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.login.JoinActivity
 
 
-class MyDialog(context: Context?) : Dialog(context!!) {
+class Dialog(context: Context?) : Dialog(context!!) {
 
     //활동 기반 컨텍스트가 아닌 경우 다음 메서드를 사용하여 컨텍스트 또는 throw 및 예외에서 활동을 가져올 수 있습니다
     // 일반 context를 쓸 경우 회원가입 Activity가 죽어버리는 현상이 발생해 이를 해결하기 위해 사용

@@ -1,6 +1,5 @@
 package com.kt.digicobus.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.findNavController
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
-import com.kt.digicobus.databinding.FragmentCommuteBusChoiceBinding
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
-import com.kt.digicobus.fragment.commute.CommuteBusChoiceFragment
-import com.kt.digicobus.fragment.commute.CommuteFragment
-import com.kt.digicobus.fragment.commute.CommuteMainFragment
-import kotlinx.android.synthetic.main.listview_ticket.view.*
+import com.kt.digicobus.dialog.BottomSheetAfterClickMore
+import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
 
 class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<TicketHolder>() {
@@ -83,7 +78,12 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         // 더보기 클릭시 하단 모달창
         holder.more.setOnClickListener{
+            val bottomDialog = BottomSheetAfterClickMore()
 
+            bottomDialog.show(
+                (holder.itemView.context as FragmentActivity).supportFragmentManager,
+                bottomDialog.tag
+            )
         }
     }
 

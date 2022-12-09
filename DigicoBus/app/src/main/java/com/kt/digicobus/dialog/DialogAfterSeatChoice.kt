@@ -5,18 +5,14 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import com.kt.digicobus.R
 
 
-class MyDialogAfterSeatChoice(context: Context?,container: ViewGroup?) : Dialog(context!!) {
+class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(context!!) {
     val container = container
 
     //활동 기반 컨텍스트가 아닌 경우 다음 메서드를 사용하여 컨텍스트 또는 throw 및 예외에서 활동을 가져올 수 있습니다
@@ -33,6 +29,10 @@ class MyDialogAfterSeatChoice(context: Context?,container: ViewGroup?) : Dialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.custom_dialog_after_seat_choice)
+
+        //예약내역이 하나일 경우 => 2022.12.7 (목)
+
+        //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
 
         var btn_ok = findViewById<Button>(R.id.btn_ok)
         var btn_cancle = findViewById<Button>(R.id.btn_cancle)

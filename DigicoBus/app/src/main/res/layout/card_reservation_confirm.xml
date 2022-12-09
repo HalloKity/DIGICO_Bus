@@ -21,7 +21,7 @@
                 android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/mint"
+                android:background="@color/mint_button"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
@@ -75,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/tv_to_place"
@@ -111,6 +112,7 @@
                     android:orientation="vertical"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
+                    android:layout_marginRight="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -260,15 +262,13 @@
                 app:layout_constraintVertical_bias="0.09"
                 tools:layout_editor_absoluteX="-23dp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/reserve_cancle"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@color/mint"
+                style="@style/button"
                 android:text="예약 취소"
                 android:textSize="16dp"
-                android:fontFamily="@font/noto_sans_kr_bold"
-                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kt.digicobus.R
 
-class MyBottomDialogQrcodeHelp() :
+class BottomSheetAfterClickMore() :
     BottomSheetDialogFragment(){
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class MyBottomDialogQrcodeHelp() :
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.custom_dialog_qrcode_help, container, false)
+        return inflater.inflate(R.layout.custom_dialog_after_click_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

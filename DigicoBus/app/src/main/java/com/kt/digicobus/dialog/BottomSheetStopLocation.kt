@@ -16,7 +16,7 @@ import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 
-class MyBottomDialogStopLocation(val stopLocation: String, val departureTime: String, val latlng: LatLng) :
+class BottomSheetStopLocation(val stopLocation: String, val departureTime: String, val latlng: LatLng) :
     BottomSheetDialogFragment(), OnMapReadyCallback {
 
     override fun onCreateView(

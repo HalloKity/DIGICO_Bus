@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +15,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
-import com.kt.digicobus.MainActivity
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
-import com.kt.digicobus.dialog.MyBottomDialogQrcodeHelp
-import kotlinx.android.synthetic.main.listview_ticket.view.*
-import org.w3c.dom.Text
+import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
 
 class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<ReservationHolder>() {
@@ -40,7 +34,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
 
     override fun onBindViewHolder(holder: ReservationHolder, position: Int) {
         holder.icon_info.setOnClickListener{
-            val bottomDialog = MyBottomDialogQrcodeHelp()
+            val bottomDialog = BottomSheetQrcodeHelp()
 
             bottomDialog.show(
                 (holder.itemView.context as FragmentActivity).supportFragmentManager,
