@@ -3,19 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_day_layout"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="62dp"
     android:gravity="right|center_vertical"
     android:paddingRight="5dp"
     android:background="@drawable/border_gray"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_day_text"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#E23C3B3B"
-        android:text="7"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/item_circle_day"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/circle_day"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_day_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:textColor="#E23C3B3B"
+            android:text="7"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,16 +42,10 @@
             android:textColor="@color/mint_check"/>
 
         <TextView
-            android:id="@+id/tv_middle"
+            android:id="@+id/tv_seok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/"/>
-
-        <TextView
-            android:id="@+id/tv_total_seat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="44"
+            android:text="석"
             android:textSize="14dp"/>
     </LinearLayout>
 

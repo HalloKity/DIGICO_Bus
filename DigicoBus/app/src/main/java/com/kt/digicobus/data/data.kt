@@ -20,7 +20,7 @@ data class BusStopContent(
     var isClick: Boolean
 )
 
-data class User(
+data class UserForLogin(
     val id: String,
     val pw: String
 )
@@ -38,7 +38,7 @@ class data{
         var busStopList = mutableListOf<BusStopContent>()
 
         // login
-        val userList = mutableListOf(User("10150000", "1234"), User("1","1"), User("", ""))
+        val userList = mutableListOf(UserForLogin("10150000", "1234"), UserForLogin("1","1"), UserForLogin("", ""))
 
         var busChoiceInfo = -1
     }

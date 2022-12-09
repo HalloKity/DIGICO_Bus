@@ -41,6 +41,7 @@ class CommuteMainFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteMainBinding.inflate(layoutInflater)
 
+        //전체값으로 데이터 받아서 달력으로 넘어가기 -> 버튼이 메인페이지에 있어서 어쩔 수 없음.
         binding.btnChoice.setOnClickListener {
             container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
         }
