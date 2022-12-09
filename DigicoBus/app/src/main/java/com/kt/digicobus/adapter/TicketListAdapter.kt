@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
+import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.dialog.BottomSheetAfterClickMore
 import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
@@ -78,7 +79,28 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         // 더보기 클릭시 하단 모달창
         holder.more.setOnClickListener{
-            val bottomDialog = BottomSheetAfterClickMore()
+//            val stationId: Int?,
+//            val busId: Int?,
+//            val commuteId:Int?,
+//            val line:String?,
+//            val mainPlace:String?,
+//            val detailPlace:String?,
+//            val departureTime:String?,
+//            val officePlace:String?,
+//            val officeTime:String?,
+//            val latitude:Double?,
+//            val longitude:Double?,
+//            // 즐겨찾기 여부 default false
+//            val isFavorite: Boolean = false,
+//            // 클릭 여부 default false
+//            val isClick: Boolean = false,
+            var mainPlace = holder.mainPlace.text.toString()
+            var detailPlace = holder.detailPlace.text.toString()
+            var departureTime = holder.departureTime.text.toString()
+            var latitude = 1.14345346
+            var longitude = 1.233454
+            val selectBusInfo = CommuteBusInfo(mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude, longitude = longitude)
+            val bottomDialog = BottomSheetAfterClickMore(selectBusInfo)
 
             bottomDialog.show(
                 (holder.itemView.context as FragmentActivity).supportFragmentManager,

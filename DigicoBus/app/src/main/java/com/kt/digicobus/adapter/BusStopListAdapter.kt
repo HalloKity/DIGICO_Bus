@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
+import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.dialog.BottomSheetStopLocation
 import com.naver.maps.geometry.LatLng
 import com.kt.digicobus.databinding.FragmentCommuteBusChoiceBinding
@@ -60,15 +61,14 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusCh
 
         //지도 클릭시 넘어감
         holder.btn_map.setOnClickListener {
-
-            val bottomDialog = BottomSheetStopLocation(
-                busStopList[position].busStopLocation,
-                busStopList[position].departureTime,
-                LatLng(
-                    busStopList[position].locationLatitude,
-                    busStopList[position].locationLongitude
+            val selectBusInfo = CommuteBusInfo(
+                mainPlace = busStopList[position].busStopLocation,
+                detailPlace = busStopList[position].departureTime,
+                latitude = busStopList[position].locationLatitude,
+                longitude = busStopList[position].locationLongitude,
                 )
-            )
+
+            val bottomDialog = BottomSheetStopLocation(selectBusInfo)
 
             bottomDialog.show(
                 (holder.itemView.context as FragmentActivity).supportFragmentManager,

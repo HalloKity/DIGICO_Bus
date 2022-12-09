@@ -13,13 +13,13 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //알림창 띄우기
-        var dialog_listener = Dialog(this); //다이얼로그 선언
+//        var dialog_listener = Dialog(this); //다이얼로그 선언
 
         binding.btnJoin.setOnClickListener{
             //회원가입 내역 백엔드로 보내기
 
             //다이얼로그 띄우기
-            dialog_listener.show();//띄우기
+//            dialog_listener.show();//띄우기
         }
     }
 }

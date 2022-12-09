@@ -5,12 +5,14 @@ import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.findNavController
 import com.kt.digicobus.R
 import com.kt.digicobus.login.JoinActivity
 
 
-class Dialog(context: Context?) : Dialog(context!!) {
+class Dialog(context: Context?,var container: ViewGroup?) : Dialog(context!!) {
 
     //활동 기반 컨텍스트가 아닌 경우 다음 메서드를 사용하여 컨텍스트 또는 throw 및 예외에서 활동을 가져올 수 있습니다
     // 일반 context를 쓸 경우 회원가입 Activity가 죽어버리는 현상이 발생해 이를 해결하기 위해 사용
@@ -24,14 +26,15 @@ class Dialog(context: Context?) : Dialog(context!!) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.custom_dialog)
+        setContentView(R.layout.custom_dialog_reservation_check)
 
         var btn_ok = findViewById<Button>(R.id.btn_ok)
 
         //확인 버튼 눌렀을 때 뒤로 가는 버튼
         btn_ok.setOnClickListener{
             dismiss()
-            (getActivity(context) as JoinActivity).finish()
+
+            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
     }
 

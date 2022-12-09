@@ -40,7 +40,14 @@ class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(c
         //확인 버튼 눌렀을 때 뒤로 가는 버튼
         btn_ok.setOnClickListener{
             dismiss()
-            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+
+            // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
+            //알림창 띄우기
+            var dialog_listener = com.kt.digicobus.dialog.Dialog(context,container); //다이얼로그 선언
+            //다이얼로그 띄우기
+            dialog_listener.show();//띄우기
+
+//            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
         //취소버튼
