@@ -20,7 +20,7 @@ import com.kt.digicobus.fragment.commute.CommuteFragment
 import com.kt.digicobus.fragment.commute.CommuteMainFragment
 import kotlinx.android.synthetic.main.listview_ticket.view.*
 
-class TicketListAdapter(var context: Context, private val resource: Int, var ticketContentsList: MutableList<TicketContent>)
+class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<TicketHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketHolder {
@@ -41,6 +41,7 @@ class TicketListAdapter(var context: Context, private val resource: Int, var tic
         holder.constraint.setOnClickListener{
             ticketContentsList[position].isClick = true
             it.setBackgroundColor(context.resources.getColor(R.color.mint_choice))
+            binding.tvStartPlace.text = ticketContentsList[position].mainPlace
 
             for(i in 0 until ticketContentsList.size){
                 if(i != position){
@@ -92,12 +93,12 @@ class TicketListAdapter(var context: Context, private val resource: Int, var tic
 }
 
 class TicketHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var constraint: ConstraintLayout = itemView!!.findViewById(R.id.constraint)
+    var constraint: ConstraintLayout = itemView.findViewById(R.id.constraint)
 
-    var favorite: ImageView = itemView!!.findViewById(R.id.icon_star)
-    var line: TextView = itemView!!.findViewById(R.id.tv_line)
-    var mainPlace: TextView = itemView!!.findViewById(R.id.tv_main_place)
-    var detailPlace: TextView = itemView!!.findViewById(R.id.tv_detail_place)
-    var departureTime: TextView = itemView!!.findViewById(R.id.tv_departure_time)
-    var more: ImageView = itemView!!.findViewById(R.id.icon_more)
+    var favorite: ImageView = itemView.findViewById(R.id.icon_star)
+    var line: TextView = itemView.findViewById(R.id.tv_line)
+    var mainPlace: TextView = itemView.findViewById(R.id.tv_main_place)
+    var detailPlace: TextView = itemView.findViewById(R.id.tv_detail_place)
+    var departureTime: TextView = itemView.findViewById(R.id.tv_departure_time)
+    var more: ImageView = itemView.findViewById(R.id.icon_more)
 }

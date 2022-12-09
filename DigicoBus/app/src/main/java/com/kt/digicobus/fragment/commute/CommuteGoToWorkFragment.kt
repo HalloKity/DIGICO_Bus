@@ -14,6 +14,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.ticketList
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
@@ -59,7 +60,7 @@ class CommuteGoToWorkFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        ticketListAdapter = TicketListAdapter(ctx, R.layout.listview_ticket, data.ticketList)
+        ticketListAdapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, data.ticketList)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = ticketListAdapter
