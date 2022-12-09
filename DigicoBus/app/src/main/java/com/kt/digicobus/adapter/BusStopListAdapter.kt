@@ -41,8 +41,8 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusCh
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: BusStopHolder, position: Int) {
-        holder.tv_bus_stop_location.text = busStopList[position].tv_bus_stop_location
-        holder.tv_departure_time.text = busStopList[position].tv_departure_time
+        holder.tv_bus_stop_location.text = busStopList[position].busStopLocation
+        holder.tv_departure_time.text = busStopList[position].departureTime
 
         holder.constraint.setOnClickListener{
             busStopList[position].isClick = true
@@ -68,11 +68,11 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusCh
         holder.btn_map.setOnClickListener {
 
             val bottomDialog = MyBottomDialogStopLocation(
-                busStopList[position].tv_bus_stop_location,
-                busStopList[position].tv_departure_time,
+                busStopList[position].busStopLocation,
+                busStopList[position].departureTime,
                 LatLng(
-                    busStopList[position].tv_location_latitude,
-                    busStopList[position].tv_location_longitude
+                    busStopList[position].locationLatitude,
+                    busStopList[position].locationLongitude
                 )
             )
 

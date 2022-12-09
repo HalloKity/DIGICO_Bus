@@ -2,10 +2,11 @@ package com.kt.digicobus.fragment.commute
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +15,8 @@ import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.data
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
-import com.kt.digicobus.databinding.FragmentCommuteMainBinding
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+
 
 class CommuteGoToWorkFragment : Fragment() {
     private lateinit var binding : FragmentCommuteGoToWorkBinding
@@ -35,10 +36,14 @@ class CommuteGoToWorkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCommuteGoToWorkBinding.inflate(layoutInflater)
-
-        binding.btnChoice.setOnClickListener {
-            container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
-        }
+//        binding.btnChoice.setOnClickListener {
+//            container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+////            val transaction: FragmentTransaction = childFragmentManager.beginTransaction()
+////            val fragment1 = CommuteCalendarChoiceFragment()
+////            transaction.replace(R.id.fragment, fragment1)
+////            transaction.commit()
+////            it.findNavController().navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+//        }
 
         setAdapter()
 
@@ -62,18 +67,18 @@ class CommuteGoToWorkFragment : Fragment() {
 
     fun fillData(){
         data.ticketList.clear()
-        data.ticketList.add(TicketContent("인천","간석오거리역","1번출구 버스정류장 앞","6:50",true))
-        data.ticketList.add(TicketContent("인천","부평역","1번출구 큰사거리 고은성모의원 앞","7:00",false))
-        data.ticketList.add(TicketContent("인천","송내남부역","커피에 반하다 앞","7:15",false))
-        data.ticketList.add(TicketContent("인천","시흥영업소","판교 방향","7:25",false))
-        data.ticketList.add(TicketContent("창동/잠실","창동역","1번출구 프레스티지 앞","6:55",false))
-        data.ticketList.add(TicketContent("창동/잠실","태릉입구역","2번출구","7:15",false))
-        data.ticketList.add(TicketContent("창동/잠실","잠실역","6번출구 앞 버스정류장 앞","7:50",false))
-        data.ticketList.add(TicketContent("목동","목동사옥","세신비젼프라자앞","7:10",false))
-        data.ticketList.add(TicketContent("목동","오목교역","2번출구","7:13",false))
-        data.ticketList.add(TicketContent("신도림","신도림역","6번출구","7:10",false))
-        data.ticketList.add(TicketContent("신도림","마포역","3번출구","7:25",false))
-        data.ticketList.add(TicketContent("신도림","서울역","14번출구","7:45",false))
+        data.ticketList.add(TicketContent("인천","간석오거리역","1번출구 버스정류장 앞","6:50",true,false))
+        data.ticketList.add(TicketContent("인천","부평역","1번출구 큰사거리 고은성모의원 앞","7:00",false,false))
+        data.ticketList.add(TicketContent("인천","송내남부역","커피에 반하다 앞","7:15",false,false))
+        data.ticketList.add(TicketContent("인천","시흥영업소","판교 방향","7:25",false,false))
+        data.ticketList.add(TicketContent("창동/잠실","창동역","1번출구 프레스티지 앞","6:55",false,false))
+        data.ticketList.add(TicketContent("창동/잠실","태릉입구역","2번출구","7:15",false,false))
+        data.ticketList.add(TicketContent("창동/잠실","잠실역","6번출구 앞 버스정류장 앞","7:50",false,false))
+        data.ticketList.add(TicketContent("목동","목동사옥","세신비젼프라자앞","7:10",false,false))
+        data.ticketList.add(TicketContent("목동","오목교역","2번출구","7:13",false,false))
+        data.ticketList.add(TicketContent("신도림","신도림역","6번출구","7:10",false,false))
+        data.ticketList.add(TicketContent("신도림","마포역","3번출구","7:25",false,false))
+        data.ticketList.add(TicketContent("신도림","서울역","14번출구","7:45",false,false))
     }
 
 }

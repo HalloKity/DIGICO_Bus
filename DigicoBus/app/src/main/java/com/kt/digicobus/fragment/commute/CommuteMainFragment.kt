@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +40,10 @@ class CommuteMainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCommuteMainBinding.inflate(layoutInflater)
+
+        binding.btnChoice.setOnClickListener {
+            container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+        }
 
         //출퇴근 fragment 연결
         val navHostFragment =
