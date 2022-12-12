@@ -38,12 +38,13 @@ class BusRouteAdapter(var context: Context, private val resource: Int,  var tick
 
         if(position == 0){
             holder.topLine.visibility = View.GONE
+            holder.bottomLine.visibility = View.VISIBLE
         }else if(position == ticketContentsList.size-1){
+            holder.topLine.visibility = View.VISIBLE
             holder.bottomLine.visibility = View.GONE
         }
 
-        holder.place.text = "?"
-        holder.time.text = "?"
+
     }
 
     override fun getItemCount(): Int {

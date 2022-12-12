@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
@@ -17,6 +16,7 @@ import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.ticketList
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import java.util.*
 
 
 class CommuteGoToWorkFragment : Fragment() {
@@ -47,11 +47,44 @@ class CommuteGoToWorkFragment : Fragment() {
 //        }
 
         setAdapter()
+        search()
 
         return binding.root
     }
 
-        private fun setAdapter(){
+    fun search(){
+        val searchView = binding.btnSearch
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                val filterList: ArrayList<TicketContent> = ArrayList()
+
+                for (i in 0 until ticketList.size) {
+                    val data: TicketContent = ticketList.get(i)
+
+                    //데이터와 비교해서 내가 쓴 단어가 있다면 (00행, 메인 장소, 디테일 장소)
+                    if (data.mainPlace.toLowerCase().contains(newText.toLowerCase())) {
+                        filterList.add(data)
+                    }else if(data.detailPlace.toLowerCase().contains(newText.toLowerCase())){
+                        filterList.add(data)
+                    }else if(data.line.toLowerCase().contains(newText.toLowerCase())){
+                        filterList.add(data)
+                    }
+                }
+
+                val adapter = TicketListAdapter(ctx, binding, com.kt.digicobus.R.layout.listview_ticket, filterList)
+                recyclerView.adapter = adapter
+
+                return false
+            }
+        })
+    }
+
+    private fun setAdapter(){
         fillData()
 
         // RecyclerView 객체 생성
@@ -60,7 +93,7 @@ class CommuteGoToWorkFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        ticketListAdapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, data.ticketList)
+        ticketListAdapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, ticketList)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = ticketListAdapter
