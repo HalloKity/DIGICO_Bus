@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.BusStopListAdapter
 import com.kt.digicobus.data.BusStopContent
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.busStopList
 import com.kt.digicobus.databinding.FragmentCommuteBusEntireRouteBinding
 import com.kt.digicobus.naverMap.NaverMapAPIService
@@ -22,7 +20,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 //통근버스 - 전체 노선 보기
-class CommuteBusEntireRoute : Fragment(), OnMapReadyCallback {
+class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentCommuteBusEntireRouteBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var busStopListAdapter: BusStopListAdapter

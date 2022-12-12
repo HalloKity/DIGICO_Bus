@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -17,7 +19,6 @@ import com.naver.maps.geometry.LatLng
 
 class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
     BottomSheetDialogFragment(){
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +44,13 @@ class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
                 (context as FragmentActivity).supportFragmentManager,
                 bottomDialog.tag
             )
+        }
+
+        // 전체 노선 보기
+        val totalMap = view.findViewById<LinearLayout>(R.id.layout_linear_total_map)
+        totalMap.setOnClickListener {
+            findNavController().navigate(R.id.action_CommuteFragment_to_CommuteBusEntireRouteFragment)
+            dismiss()
         }
 
 
