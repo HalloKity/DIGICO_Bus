@@ -36,22 +36,31 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
         if(holder.layout.tv_left_seat.text == "0"){
             holder.layout.item_day_layout.setBackgroundColor(Color.argb(70,170,170,170))
             holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
-            holder.layout.tv_middle.setTextColor(Color.rgb(170,170,170))
-            holder.layout.tv_total_seat.setTextColor(Color.rgb(170,170,170))
+            holder.layout.tv_seok.setTextColor(Color.rgb(170,170,170))
         }
 
-        //좌석 클릭시 배경 변환
+        //좌석 클릭시 배경 변환 -> 다중 선택 가능하게
         holder.layout.item_day_layout.setOnClickListener{
-            // 이전에 선택된 좌석말고 다른 곳 클릭 시 이전 곳 배경 다시 흰색으로 변환하고 선택한 곳 색깔 변환
-            dayClickCheckList[position] = true
-            holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
+            //true
+            if(dayClickCheckList[position]){
+                dayClickCheckList[position] = false
+                holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.white))
+            }
+            //false
+            else{
+                dayClickCheckList[position] = true
+                holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
+            }
 
+            //선택된 좌석이 1개 이상일 경우
+            var seatChoiceCnt = 0
             for(i in 0 until dayClickCheckList.size){
-                if(i != position){
-                    dayClickCheckList[i]= false
+                if(dayClickCheckList[i]){
+                    seatChoiceCnt++
                 }
             }
-            binding.btnChoice.isEnabled = true
+
+            binding.btnChoice.isEnabled = seatChoiceCnt > 0
 
             notifyDataSetChanged()
         }
@@ -68,10 +77,11 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             holder.layout.item_day_text.alpha = 0.4f
         }
 
-        //오늘 날짜일 경우 빨간색으로 처리
+        //오늘 날짜일 경우 백그라운드 동그라미 활성화 & 글자 색 화이트로 변경
         var date = Date()
         if(date.date == dayList[position].date && date.month == dayList[position].month){
-            holder.layout.item_day_text.setTextColor(Color.RED)
+            holder.layout.item_day_text.setTextColor(Color.WHITE)
+            holder.layout.item_circle_day.visibility = View.VISIBLE
         }
 
         //지난 날짜인 경우 마감처리
@@ -82,8 +92,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
             holder.layout.item_day_layout.isClickable = false
             holder.layout.tv_left_seat.text = ""
-            holder.layout.tv_middle.text = ""
-            holder.layout.tv_total_seat.text = ""
+            holder.layout.tv_seok.text = ""
         }
 
         //오늘이 25일 이전이면
@@ -91,7 +100,6 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             // 다음달 오픈 x
             // 이번달 25일 이후 또는 다음달 이상
             if(
-                (date.year >= dayList[position].year && dayList[position].date >=25) ||
                 date.year < dayList[position].year ||
                 (date.year == dayList[position].year && date.month < dayList[position].month) ||
                 (date.year == dayList[position].year && date.month > dayList[position].month)
@@ -99,8 +107,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
                 holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
                 holder.layout.item_day_layout.isClickable = false
                 holder.layout.tv_left_seat.text = ""
-                holder.layout.tv_middle.text = ""
-                holder.layout.tv_total_seat.text = ""
+                holder.layout.tv_seok.text = ""
             }
         }
         // 오늘이 25일 이후면 풀어주기 코드

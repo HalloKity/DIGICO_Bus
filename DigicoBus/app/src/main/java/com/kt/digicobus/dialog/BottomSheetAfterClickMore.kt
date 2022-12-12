@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kt.digicobus.R
+import com.kt.digicobus.data.model.CommuteBusInfo
+import com.naver.maps.geometry.LatLng
 
-class MyBottomDialogQrcodeHelp() :
+class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
     BottomSheetDialogFragment(){
 
     override fun onCreateView(
@@ -20,7 +24,8 @@ class MyBottomDialogQrcodeHelp() :
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.custom_dialog_qrcode_help, container, false)
+
+        return inflater.inflate(R.layout.custom_dialog_after_click_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +33,18 @@ class MyBottomDialogQrcodeHelp() :
         view.findViewById<Button>(R.id.btn_close)?.setOnClickListener {
             dismiss()
         }
+
+        // 정류장 위치 보기
+        val specificationMap = view.findViewById<LinearLayout>(R.id.layout_linear_specification_map)
+        specificationMap.setOnClickListener{
+            val bottomDialog = BottomSheetStopLocation(selectBusInfo)
+
+            bottomDialog.show(
+                (context as FragmentActivity).supportFragmentManager,
+                bottomDialog.tag
+            )
+        }
+
 
         // dialog가 drag로 닫히지 않도록 설정
         if (dialog is BottomSheetDialog) {

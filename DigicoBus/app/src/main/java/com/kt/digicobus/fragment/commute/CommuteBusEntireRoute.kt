@@ -43,13 +43,6 @@ class CommuteBusEntireRoute : Fragment(), OnMapReadyCallback {
 
         setAdapter()
 
-        //뒤로가기
-        binding.btnBack.setOnClickListener {
-            data.busChoiceInfo = -1
-            container?.findNavController()
-                ?.navigate(R.id.action_CommuteBusChoiceFragment_to_CommuteMainFragment)
-        }
-
         // 네이버 지도
         val mapView = binding.routeMap
         mapView.onCreate(savedInstanceState)
@@ -58,7 +51,7 @@ class CommuteBusEntireRoute : Fragment(), OnMapReadyCallback {
         binding.recyclerview.setOnClickListener {
             val clickedItem = busStopList.find { it.isClick }
             if (clickedItem != null) {
-                naverMapAPIService.setMarker(LatLng(clickedItem.tv_location_latitude, clickedItem.tv_location_longitude))
+                naverMapAPIService.setMarker(LatLng(clickedItem.locationLatitude, clickedItem.locationLongitude))
             }
         }
 
@@ -100,16 +93,16 @@ class CommuteBusEntireRoute : Fragment(), OnMapReadyCallback {
         // camera position
         naverMapAPIService.setCameraPosition(
             LatLng(
-                busStopList[busStopList.size / 2].tv_location_latitude,
-                busStopList[busStopList.size / 2].tv_location_longitude
+                busStopList[busStopList.size / 2].locationLatitude,
+                busStopList[busStopList.size / 2].locationLongitude
             )
         )
 
 //        // 첫번째 정차역 마커표시
 //        naverMapAPIService.setMarker(
 //            LatLng(
-//                busStopList[0].tv_location_latitude,
-//                busStopList[0].tv_location_longitude
+//                busStopList[0].locationLatitude,
+//                busStopList[0].locationLongitude
 //            ),
 //            busStopList[0].tv_bus_stop_location
 //        )
@@ -117,15 +110,15 @@ class CommuteBusEntireRoute : Fragment(), OnMapReadyCallback {
 //        // 마지막 정차역 마커표시
 //        naverMapAPIService.setMarker(
 //            LatLng(
-//                busStopList[busStopList.size-1].tv_location_latitude,
-//                busStopList[busStopList.size-1].tv_location_longitude
+//                busStopList[busStopList.size-1].locationLatitude,
+//                busStopList[busStopList.size-1].locationLongitude
 //            ),
 //            busStopList[0].tv_bus_stop_location
 //        )
 
         for (i in 1 until busStopList.size) {
-            val latlngStart = LatLng(busStopList[i - 1].tv_location_latitude, busStopList[i - 1].tv_location_longitude)
-            val latlngEnd = LatLng(busStopList[i].tv_location_latitude, busStopList[i].tv_location_longitude)
+            val latlngStart = LatLng(busStopList[i - 1].locationLatitude, busStopList[i - 1].locationLongitude)
+            val latlngEnd = LatLng(busStopList[i].locationLatitude, busStopList[i].locationLongitude)
 
             // 마커 표시
 //            naverMapAPIService.setMarker(latlngEnd, busStopList[i].tv_bus_stop_location)

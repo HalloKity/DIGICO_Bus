@@ -32,8 +32,8 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEn
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: BusStopHolder, position: Int) {
-        holder.tv_bus_stop_location.text = busStopList[position].tv_bus_stop_location
-        holder.tv_departure_time.text = busStopList[position].tv_departure_time
+        holder.tv_bus_stop_location.text = busStopList[position].busStopLocation
+        holder.tv_departure_time.text = busStopList[position].departureTime
 
         // 노선 line
         if(position == 0) holder.line_route_top.visibility = View.INVISIBLE
@@ -57,8 +57,9 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEn
         if(!busStopList[position].isClick){
             holder.constraint.setBackgroundColor(context.getColor(R.color.white))
         }else if(busStopList[position].isClick){
-            holder.constraint.setBackgroundColor(context.getColor(R.color.gray_70))
+            holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
         }
+
     }
 
     override fun getItemCount(): Int {

@@ -10,13 +10,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kt.digicobus.R
+import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.naverMap.NaverMapAPIService
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 
-class MyBottomDialogStopLocation(val stopLocation: String, val departureTime: String, val latlng: LatLng) :
+class BottomSheetStopLocation(val selectBusInfo:CommuteBusInfo) :
     BottomSheetDialogFragment(), OnMapReadyCallback {
 
     override fun onCreateView(
@@ -51,10 +52,10 @@ class MyBottomDialogStopLocation(val stopLocation: String, val departureTime: St
 
         // 정류장 위치, 시간
         val tvStopLocation = view.findViewById<TextView>(R.id.tv_stop_location)
-        tvStopLocation.text = stopLocation
+        tvStopLocation.text = "${selectBusInfo.mainPlace} ${selectBusInfo.detailPlace}"
 
         val tvStopTime = view.findViewById<TextView>(R.id.tv_stop_time)
-        tvStopTime.text = departureTime
+        tvStopTime.text = selectBusInfo.departureTime
 
         // 네이버 지도
         val mapView = view.findViewById<MapView>(R.id.station_map)
@@ -66,6 +67,7 @@ class MyBottomDialogStopLocation(val stopLocation: String, val departureTime: St
     override fun onMapReady(naverMap: NaverMap) {
         val naverMapAPIService = NaverMapAPIService(naverMap)
 
+        val latlng = LatLng(selectBusInfo.latitude!!, selectBusInfo.longitude!!)
         // camera position
         naverMapAPIService.setCameraPosition(latlng)
 

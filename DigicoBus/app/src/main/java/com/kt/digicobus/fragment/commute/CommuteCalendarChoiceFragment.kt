@@ -1,13 +1,11 @@
 package com.kt.digicobus.fragment.commute
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -15,7 +13,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
 import com.kt.digicobus.data.data
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
-import com.kt.digicobus.dialog.MyDialogAfterSeatChoice
+import com.kt.digicobus.dialog.DialogAfterSeatChoice
 
 //통근버스 3
 class CommuteCalendarChoiceFragment : Fragment() {
@@ -40,11 +38,12 @@ class CommuteCalendarChoiceFragment : Fragment() {
         // 뒤로가기
         binding.btnBack.setOnClickListener{
             data.busChoiceInfo = -1
-            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment)
+            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
         //알림창 띄우기
-        var dialog_listener = MyDialogAfterSeatChoice(ctx, container); //다이얼로그 선언
+        var dialog_listener = DialogAfterSeatChoice(ctx, container); //다이얼로그 선언
+
         //신청하기
         binding.btnChoice.setOnClickListener{
             //예약내역 백엔드로 보내기

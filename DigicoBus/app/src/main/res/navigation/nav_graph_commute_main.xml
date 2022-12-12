@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_commute_main"
+    app:startDestination="@id/CommuteGoToWorkFragment">
+    <fragment
+        android:id="@+id/CommuteGoToWorkFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteGoToWorkFragment"
+        android:label="fragment_commute_go_to_work"
+        tools:layout="@layout/fragment_commute_go_to_work" >
+        <action
+            android:id="@+id/action_CommuteGoToWorkFragment_to_CommuteCalendarChoiceFragment"
+            app:destination="@id/CommuteCalendarChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CommuteLeaveWorkFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteLeaveWorkFragment"
+        android:label="fragment_commute_leave_work"
+        tools:layout="@layout/fragment_commute_leave_work" >
+    </fragment>
+    <fragment
+        android:id="@+id/CommuteCalendarChoiceFragment"
+        android:name="com.kt.digicobus.fragment.commute.CommuteCalendarChoiceFragment"
+        android:label="fragment_commute_calendar_choice"
+        tools:layout="@layout/fragment_commute_calendar_choice" >
+    </fragment>
+
+</navigation>

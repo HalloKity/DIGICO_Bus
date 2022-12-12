@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -16,20 +15,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
-import com.kt.digicobus.MainActivity
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
-import com.kt.digicobus.dialog.MyBottomDialogQrcodeHelp
-import kotlinx.android.synthetic.main.listview_ticket.view.*
-import org.w3c.dom.Text
+import com.kt.digicobus.data.data
+import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<TicketContent>)
     : RecyclerView.Adapter<ReservationHolder>() {
     val PERMISSIONS_CALL_PHONE = 1
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var busRouteAdapter: BusRouteAdapter
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservationHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -39,8 +40,8 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
     }
 
     override fun onBindViewHolder(holder: ReservationHolder, position: Int) {
-        holder.icon_info.setOnClickListener{
-            val bottomDialog = MyBottomDialogQrcodeHelp()
+        holder.iconInfo.setOnClickListener{
+            val bottomDialog = BottomSheetQrcodeHelp()
 
             bottomDialog.show(
                 (holder.itemView.context as FragmentActivity).supportFragmentManager,
@@ -48,18 +49,35 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             )
         }
 
-        val callNumber = holder.tv_car_number_content.text.toString()
-        holder.tv_car_number_content.setOnClickListener{
+        val callNumber = holder.carNumberContent.text.toString()
+        holder.carNumberContent.setOnClickListener{
             dialog(callNumber)
         }
 
-        holder.icon_call.setOnClickListener{
+        holder.iconCall.setOnClickListener{
             dialog(callNumber)
         }
+
+        setAdapter(holder.recyclerview)
+
     }
 
     override fun getItemCount(): Int {
         return ticketContentsList.size
+    }
+
+    private fun setAdapter(recyclerview:RecyclerView){
+
+        // RecyclerView 객체 생성
+        recyclerView = recyclerview
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
+        // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
+        busRouteAdapter = BusRouteAdapter(context, R.layout.listview_specification_bus_route, data.ticketList)
+
+        // 3. RecyclerView와 Adapter 연결
+        recyclerView.adapter = busRouteAdapter
     }
 
     fun dialog(callNumber: String){
@@ -98,9 +116,9 @@ class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tv_from_place: TextView = itemView!!.findViewById(R.id.tv_from_place)
     val tv_to_time: TextView = itemView!!.findViewById(R.id.tv_to_time)
     val tv_from_time: TextView = itemView!!.findViewById(R.id.tv_from_time)
-    val google_map: ImageView = itemView!!.findViewById(R.id.google_map)
 
-    var tv_car_number_content: TextView = itemView!!.findViewById((R.id.tv_car_number_content))
-    var icon_call: ImageView = itemView!!.findViewById(R.id.icon_call)
-    val icon_info: ImageView = itemView!!.findViewById(R.id.icon_info)
+    val carNumberContent: TextView = itemView!!.findViewById((R.id.tv_car_number_content))
+    val iconCall: ImageView = itemView!!.findViewById(R.id.icon_call)
+    val iconInfo: ImageView = itemView!!.findViewById(R.id.icon_info)
+    val recyclerview: RecyclerView = itemView!!.findViewById(R.id.recyclerview)
 }

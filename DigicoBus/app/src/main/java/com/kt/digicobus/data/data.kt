@@ -4,24 +4,23 @@ import android.widget.TextView
 import com.kt.digicobus.R
 
 data class TicketContent(
-    var tv_large_place: String,
-    var tv_small_place: String,
-    var tv_start_place_name:String,
-    var tv_start_time: String,
-    var tv_end_place_name: String,
-    var tv_end_time: String,
+    var line: String,
+    var mainPlace: String,
+    var detailPlace: String,
+    var departureTime: String,
     var isFavorite: Boolean,
-)
-
-data class BusStopContent(
-    var tv_bus_stop_location:String,
-    var tv_departure_time:String,
-    var tv_location_latitude:Double,
-    var tv_location_longitude:Double,
     var isClick: Boolean
 )
 
-data class User(
+data class BusStopContent(
+    var busStopLocation:String,
+    var departureTime:String,
+    var locationLatitude:Double,
+    var locationLongitude:Double,
+    var isClick: Boolean
+)
+
+data class UserForLogin(
     val id: String,
     val pw: String
 )
@@ -39,7 +38,7 @@ class data{
         var busStopList = mutableListOf<BusStopContent>()
 
         // login
-        val userList = mutableListOf(User("10150000", "1234"), User("1","1"), User("", ""))
+        val userList = mutableListOf(UserForLogin("10150000", "1234"), UserForLogin("1","1"), UserForLogin("", ""))
 
         var busChoiceInfo = -1
     }

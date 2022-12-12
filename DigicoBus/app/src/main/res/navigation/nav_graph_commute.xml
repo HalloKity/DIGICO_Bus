@@ -9,30 +9,17 @@
         android:name="com.kt.digicobus.fragment.commute.CommuteMainFragment"
         android:label="fragment_commute_main"
         tools:layout="@layout/fragment_commute_main" >
+
         <action
-            android:id="@+id/action_CommuteMainFragment_to_CommuteBusChoiceFragment2"
-            app:destination="@id/CommuteBusChoiceFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/CommuteBusChoiceFragment"
-        android:name="com.kt.digicobus.fragment.commute.CommuteBusEntireRoute"
-        android:label="fragment_commute_bus_choice"
-        tools:layout="@layout/fragment_commute_bus_entire_route" >
-        <action
-            android:id="@+id/action_CommuteBusChoiceFragment_to_CommuteCalendarChoiceFragment"
+            android:id="@+id/action_CommuteMainFragment_to_CommuteCalendarChoiceFragment"
             app:destination="@id/CommuteCalendarChoiceFragment" />
-        <action
-            android:id="@+id/action_CommuteBusChoiceFragment_to_CommuteMainFragment"
-            app:destination="@id/CommuteMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/CommuteCalendarChoiceFragment"
         android:name="com.kt.digicobus.fragment.commute.CommuteCalendarChoiceFragment"
         android:label="fragment_commute_calendar_choice"
         tools:layout="@layout/fragment_commute_calendar_choice" >
-        <action
-            android:id="@+id/action_CommuteCalendarChoiceFragment_to_CommuteBusChoiceFragment"
-            app:destination="@id/CommuteBusChoiceFragment" />
+
         <action
             android:id="@+id/action_CommuteCalendarChoiceFragment_to_CommuteMainFragment"
             app:destination="@id/CommuteMainFragment" />

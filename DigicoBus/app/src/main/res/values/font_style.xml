@@ -3,4 +3,7 @@
     <style name="customTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
     </style>
+    <style name="customTextViewFontStyle.bold" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
+    </style>
 </resources>
