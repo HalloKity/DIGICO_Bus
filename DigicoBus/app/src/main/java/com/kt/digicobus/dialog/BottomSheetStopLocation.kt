@@ -67,7 +67,7 @@ class BottomSheetStopLocation(val selectBusInfo:CommuteBusInfo) :
     override fun onMapReady(naverMap: NaverMap) {
         val naverMapAPIService = NaverMapAPIService(naverMap)
 
-        val latlng = LatLng(selectBusInfo.latitude!!, selectBusInfo.longitude!!)
+        val latlng = LatLng(selectBusInfo.latitude!!.toDouble(), selectBusInfo.longitude!!.toDouble())
         // camera position
         naverMapAPIService.setCameraPosition(latlng)
 

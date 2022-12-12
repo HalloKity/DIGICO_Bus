@@ -14,9 +14,8 @@ import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.dialog.BottomSheetAfterClickMore
-import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
 
-class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<TicketContent>)
+class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<CommuteBusInfo>)
     : RecyclerView.Adapter<TicketHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketHolder {
@@ -99,7 +98,7 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
             var departureTime = holder.departureTime.text.toString()
             var latitude = 1.14345346
             var longitude = 1.233454
-            val selectBusInfo = CommuteBusInfo(mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude, longitude = longitude)
+            val selectBusInfo = CommuteBusInfo(mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude.toString(), longitude = longitude.toString())
             val bottomDialog = BottomSheetAfterClickMore(selectBusInfo)
 
             bottomDialog.show(
