@@ -4,41 +4,63 @@
     android:id="@+id/constraint_bus_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/img_bus_route_circle"
+        android:src="@drawable/img_bus_route_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:id="@+id/line_route_top"
+        android:background="@color/gray_70"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_bus_route_circle"
+        app:layout_constraintBottom_toTopOf="@+id/img_bus_route_circle"
+        app:layout_constraintEnd_toEndOf="@id/img_bus_route_circle"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:id="@+id/line_route_bottom"
+        android:background="@color/gray_70"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_bus_route_circle"
+        app:layout_constraintTop_toBottomOf="@+id/img_bus_route_circle"
+        app:layout_constraintEnd_toEndOf="@id/img_bus_route_circle"/>
 
     <TextView
         android:id="@+id/tv_bus_stop_location"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="간선오거리역 1번출구 버스정류장 aaaaaaaaa앞"
+        android:layout_marginLeft="25dp"
+        android:text="간선오거리역"
         android:textSize="16dp"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tv_departure_time"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_bus_route_circle" />
 
     <TextView
         android:id="@+id/tv_departure_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(06:30)"
-        android:textColor="@color/red"
+        android:layout_marginRight="50dp"
+        android:text="06:30"
+        android:textColor="@color/black"
         android:textSize="15dp"
-        android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_map"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_bus_stop_location"
         app:layout_constraintTop_toTopOf="parent" />
-    <ImageView
-        android:id="@+id/btn_map"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/icon_map"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
