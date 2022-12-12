@@ -60,9 +60,6 @@ class ShuttleFragment : Fragment(), OnMapReadyCallback {
         val latlngOffice = LatLng(37.407385, 127.090450)
         val latlngStation = LatLng(37.394769, 127.111194)
 
-        // camera position
-        naverMapAPIService.setCameraPosition(latlngOffice)
-
         // 판교사옥 마커 표시
         naverMapAPIService.setMarker(latlngOffice, "KT 판교사옥")
 
@@ -71,5 +68,8 @@ class ShuttleFragment : Fragment(), OnMapReadyCallback {
 
         // 판교역-판교사옥 경로 표시
         naverMapAPIService.setPath(latlngStation, latlngOffice)
+
+        // camera position
+        naverMapAPIService.showPath(latlngStation, latlngOffice)
     }
 }

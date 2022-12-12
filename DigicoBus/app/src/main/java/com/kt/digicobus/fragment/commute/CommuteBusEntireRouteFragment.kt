@@ -17,6 +17,7 @@ import com.kt.digicobus.naverMap.NaverMapAPIService
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 //통근버스 - 전체 노선 보기
@@ -27,6 +28,7 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
     private lateinit var naverMapAPIService : NaverMapAPIService
 
     private lateinit var ctx: Context
+    private var prevMarker : Marker? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,13 +53,6 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-        binding.recyclerview.setOnClickListener {
-            val clickedItem = busStopList.find { it.isClick }
-            if (clickedItem != null) {
-                naverMapAPIService.setMarker(LatLng(clickedItem.locationLatitude, clickedItem.locationLongitude))
-            }
-        }
-
         return binding.root
     }
 
@@ -74,10 +69,21 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
         busStopListAdapter =
-            BusStopListAdapter(ctx, binding, R.layout.listview_detail_bus_info, busStopList)
+            BusStopListAdapter(ctx, binding, R.layout.listview_detail_bus_info, busStopList, ::onClickItem)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = busStopListAdapter
+    }
+
+    private fun onClickItem(position: Int) {
+        val clickedItem = busStopList[position]
+        val clickedItemLat = LatLng(clickedItem.locationLatitude, clickedItem.locationLongitude)
+
+        if (prevMarker != null) {
+            naverMapAPIService.removeMarker(prevMarker!!)
+        }
+        prevMarker = naverMapAPIService.setMarker(clickedItemLat, clickedItem.busStopLocation)
+        naverMapAPIService.setCameraPositionAndZoom(clickedItemLat, 16.0)
     }
 
     fun fillData() {
@@ -93,41 +99,16 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         naverMapAPIService = NaverMapAPIService(naverMap)
 
-        // camera position
-        naverMapAPIService.setCameraPosition(
-            LatLng(
-                busStopList[busStopList.size / 2].locationLatitude,
-                busStopList[busStopList.size / 2].locationLongitude
-            )
-        )
-
-//        // 첫번째 정차역 마커표시
-//        naverMapAPIService.setMarker(
-//            LatLng(
-//                busStopList[0].locationLatitude,
-//                busStopList[0].locationLongitude
-//            ),
-//            busStopList[0].tv_bus_stop_location
-//        )
-//
-//        // 마지막 정차역 마커표시
-//        naverMapAPIService.setMarker(
-//            LatLng(
-//                busStopList[busStopList.size-1].locationLatitude,
-//                busStopList[busStopList.size-1].locationLongitude
-//            ),
-//            busStopList[0].tv_bus_stop_location
-//        )
-
         for (i in 1 until busStopList.size) {
             val latlngStart = LatLng(busStopList[i - 1].locationLatitude, busStopList[i - 1].locationLongitude)
             val latlngEnd = LatLng(busStopList[i].locationLatitude, busStopList[i].locationLongitude)
 
-            // 마커 표시
-//            naverMapAPIService.setMarker(latlngEnd, busStopList[i].tv_bus_stop_location)
-
             // 경로 표시
             naverMapAPIService.setPath(latlngStart, latlngEnd)
         }
+
+        val startLatLng = LatLng(busStopList[0].locationLatitude, busStopList[0].locationLongitude)
+        val goalLatLng = LatLng(busStopList[busStopList.size-1].locationLatitude, busStopList[busStopList.size-1].locationLongitude)
+        naverMapAPIService.showPath(startLatLng, goalLatLng)
     }
 }

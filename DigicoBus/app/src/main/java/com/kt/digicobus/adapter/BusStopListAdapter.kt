@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
 import com.kt.digicobus.databinding.FragmentCommuteBusEntireRouteBinding
-import com.kt.digicobus.naverMap.NaverMapAPIService
 import kotlinx.android.synthetic.main.listview_detail_bus_info.view.*
 
-class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEntireRouteBinding, private val resource: Int, var busStopList: MutableList<BusStopContent>)
+class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEntireRouteBinding, private val resource: Int, var busStopList: MutableList<BusStopContent>,
+                            val onClickItem: (Int) -> Unit)
     : RecyclerView.Adapter<BusStopHolder>() {
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -58,8 +58,8 @@ class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEn
             holder.constraint.setBackgroundColor(context.getColor(R.color.white))
         }else if(busStopList[position].isClick){
             holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
+            onClickItem(position)
         }
-
     }
 
     override fun getItemCount(): Int {

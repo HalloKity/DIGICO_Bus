@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.kt.digicobus.BuildConfig
 import com.kt.digicobus.data.ResultPath
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
@@ -26,10 +27,17 @@ class NaverMapAPIService(naverMapParam: NaverMap) {
 
     fun setCameraPosition(latlng: LatLng) {
         val cameraUpdate = CameraUpdate.scrollTo(latlng)
+                                .animate(CameraAnimation.Fly, 3000)
         naverMap.moveCamera(cameraUpdate)
     }
 
-    fun setMarker(latlng: LatLng, text: String = "") {
+    fun setCameraPositionAndZoom(latlng: LatLng, zoom: Double) {
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(latlng, zoom)
+                            .animate(CameraAnimation.Fly, 3000)
+        naverMap.moveCamera(cameraUpdate)
+    }
+
+    fun setMarker(latlng: LatLng, text: String = ""): Marker {
         val marker = Marker()
 
         marker.position = latlng
@@ -37,6 +45,12 @@ class NaverMapAPIService(naverMapParam: NaverMap) {
         marker.height = Marker.SIZE_AUTO
         marker.captionText = text
         marker.map = naverMap
+
+        return marker
+    }
+
+    fun removeMarker(prevMarker: Marker) {
+        prevMarker.map = null
     }
 
     fun setPath(start: LatLng, goal: LatLng) {
@@ -74,19 +88,16 @@ class NaverMapAPIService(naverMapParam: NaverMap) {
                 path.coords = path_container?.drop(1)!!
                 path.color = Color.RED
                 path.map = naverMap
-
-                // 경로를 보여주도록 카메라 이동
-                if (path.coords != null) {
-                    val cameraUpdate =
-                        CameraUpdate.scrollAndZoomTo(path.coords[path.coords.size / 2]!!, 12.5)
-                            .animate(CameraAnimation.Fly, 3000)
-                    naverMap!!.moveCamera(cameraUpdate)
-                }
             }
 
             override fun onFailure(call: Call<ResultPath>, t: Throwable) {
                //주석 지움
             }
         })
+    }
+    fun showPath(start: LatLng, goal: LatLng) {
+        val cameraUpdate = CameraUpdate.fitBounds(LatLngBounds(start, goal), 100)
+                            .animate(CameraAnimation.Fly, 3000)
+        naverMap.moveCamera(cameraUpdate)
     }
 }
