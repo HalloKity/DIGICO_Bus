@@ -39,6 +39,11 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         binding = FragmentCommuteBusEntireRouteBinding.inflate(layoutInflater)
 
+        // 뒤로 가기
+        binding.btnBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         setAdapter()
 
         // 네이버 지도

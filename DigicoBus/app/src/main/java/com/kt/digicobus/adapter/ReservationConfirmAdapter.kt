@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
@@ -59,6 +60,11 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         }
 
         setAdapter(holder.recyclerview)
+
+        // 지도로 보기
+        holder.viewMap.setOnClickListener {
+            holder.itemView.findNavController().navigate(R.id.action_ReservationConfirmFragment_to_CommuteBusEntireRouteFragment)
+        }
 
     }
 
@@ -121,4 +127,5 @@ class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val iconCall: ImageView = itemView!!.findViewById(R.id.icon_call)
     val iconInfo: ImageView = itemView!!.findViewById(R.id.icon_info)
     val recyclerview: RecyclerView = itemView!!.findViewById(R.id.recyclerview)
+    val viewMap : TextView = itemView!!.findViewById(R.id.tv_large)
 }
