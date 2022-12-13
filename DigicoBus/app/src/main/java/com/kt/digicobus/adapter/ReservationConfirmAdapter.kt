@@ -20,14 +20,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
-import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<TicketContent>)
+class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>)
     : RecyclerView.Adapter<ReservationHolder>() {
-    val PERMISSIONS_CALL_PHONE = 1
+        val PERMISSIONS_CALL_PHONE = 1
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var busRouteAdapter: BusRouteAdapter
@@ -41,6 +41,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
     }
 
     override fun onBindViewHolder(holder: ReservationHolder, position: Int) {
+        // card setting
+        setHolderData(holder, ticketContentsList[position])
+
+
         holder.iconInfo.setOnClickListener{
             val bottomDialog = BottomSheetQrcodeHelp()
 
@@ -113,6 +117,16 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             .create()
             .show()
     }
+
+    private fun setHolderData (holder: ReservationHolder, item: ReserveSearch) {
+        holder.tv_date.text = item.reserveDate.toString()
+        holder.tv_to_place.text = item.mainPlace
+        holder.tv_from_place.text = item.officePlace
+        holder.tv_to_time.text = item.departureTime
+        holder.tv_from_time.text = item.officeTime
+        holder.tv_bus_number_content.text = item.busNumber
+        holder.tv_car_number_content.text = item.busDriverNumber
+    }
 }
 
 class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -122,6 +136,8 @@ class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tv_from_place: TextView = itemView!!.findViewById(R.id.tv_from_place)
     val tv_to_time: TextView = itemView!!.findViewById(R.id.tv_to_time)
     val tv_from_time: TextView = itemView!!.findViewById(R.id.tv_from_time)
+    val tv_bus_number_content : TextView = itemView!!.findViewById(R.id.tv_bus_number_content)
+    val tv_car_number_content: TextView = itemView!!.findViewById(R.id.tv_car_number_content)
 
     val carNumberContent: TextView = itemView!!.findViewById((R.id.tv_car_number_content))
     val iconCall: ImageView = itemView!!.findViewById(R.id.icon_call)
