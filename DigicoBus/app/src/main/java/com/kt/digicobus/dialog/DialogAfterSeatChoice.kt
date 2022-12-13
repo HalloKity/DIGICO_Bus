@@ -53,7 +53,7 @@ class DialogAfterSeatChoice(
             //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
             else{
                 //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
-                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate} 외 ${busRegisterList.size}개\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate} 외 ${busRegisterList.size-1}개\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
             }
         } else {
             // 예약 취소
@@ -65,20 +65,22 @@ class DialogAfterSeatChoice(
         var btnOk = findViewById<Button>(R.id.btn_ok)
         var btnCancle = findViewById<Button>(R.id.btn_cancle)
 
-        //확인 버튼 눌렀을 때 뒤로 가는 버튼
+        //예약 확인
         btnOk.setOnClickListener{
             dismiss()
             if (reservation != null) {
                 // 예약 취소
-                val dialogCancel = com.kt.digicobus.dialog.Dialog(context, container, reservation.reservationId, setReservationConfirmAdapter)
+                val dialogCancel = Dialog(context, container, reservation.reservationId, setReservationConfirmAdapter)
                 dialogCancel.show()
             } else {
                 //post로 보내기
                 CoroutineScope(Dispatchers.Main).launch {
                     insertSeat()
                     dismiss()
-                }
+                    // 예약리스트 클리어
+                    busRegisterList.clear()
 
+                }
 
                 // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
                 //알림창 띄우기

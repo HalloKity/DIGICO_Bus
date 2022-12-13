@@ -16,8 +16,6 @@ import com.kt.digicobus.databinding.FragmentCommuteBinding
 // 통근버스 들어갔을 시 제어하는 첫 화면
 class CommuteFragment : Fragment() {
     private lateinit var binding : FragmentCommuteBinding
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var ticketListAdapter: TicketListAdapter
 
     private lateinit var ctx: Context
 
@@ -34,7 +32,6 @@ class CommuteFragment : Fragment() {
 
         //commutefragment에 네임 직접지정하면 화면 전환이 잘 안됨 이부분 해결책 찾기
         view?.findNavController()?.navigate(R.id.fragment)
-
 
         return binding.root
     }

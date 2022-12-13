@@ -11,9 +11,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data.Companion.choiceRoute
+import com.kt.digicobus.data.data.Companion.commuteBusInfoList
+import com.kt.digicobus.data.data.Companion.routeChoiceState
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.dialog.BottomSheetAfterClickMore
+import kotlin.properties.Delegates
 
 class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<CommuteBusInfo>)
     : RecyclerView.Adapter<TicketHolder>() {
@@ -34,6 +37,7 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
     override fun onBindViewHolder(holder: TicketHolder, position: Int) {
 
         holder.constraint.setOnClickListener{
+
             ticketContentsList[position].isClick = true
 
             var pos = ticketContentsList[position]
@@ -47,6 +51,10 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
                     ticketContentsList[i].isClick = false
                 }
             }
+
+            //만약 좌석이 클릭되었다면
+//            routeChoiceState = 1
+
 
             notifyDataSetChanged()
         }
@@ -82,11 +90,19 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         // 더보기 클릭시 하단 모달창
         holder.more.setOnClickListener{
+
             var mainPlace = holder.mainPlace.text.toString()
             var detailPlace = holder.detailPlace.text.toString()
             var departureTime = holder.departureTime.text.toString()
-            var latitude = 1.14345346
-            var longitude = 1.233454
+            var latitude = 0.0
+            var longitude = 0.0
+            // 위도 , 경도 받아오기 로직
+            for(i in commuteBusInfoList.indices){
+                if(commuteBusInfoList[i].mainPlace == mainPlace && commuteBusInfoList[i].detailPlace == detailPlace && commuteBusInfoList[i].departureTime == departureTime){
+                    latitude = commuteBusInfoList[i].latitude?.toDouble()!!
+                    longitude = commuteBusInfoList[i].longitude?.toDouble()!!
+                }
+            }
             val selectBusInfo = CommuteBusInfo(mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude.toString(), longitude = longitude.toString())
             val bottomDialog = BottomSheetAfterClickMore(selectBusInfo)
 

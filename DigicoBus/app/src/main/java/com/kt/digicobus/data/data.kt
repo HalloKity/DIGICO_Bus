@@ -24,10 +24,16 @@ class data{
         val icon_list = mutableListOf(R.drawable.icon_speaker, R.drawable.icon_booking, R.drawable.icon_question, R.drawable.icon_setting)
         var icon_name_list = mutableListOf("공지사항","예약내역","FAQ","설정")
 
+        // 전체 통근 노선도
+        var commuteBusInfoList = mutableListOf<CommuteBusInfo>()
+
         //선택한 출근길 값
         var choiceRoute = CommuteBusInfo()
+        // 통근버스 리스트 선택 여부 확인
+        var routeChoiceState = 0
         // 통근버스 예약 등록 리스트
         var busRegisterList = mutableListOf<ReserveRegister>()
+
 
 
         //commuteBusChoiceFragment

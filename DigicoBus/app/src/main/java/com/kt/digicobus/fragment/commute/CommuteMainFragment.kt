@@ -18,6 +18,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketHolder
 import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.routeChoiceState
 import com.kt.digicobus.databinding.ActivityLoginBinding.inflate
 import com.kt.digicobus.databinding.FragmentCommuteMainBinding
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -40,6 +41,13 @@ class CommuteMainFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteMainBinding.inflate(layoutInflater)
 
+
+        //선택된 리스트 없으면 0, 있으면 1
+//        if(routeChoiceState == 0){
+//            binding.btnChoice.isEnabled = false
+//        }else{
+//            binding.btnChoice.isEnabled = true
+//        }
         //전체값으로 데이터 받아서 달력으로 넘어가기 -> 버튼이 메인페이지에 있어서 어쩔 수 없음.
         binding.btnChoice.setOnClickListener {
             container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)

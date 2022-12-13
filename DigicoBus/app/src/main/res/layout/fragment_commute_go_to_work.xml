@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:gravity="center_horizontal"
-                android:text="간석오거리역"
+                android:text=""
                 android:textColor="@color/mint_title"
                 android:textSize="24dp" />
         </LinearLayout>

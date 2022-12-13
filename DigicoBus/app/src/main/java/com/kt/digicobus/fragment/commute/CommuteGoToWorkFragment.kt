@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketListAdapter
+import com.kt.digicobus.data.data.Companion.commuteBusInfoList
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.service.CommuteService
@@ -28,7 +29,6 @@ class CommuteGoToWorkFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var ticketListAdapter: TicketListAdapter
 
-    private lateinit var commuteBusInfoList:MutableList<CommuteBusInfo>
 
     private lateinit var ctx: Context
 
@@ -99,7 +99,7 @@ class CommuteGoToWorkFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        ticketListAdapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, commuteBusInfoList)
+        ticketListAdapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, commuteBusInfoList, )
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = ticketListAdapter
