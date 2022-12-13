@@ -2,6 +2,7 @@ package com.kt.digicobus.fragment.commute
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,25 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.choiceRoute
+import com.kt.digicobus.data.model.CommuteBusInfo
+import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import com.kt.digicobus.dialog.DialogAfterSeatChoice
+import com.kt.digicobus.service.CommuteService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 //통근버스 3
 class CommuteCalendarChoiceFragment : Fragment() {
     private lateinit var binding : FragmentCommuteCalendarChoiceBinding
+    private lateinit var remainSeatList:MutableList<RemainSeat>
 
     private lateinit var ctx: Context
 
@@ -33,11 +44,23 @@ class CommuteCalendarChoiceFragment : Fragment() {
         binding = FragmentCommuteCalendarChoiceBinding.inflate(layoutInflater)
 
         //캘린더 뼈대
-        makeCalendar()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            getRemainSeatInfo()
+            makeCalendar()
+        }
+
+        //출발지 지정
+        binding.tvStartPlace.text = choiceRoute.mainPlace
+        //출발 시간 지정
+        binding.tvStartTime.text = choiceRoute.departureTime
+        //도착지 지정
+        binding.tvEndPlace.text = choiceRoute.officePlace
+        //도착 시간 지정
+        binding.tvEndTime.text = choiceRoute.officeTime
 
         // 뒤로가기
         binding.btnBack.setOnClickListener{
-            data.busChoiceInfo = -1
             container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
@@ -49,7 +72,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
             //예약내역 백엔드로 보내기
 
             //다이얼로그 띄우기
-            dialog_listener.show();//띄우기
+            dialog_listener.show()
 
 //            val view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_after_seat_choice, con, false)
 //            //이동하기 코드 작성
@@ -63,7 +86,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
     private fun makeCalendar() {
         val monthListManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
-        val monthListAdapter = MonthAdapter(ctx,binding)
+        val monthListAdapter = MonthAdapter(ctx,binding,remainSeatList)
 
         binding.calendarCustom.apply {
             layoutManager = monthListManager
@@ -78,4 +101,24 @@ class CommuteCalendarChoiceFragment : Fragment() {
     }
 
 
+
+    private suspend fun getRemainSeatInfo() {
+        withContext(Dispatchers.IO) {
+            val service = GOGenieApplication.retrofit.create(CommuteService::class.java)
+            val response = service.selectRemainSeatByBusID(choiceRoute.busId).execute()
+
+            if (response.code() == 200) {
+                var resp = response.body()
+
+                remainSeatList = (resp as List<RemainSeat>).toMutableList()
+
+                println("busId : ${choiceRoute.busId} , date : ${remainSeatList?.get(0)?.date}" +
+                        " remainseatcount : ${remainSeatList?.get(0)?.remainSeatsCount}")
+
+                Log.d(TAG, "getRemainSeat: ${remainSeatList.size}")
+            } else {
+                Log.d(TAG, "getRemainSeat: error code")
+            }
+        }
+    }
 }

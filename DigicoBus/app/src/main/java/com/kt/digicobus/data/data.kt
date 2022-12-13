@@ -2,6 +2,7 @@ package com.kt.digicobus.data
 
 import android.widget.TextView
 import com.kt.digicobus.R
+import com.kt.digicobus.data.model.CommuteBusInfo
 
 data class TicketContent(
     var line: String,
@@ -31,7 +32,11 @@ class data{
         val icon_list = mutableListOf(R.drawable.icon_speaker, R.drawable.icon_booking, R.drawable.icon_question, R.drawable.icon_setting)
         var icon_name_list = mutableListOf("공지사항","예약내역","FAQ","설정")
 
-        //commuteFragment
+        //선택한 출근길 값
+        var choiceRoute = CommuteBusInfo()
+
+
+        //commuteFragment - 지우기
         var ticketList = mutableListOf<TicketContent>()
 
         //commuteBusChoiceFragment

@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.TicketContent
+import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.dialog.BottomSheetAfterClickMore
@@ -35,6 +36,10 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         holder.constraint.setOnClickListener{
             ticketContentsList[position].isClick = true
+
+            var pos = ticketContentsList[position]
+            choiceRoute = CommuteBusInfo(pos.stationId, pos.busId,pos.commuteId,pos.line,pos.mainPlace,pos.detailPlace,pos.departureTime,pos.officePlace,pos.officeTime,pos.latitude,pos.longitude,pos.isFavorite,pos.isClick)
+
             it.setBackgroundColor(context.resources.getColor(R.color.mint_choice))
             binding.tvStartPlace.text = ticketContentsList[position].mainPlace
 
@@ -78,21 +83,6 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         // 더보기 클릭시 하단 모달창
         holder.more.setOnClickListener{
-//            val stationId: Int?,
-//            val busId: Int?,
-//            val commuteId:Int?,
-//            val line:String?,
-//            val mainPlace:String?,
-//            val detailPlace:String?,
-//            val departureTime:String?,
-//            val officePlace:String?,
-//            val officeTime:String?,
-//            val latitude:Double?,
-//            val longitude:Double?,
-//            // 즐겨찾기 여부 default false
-//            val isFavorite: Boolean = false,
-//            // 클릭 여부 default false
-//            val isClick: Boolean = false,
             var mainPlace = holder.mainPlace.text.toString()
             var detailPlace = holder.detailPlace.text.toString()
             var departureTime = holder.departureTime.text.toString()
