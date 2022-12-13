@@ -67,8 +67,9 @@ class DialogAfterSeatChoice(
 
         //예약 확인
         btnOk.setOnClickListener{
-            dismiss()
+
             if (reservation != null) {
+                dismiss()
                 // 예약 취소
                 val dialogCancel = Dialog(context, container, reservation.reservationId, setReservationConfirmAdapter)
                 dialogCancel.show()
@@ -76,10 +77,9 @@ class DialogAfterSeatChoice(
                 //post로 보내기
                 CoroutineScope(Dispatchers.Main).launch {
                     insertSeat()
-                    dismiss()
                     // 예약리스트 클리어
                     busRegisterList.clear()
-
+                    dismiss()
                 }
 
                 // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동

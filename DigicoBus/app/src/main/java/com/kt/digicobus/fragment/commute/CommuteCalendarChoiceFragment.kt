@@ -63,11 +63,10 @@ class CommuteCalendarChoiceFragment : Fragment() {
             container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
-        //알림창 띄우기
-        var dialog_listener = DialogAfterSeatChoice(ctx, container); //다이얼로그 선언
-
         //신청하기
         binding.btnChoice.setOnClickListener{
+            //알림창 띄우기
+            var dialog_listener = DialogAfterSeatChoice(ctx, container)
             //다이얼로그 띄우기
             dialog_listener.show()
         }
