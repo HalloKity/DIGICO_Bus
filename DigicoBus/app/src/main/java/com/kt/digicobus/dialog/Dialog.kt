@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.findNavController
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
@@ -38,18 +39,21 @@ class Dialog(
         setContentView(R.layout.custom_dialog_reservation_check)
 
         var btn_ok = findViewById<Button>(R.id.btn_ok)
+        val confirmText = findViewById<TextView>(R.id.tv_text)
+
+        if(reserveId != null) confirmText.text = "취소되었습니다."
 
         //확인 버튼 눌렀을 때 뒤로 가는 버튼
         btn_ok.setOnClickListener{
             dismiss()
-            if(reserveId != null) {
+            if(reserveId == null) {
+                container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+            } else {
                 // 예약 취소
                 CoroutineScope(Dispatchers.Main).launch {
                     reservationCancel()
                     setReservationConfirmAdapter()
                 }
-            } else {
-                container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
             }
         }
     }

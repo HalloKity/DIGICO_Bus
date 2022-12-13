@@ -6,10 +6,13 @@ import java.util.*
 //예약등록
 data class ReserveRegister(
     // 예약할 날짜 (ex. 2022-12-08)
+    @SerializedName("reserveDate")
     val reserveDate: String,
     // 예약하는 버스 id
+    @SerializedName("busId")
     val busId: Int,
     // 예약하는 노선 id
+    @SerializedName("stationId")
     val stationId:Int,
 )
 

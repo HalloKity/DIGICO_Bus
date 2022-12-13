@@ -25,7 +25,7 @@ class GOGenieApplication: Application() {
         // 앱이 처음 생성되는 순간, retrofit 인스턴스를 생성
         retrofit = Retrofit.Builder()
             .baseUrl(BOARD_URL)
-//            .addConverterFactory(NullOnEmptyConverterFactory())
+            .addConverterFactory(NullOnEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -36,12 +36,12 @@ class GOGenieApplication: Application() {
 /**
  * 비어있는(length=0)인 Response를 받았을 경우 처리
  */
-//class NullOnEmptyConverterFactory : Converter.Factory() {
-//    override fun responseBodyConverter(type: Type?, annotations: Array<Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
-//        val delegate = retrofit!!.nextResponseBodyConverter<Any>(this, type!!, annotations!!)
-//        return Converter<ResponseBody, Any> {
-//            if (it.contentLength() == 0L) return@Converter null
-//            delegate.convert(it)
-//        }
-//    }
-//}
+class NullOnEmptyConverterFactory : Converter.Factory() {
+    override fun responseBodyConverter(type: Type?, annotations: Array<Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
+        val delegate = retrofit!!.nextResponseBodyConverter<Any>(this, type!!, annotations!!)
+        return Converter<ResponseBody, Any> {
+            if (it.contentLength() == 0L) return@Converter null
+            delegate.convert(it)
+        }
+    }
+}

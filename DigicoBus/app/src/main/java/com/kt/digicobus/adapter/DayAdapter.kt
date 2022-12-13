@@ -2,6 +2,7 @@ package com.kt.digicobus.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.busRegisterList
+import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.RemainSeat
+import com.kt.digicobus.data.model.ReserveRegister
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import kotlinx.android.synthetic.main.list_item_month.view.*
@@ -17,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
-
+const val TAG = "DayAdapter"
 class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int,
                  val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>, var remainSeatList: List<RemainSeat>)
     : RecyclerView.Adapter<DayAdapter.DayView>() {
@@ -50,12 +54,33 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             if(dayClickCheckList[position]){
                 dayClickCheckList[position] = false
                 holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.white))
+                //좌석 클릭시 예약 등록 리스트에서 빼기
+                var date = "2022-${dayList[position].month+1}-${holder.layout.item_day_text.text}"
+                for(i in 0 until busRegisterList.size){
+                    if(date == busRegisterList[i].reserveDate){
+                        busRegisterList.removeAt(i)
+                        break;
+                    }
+                }
+                println("------------buscancle-------------")
+                for(i in busRegisterList.indices){
+                    println(busRegisterList[i])
+                }
             }
             //false
             else{
                 dayClickCheckList[position] = true
                 holder.layout.item_day_layout.setBackgroundColor(it.resources.getColor(R.color.mint))
+
+                //좌석 클릭시 예약 등록 리스트에 넣기
+                var date = "2022-${dayList[position].month+1}-${holder.layout.item_day_text.text}"
+                busRegisterList.add(ReserveRegister(date,choiceRoute.busId.toInt(), choiceRoute.stationId.toInt()))
+                println("------------busRegi-------------")
+                for(i in busRegisterList.indices){
+                    println(busRegisterList[i])
+                }
             }
+
 
             //선택된 좌석이 1개 이상일 경우
             var seatChoiceCnt = 0
@@ -88,10 +113,10 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
 //        val date = SimpleDateFormat("yyyy-MM-dd").toString().split("-") // 년 월 일
 
         var date = Date()
-        println("date : ${date.year} ${date.month} ${date.date} , dayList[position] : ${dayList[position].month}")
+//        println("date : ${date.year} ${date.month} ${date.date} , dayList[position] : ${dayList[position].month}")
 
         //잔여좌석 적용
-        println("monmon : ${date.month}")
+//        println("monmon : ${date.month}")
         applyRemainingSeats(holder,date.month.toString())
 
         //오늘 날짜일 경우 백그라운드 동그라미 활성화 & 글자 색 화이트로 변경
@@ -140,14 +165,14 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
     fun applyRemainingSeats(holder: DayView, inputMonth:String){
         for(i in remainSeatList.indices){
             //"2022-12-12"
-            println("remainSeatList : ${remainSeatList[0].date}")
+//            println("remainSeatList : ${remainSeatList[0].date}")
             var YMDList = remainSeatList[i].date!!.split("-")
             var year = YMDList[0]
             var month = YMDList[1]
             var day = YMDList[2]
 
             // 예약 월, 일이 같다면 전체 44석 - 예약된 좌석 갯수를 적용
-            println("inputMonth : ${inputMonth} , month:${month}, holderday : ${holder.layout.item_day_text.text}, day: ${day}")
+//            println("inputMonth : ${inputMonth} , month:${month}, holderday : ${holder.layout.item_day_text.text}, day: ${day}")
             var newInputMonth = (inputMonth.toInt()+1).toString()
             if(newInputMonth == month && holder.layout.item_day_text.text.toString() == day){
                 holder.layout.tv_left_seat.text = remainSeatList[i].remainSeatsCount.toString()

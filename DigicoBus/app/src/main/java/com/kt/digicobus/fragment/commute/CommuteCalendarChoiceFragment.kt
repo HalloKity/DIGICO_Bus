@@ -15,7 +15,6 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
 import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.choiceRoute
-import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import com.kt.digicobus.dialog.DialogAfterSeatChoice
@@ -69,16 +68,8 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
         //신청하기
         binding.btnChoice.setOnClickListener{
-            //예약내역 백엔드로 보내기
-
             //다이얼로그 띄우기
             dialog_listener.show()
-
-//            val view = LayoutInflater.from(context).inflate(R.layout.custom_dialog_after_seat_choice, con, false)
-//            //이동하기 코드 작성
-            // 확인버튼일 시에만 화면 이동
-//            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
-            data.busChoiceInfo = -1
         }
 
         return binding.root
