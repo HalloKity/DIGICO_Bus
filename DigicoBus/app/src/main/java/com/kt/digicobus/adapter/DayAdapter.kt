@@ -9,12 +9,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import kotlinx.android.synthetic.main.list_item_day.view.*
+import kotlinx.android.synthetic.main.list_item_month.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 
-class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int, val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>)
+class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int,
+                 val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>, var remainSeatList: List<RemainSeat>)
     : RecyclerView.Adapter<DayAdapter.DayView>() {
 
     val ROW = 6
@@ -77,8 +82,19 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             holder.layout.item_day_text.alpha = 0.4f
         }
 
-        //오늘 날짜일 경우 백그라운드 동그라미 활성화 & 글자 색 화이트로 변경
+
+//        val currentTime : Long = System.currentTimeMillis() // ms로 반환
+//        println(currentTime)
+//        val date = SimpleDateFormat("yyyy-MM-dd").toString().split("-") // 년 월 일
+
         var date = Date()
+        println("date : ${date.year} ${date.month} ${date.date} , dayList[position] : ${dayList[position].month}")
+
+        //잔여좌석 적용
+        println("monmon : ${date.month}")
+        applyRemainingSeats(holder,date.month.toString())
+
+        //오늘 날짜일 경우 백그라운드 동그라미 활성화 & 글자 색 화이트로 변경
         if(date.date == dayList[position].date && date.month == dayList[position].month){
             holder.layout.item_day_text.setTextColor(Color.WHITE)
             holder.layout.item_circle_day.visibility = View.VISIBLE
@@ -118,5 +134,24 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
 
     override fun getItemCount(): Int {
         return ROW * 5
+    }
+
+    //잔여좌석 적용
+    fun applyRemainingSeats(holder: DayView, inputMonth:String){
+        for(i in remainSeatList.indices){
+            //"2022-12-12"
+            println("remainSeatList : ${remainSeatList[0].date}")
+            var YMDList = remainSeatList[i].date!!.split("-")
+            var year = YMDList[0]
+            var month = YMDList[1]
+            var day = YMDList[2]
+
+            // 예약 월, 일이 같다면 전체 44석 - 예약된 좌석 갯수를 적용
+            println("inputMonth : ${inputMonth} , month:${month}, holderday : ${holder.layout.item_day_text.text}, day: ${day}")
+            var newInputMonth = (inputMonth.toInt()+1).toString()
+            if(newInputMonth == month && holder.layout.item_day_text.text.toString() == day){
+                holder.layout.tv_left_seat.text = remainSeatList[i].remainSeatsCount.toString()
+            }
+        }
     }
 }
