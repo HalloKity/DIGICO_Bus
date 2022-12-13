@@ -1,5 +1,7 @@
 package com.kt.digicobus.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CommuteBusInfo(
     val stationId: String = "",
     val busId: String = "",
@@ -16,4 +18,27 @@ data class CommuteBusInfo(
     var isFavorite: Boolean = false,
     // 클릭 여부 default false
     var isClick: Boolean = false,
+)
+
+data class BusEntireRoute(
+    @SerializedName("busId")
+    val busId: String,
+
+    @SerializedName("stationId")
+    val stationId: String,
+
+    @SerializedName("mainPlace")
+    val mainPlace: String,
+
+    @SerializedName("detailPlace")
+    val detailPlace: String,
+
+    @SerializedName("departureTime")
+    val departureTime: String,
+
+    @SerializedName("latitude")
+    val latitude: Double,
+
+    @SerializedName("longitude")
+    val longitude: Double
 )

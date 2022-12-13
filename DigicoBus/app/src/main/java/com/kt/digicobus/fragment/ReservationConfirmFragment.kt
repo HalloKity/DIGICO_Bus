@@ -2,19 +2,24 @@ package com.kt.digicobus.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.ReservationConfirmAdapter
-import com.kt.digicobus.adapter.TicketListAdapter
-import com.kt.digicobus.data.data
-import com.kt.digicobus.databinding.FragmentCommuteBinding
-import com.kt.digicobus.databinding.FragmentMoreBinding
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentReservationConfirmBinding
+import com.kt.digicobus.fragment.commute.TAG
+import com.kt.digicobus.service.ReservationService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class ReservationConfirmFragment : Fragment() {
@@ -23,6 +28,7 @@ class ReservationConfirmFragment : Fragment() {
     private lateinit var reservationConfirmAdapter: ReservationConfirmAdapter
 
     private lateinit var ctx: Context
+    private lateinit var ticketList : MutableList<ReserveSearch>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,7 +41,10 @@ class ReservationConfirmFragment : Fragment() {
     ): View? {
         binding = FragmentReservationConfirmBinding.inflate(layoutInflater)
 
-        setAdapter()
+        CoroutineScope(Dispatchers.Main).launch {
+            getAllReservationBusInfo()
+            setAdapter()
+        }
 
         return binding.root
     }
@@ -48,9 +57,24 @@ class ReservationConfirmFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        reservationConfirmAdapter = ReservationConfirmAdapter(ctx, R.layout.card_reservation_confirm, data.ticketList)
+        reservationConfirmAdapter = ReservationConfirmAdapter(ctx, R.layout.card_reservation_confirm, ticketList)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = reservationConfirmAdapter
+    }
+
+    private suspend fun getAllReservationBusInfo() {
+        withContext(Dispatchers.IO) {
+            val service = GOGenieApplication.retrofit.create(ReservationService::class.java)
+            val response = service.selectAllReservationBusInfo().execute()
+
+            if (response.code() == 200) {
+                var resp = response.body()
+                ticketList = (resp as List<ReserveSearch>).toMutableList()
+
+            } else {
+                Log.d(TAG, "getAllReservationBusInfo: error code")
+            }
+        }
     }
 }
