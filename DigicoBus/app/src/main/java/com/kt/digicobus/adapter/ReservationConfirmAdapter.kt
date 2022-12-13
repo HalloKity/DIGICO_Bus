@@ -8,6 +8,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
-import com.kt.digicobus.data.data
+import com.kt.digicobus.data.model.BusEntireRoute
 import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
+import com.kt.digicobus.fragment.commute.TAG
+import com.kt.digicobus.service.CommuteService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>)
@@ -63,7 +71,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             dialog(callNumber)
         }
 
-        setAdapter(holder.recyclerview)
+        CoroutineScope(Dispatchers.Main).launch {
+            val resultList = getBusEntireRoute(ticketContentsList[position].busId)
+            setAdapter(holder.recyclerview, resultList)
+        }
 
         // 지도로 보기
         holder.viewMap.setOnClickListener {
@@ -76,7 +87,25 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         return ticketContentsList.size
     }
 
-    private fun setAdapter(recyclerview:RecyclerView){
+    private suspend fun getBusEntireRoute(busId: Int): MutableList<BusEntireRoute> {
+        var busEntireRouteList : MutableList<BusEntireRoute> = mutableListOf()
+
+        withContext(Dispatchers.IO) {
+            val service = GOGenieApplication.retrofit.create(CommuteService::class.java)
+            val response = service.selectBusEntireRoute(busId).execute()
+
+            if (response.code() == 200) {
+                val resp = response.body()
+                busEntireRouteList = (resp as List<BusEntireRoute>).toMutableList()
+            } else {
+                Log.d(TAG, "getBusEntireRoute: error code")
+            }
+
+        }
+        return busEntireRouteList
+    }
+
+    private fun setAdapter(recyclerview:RecyclerView, busEntireRouteList: MutableList<BusEntireRoute>){
 
         // RecyclerView 객체 생성
         recyclerView = recyclerview
@@ -84,7 +113,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        busRouteAdapter = BusRouteAdapter(context, R.layout.listview_specification_bus_route, data.ticketList)
+        busRouteAdapter = BusRouteAdapter(context, R.layout.listview_specification_bus_route, busEntireRouteList)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = busRouteAdapter
