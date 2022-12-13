@@ -3,15 +3,7 @@ package com.kt.digicobus.data
 import android.widget.TextView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.model.CommuteBusInfo
-
-data class TicketContent(
-    var line: String,
-    var mainPlace: String,
-    var detailPlace: String,
-    var departureTime: String,
-    var isFavorite: Boolean,
-    var isClick: Boolean
-)
+import com.kt.digicobus.data.model.ReserveRegister
 
 data class BusStopContent(
     var busStopLocation:String,
@@ -34,17 +26,14 @@ class data{
 
         //선택한 출근길 값
         var choiceRoute = CommuteBusInfo()
+        // 통근버스 예약 등록 리스트
+        var busRegisterList = mutableListOf<ReserveRegister>()
 
-
-        //commuteFragment - 지우기
-        var ticketList = mutableListOf<TicketContent>()
 
         //commuteBusChoiceFragment
         var busStopList = mutableListOf<BusStopContent>()
 
         // login
         val userList = mutableListOf(UserForLogin("10150000", "1234"), UserForLogin("1","1"), UserForLogin("", ""))
-
-        var busChoiceInfo = -1
     }
 }

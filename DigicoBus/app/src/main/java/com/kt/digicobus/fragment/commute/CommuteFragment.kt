@@ -11,8 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.kt.digicobus.MainActivity
 import com.kt.digicobus.R
-import com.kt.digicobus.data.TicketContent
-import com.kt.digicobus.data.data
 import com.kt.digicobus.databinding.FragmentCommuteBinding
 
 // 통근버스 들어갔을 시 제어하는 첫 화면

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketHolder
 import com.kt.digicobus.adapter.TicketListAdapter
-import com.kt.digicobus.data.TicketContent
 import com.kt.digicobus.data.data
 import com.kt.digicobus.databinding.ActivityLoginBinding.inflate
 import com.kt.digicobus.databinding.FragmentCommuteMainBinding
