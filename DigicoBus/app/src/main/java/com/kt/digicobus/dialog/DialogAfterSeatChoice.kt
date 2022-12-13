@@ -8,11 +8,14 @@ import android.content.ContextWrapper
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.findNavController
+import android.widget.TextView
 import com.kt.digicobus.R
+import com.kt.digicobus.data.model.ReserveSearch
 
 
-class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(context!!) {
+class DialogAfterSeatChoice(
+    context: Context?, container: ViewGroup?, private val reservation: ReserveSearch? = null,
+    val setReservationConfirmAdapter: () -> Unit? = {}) : Dialog(context!!) {
     val container = container
 
     //활동 기반 컨텍스트가 아닌 경우 다음 메서드를 사용하여 컨텍스트 또는 throw 및 예외에서 활동을 가져올 수 있습니다
@@ -34,20 +37,29 @@ class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(c
 
         //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
 
+        // 예약 취소
+        if (reservation != null) {
+            val tvText = findViewById<TextView>(R.id.tv_text)
+            tvText.text = "${reservation.reserveDate}\n${reservation.mainPlace} > ${reservation.detailPlace}\n취소하시겠습니까?"
+        }
+
         var btn_ok = findViewById<Button>(R.id.btn_ok)
         var btn_cancle = findViewById<Button>(R.id.btn_cancle)
 
         //확인 버튼 눌렀을 때 뒤로 가는 버튼
         btn_ok.setOnClickListener{
             dismiss()
-
-            // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
-            //알림창 띄우기
-            var dialog_listener = com.kt.digicobus.dialog.Dialog(context,container); //다이얼로그 선언
-            //다이얼로그 띄우기
-            dialog_listener.show();//띄우기
-
-//            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+            if (reservation != null) {
+                // 예약 취소
+                val dialogCancel = com.kt.digicobus.dialog.Dialog(context, container, reservation.reservationId, setReservationConfirmAdapter)
+                dialogCancel.show()
+            } else {
+                // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
+                //알림창 띄우기
+                var dialog_listener = com.kt.digicobus.dialog.Dialog(context,container); //다이얼로그 선언
+                //다이얼로그 띄우기
+                dialog_listener.show();//띄우기
+            }
         }
 
         //취소버튼

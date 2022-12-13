@@ -14,6 +14,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.ReservationConfirmAdapter
 import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentReservationConfirmBinding
+import com.kt.digicobus.dialog.DialogAfterSeatChoice
 import com.kt.digicobus.fragment.commute.TAG
 import com.kt.digicobus.service.ReservationService
 import kotlinx.coroutines.CoroutineScope
@@ -41,10 +42,7 @@ class ReservationConfirmFragment : Fragment() {
     ): View? {
         binding = FragmentReservationConfirmBinding.inflate(layoutInflater)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            getAllReservationBusInfo()
-            setAdapter()
-        }
+        setDataAndAdapter()
 
         return binding.root
     }
@@ -57,10 +55,23 @@ class ReservationConfirmFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        reservationConfirmAdapter = ReservationConfirmAdapter(ctx, R.layout.card_reservation_confirm, ticketList)
+        reservationConfirmAdapter = ReservationConfirmAdapter(ctx, R.layout.card_reservation_confirm, ticketList, ::onClickReservationCancelBtn)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = reservationConfirmAdapter
+    }
+
+    private fun setDataAndAdapter() {
+        CoroutineScope(Dispatchers.Main).launch {
+            getAllReservationBusInfo()
+            setAdapter()
+        }
+    }
+
+    // 예약 취소
+    private fun onClickReservationCancelBtn(position: Int) {
+        val dialogCancel = DialogAfterSeatChoice(ctx, null, ticketList[position], setReservationConfirmAdapter = ::setDataAndAdapter)
+        dialogCancel.show()
     }
 
     private suspend fun getAllReservationBusInfo() {
