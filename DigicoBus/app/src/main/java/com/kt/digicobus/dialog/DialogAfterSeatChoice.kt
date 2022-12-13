@@ -10,14 +10,12 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.findNavController
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data.Companion.busRegisterList
 import com.kt.digicobus.data.data.Companion.choiceRoute
-import com.kt.digicobus.data.model.RemainSeat
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.fragment.commute.TAG
-import com.kt.digicobus.service.CommuteService
 import com.kt.digicobus.service.ReservationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +23,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(context!!) {
+class DialogAfterSeatChoice(
+    context: Context?, container: ViewGroup?, private val reservation: ReserveSearch? = null,
+    val setReservationConfirmAdapter: () -> Unit? = {}) : Dialog(context!!) {
     val container = container
 
     //활동 기반 컨텍스트가 아닌 경우 다음 메서드를 사용하여 컨텍스트 또는 throw 및 예외에서 활동을 가져올 수 있습니다
@@ -43,16 +43,22 @@ class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(c
         super.onCreate(savedInstanceState)
         setContentView(R.layout.custom_dialog_after_seat_choice)
 
-        //예약 등록 로직
-        //예약내역이 하나일 경우 => 2022.12.7 (목)
-        if(busRegisterList.size == 1){
-            //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
-            findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate}\n${choiceRoute.detailPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
-        }
-        //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
-        else{
-            //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
-            findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate}외 ${busRegisterList.size}개\n${choiceRoute.detailPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+        if (reservation == null) {
+            //예약 등록 로직
+            //예약내역이 하나일 경우 => 2022.12.7 (목)
+            if(busRegisterList.size == 1){
+                //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
+                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate}\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+            }
+            //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
+            else{
+                //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
+                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate} 외 ${busRegisterList.size}개\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+            }
+        } else {
+            // 예약 취소
+            val tvText = findViewById<TextView>(R.id.tv_text)
+            tvText.text = "${reservation.reserveDate}\n${reservation.mainPlace} > ${reservation.detailPlace}\n취소하시겠습니까?"
         }
 
 
@@ -61,18 +67,25 @@ class DialogAfterSeatChoice(context: Context?, container: ViewGroup?) : Dialog(c
 
         //확인 버튼 눌렀을 때 뒤로 가는 버튼
         btnOk.setOnClickListener{
-            //post로 보내기
-            CoroutineScope(Dispatchers.Main).launch {
-                insertSeat()
-                dismiss()
+            dismiss()
+            if (reservation != null) {
+                // 예약 취소
+                val dialogCancel = com.kt.digicobus.dialog.Dialog(context, container, reservation.reservationId, setReservationConfirmAdapter)
+                dialogCancel.show()
+            } else {
+                //post로 보내기
+                CoroutineScope(Dispatchers.Main).launch {
+                    insertSeat()
+                    dismiss()
+                }
+
+
+                // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
+                //알림창 띄우기
+                var dialog_listener = Dialog(context,container); //다이얼로그 선언
+                //다이얼로그 띄우기
+                dialog_listener.show()
             }
-
-
-            // 예약이 완료되었습니다. 다이얼로그 뜨ㅣ우고 거기서 이동
-            //알림창 띄우기
-            var dialog_listener = Dialog(context,container); //다이얼로그 선언
-            //다이얼로그 띄우기
-            dialog_listener.show()
         }
 
         //취소버튼

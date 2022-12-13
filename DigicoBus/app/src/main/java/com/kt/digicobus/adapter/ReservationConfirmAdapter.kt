@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -33,7 +34,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>)
+class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>,
+                                val onClickReservationCancelBtn: (Int) -> Unit)
     : RecyclerView.Adapter<ReservationHolder>() {
         val PERMISSIONS_CALL_PHONE = 1
 
@@ -81,6 +83,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             holder.itemView.findNavController().navigate(R.id.action_ReservationConfirmFragment_to_CommuteBusEntireRouteFragment)
         }
 
+        // 예약 취소
+        holder.btnReserveCancel.setOnClickListener {
+            onClickReservationCancelBtn(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -167,6 +173,7 @@ class ReservationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tv_from_time: TextView = itemView!!.findViewById(R.id.tv_from_time)
     val tv_bus_number_content : TextView = itemView!!.findViewById(R.id.tv_bus_number_content)
     val tv_car_number_content: TextView = itemView!!.findViewById(R.id.tv_car_number_content)
+    val btnReserveCancel: AppCompatButton = itemView!!.findViewById(R.id.btn_reserve_cancle)
 
     val carNumberContent: TextView = itemView!!.findViewById((R.id.tv_car_number_content))
     val iconCall: ImageView = itemView!!.findViewById(R.id.icon_call)

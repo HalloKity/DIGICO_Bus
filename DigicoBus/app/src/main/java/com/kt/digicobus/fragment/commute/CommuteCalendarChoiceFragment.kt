@@ -15,7 +15,6 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
 import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.choiceRoute
-import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import com.kt.digicobus.dialog.DialogAfterSeatChoice
