@@ -18,12 +18,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NaverMapAPIService(naverMapParam: NaverMap, val isTodayReserve: Boolean = false) {
+class NaverMapAPIService(naverMapParam: NaverMap, val needBusMarker: Boolean = false) {
     private val APIKEY_ID = BuildConfig.NAVER_MAP_CLIENT_ID
     private val APIKEY = BuildConfig.NAVER_MAP_CLIENT_SECRET
     private val naverMap: NaverMap
 
-//    private var middleLatLng : LatLng? = null
     private var busMarker: Marker = Marker()
 
     init {
@@ -108,7 +107,7 @@ class NaverMapAPIService(naverMapParam: NaverMap, val isTodayReserve: Boolean = 
                 path.map = naverMap
 
                 // 버스 마커 표시
-                if(isTodayReserve) setBusMarker(path_container[path_container.size/2])
+                if(needBusMarker) setBusMarker(path_container[path_container.size/2])
             }
 
             override fun onFailure(call: Call<ResultPath>, t: Throwable) {

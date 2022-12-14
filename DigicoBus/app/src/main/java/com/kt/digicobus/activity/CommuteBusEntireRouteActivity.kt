@@ -34,14 +34,14 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private var prevMarker : Marker? = null
 
     private lateinit var busEntireRouteList: MutableList<BusStopContent>
-    private var isTodayReserve = false
+    private var needBusMarker = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommuteBusEntireRouteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        isTodayReserve = intent.getBooleanExtra("isTodayReserve", false)
+        needBusMarker = intent.getBooleanExtra("needBusMarker", false)
 
         // 뒤로 가기
         binding.btnBack.setOnClickListener {
@@ -111,7 +111,7 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-        naverMapAPIService = NaverMapAPIService(naverMap, isTodayReserve)
+        naverMapAPIService = NaverMapAPIService(naverMap, needBusMarker)
 
         for (i in 1 until busEntireRouteList.size) {
             val latlngStart = LatLng(busEntireRouteList[i - 1].locationLatitude, busEntireRouteList[i - 1].locationLongitude)

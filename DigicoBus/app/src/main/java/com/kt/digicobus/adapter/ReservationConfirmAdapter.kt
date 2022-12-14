@@ -94,7 +94,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             // start activity
             val intent = Intent(context, CommuteBusEntireRouteActivity::class.java).apply {
                 if(ticketContentsList[position].reserveDate == LocalDate.now().toString())
-                    putExtra("isTodayReserve", true)
+                    putExtra("needBusMarker", true)
             }
             context.startActivity(intent)
         }
