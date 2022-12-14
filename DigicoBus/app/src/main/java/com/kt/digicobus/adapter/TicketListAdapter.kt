@@ -90,6 +90,9 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
         // 더보기 클릭시 하단 모달창
         holder.more.setOnClickListener{
+            // "전체 노선 보기" 화면에 값을 넘기기 위해 추가
+            var pos = ticketContentsList[position]
+            choiceRoute = CommuteBusInfo(pos.stationId, pos.busId,pos.commuteId,pos.line,pos.mainPlace,pos.detailPlace,pos.departureTime,pos.officePlace,pos.officeTime,pos.latitude,pos.longitude,pos.isFavorite,pos.isClick)
 
             var mainPlace = holder.mainPlace.text.toString()
             var detailPlace = holder.detailPlace.text.toString()
