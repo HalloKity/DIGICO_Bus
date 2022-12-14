@@ -23,7 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
+import com.kt.digicobus.data.data
 import com.kt.digicobus.data.model.BusEntireRoute
+import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.dialog.BottomSheetQrcodeHelp
 import com.kt.digicobus.fragment.commute.TAG
@@ -76,6 +78,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         CoroutineScope(Dispatchers.Main).launch {
             val resultList = getBusEntireRoute(ticketContentsList[position].busId)
             setAdapter(holder.recyclerview, resultList)
+
+            // setting data.choiceRoute for map
+            val pos = ticketContentsList[position]
+            data.choiceRoute = CommuteBusInfo(busId = pos.busId.toString())
         }
 
         // 지도로 보기
