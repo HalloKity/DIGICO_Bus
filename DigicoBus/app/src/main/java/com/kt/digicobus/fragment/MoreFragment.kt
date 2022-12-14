@@ -39,6 +39,7 @@ class MoreFragment : Fragment() {
         setAdapter()
 
         binding.btnLogout.setOnClickListener{
+
             var intent = Intent(activity,LoginActivity::class.java)
 //            intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION)
             intent.addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_CLEAR_TOP)

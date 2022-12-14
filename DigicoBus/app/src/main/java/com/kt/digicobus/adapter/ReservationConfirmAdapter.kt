@@ -17,14 +17,12 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kt.digicobus.CommuteBusEntireRouteActivity
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
+import com.kt.digicobus.activity.CommuteBusEntireRouteActivity
 import com.kt.digicobus.data.data
 import com.kt.digicobus.data.model.BusEntireRoute
 import com.kt.digicobus.data.model.CommuteBusInfo

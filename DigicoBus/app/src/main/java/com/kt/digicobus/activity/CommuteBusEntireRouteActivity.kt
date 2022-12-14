@@ -1,10 +1,12 @@
-package com.kt.digicobus
+package com.kt.digicobus.activity
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kt.digicobus.GOGenieApplication
+import com.kt.digicobus.R
 import com.kt.digicobus.adapter.BusStopListAdapter
 import com.kt.digicobus.data.BusStopContent
 import com.kt.digicobus.data.data

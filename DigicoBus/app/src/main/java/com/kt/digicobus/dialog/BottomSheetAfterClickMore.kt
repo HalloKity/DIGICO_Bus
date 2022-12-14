@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kt.digicobus.CommuteBusEntireRouteActivity
 import com.kt.digicobus.R
+import com.kt.digicobus.activity.CommuteBusEntireRouteActivity
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.naver.maps.geometry.LatLng
 
