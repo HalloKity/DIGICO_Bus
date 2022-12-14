@@ -58,13 +58,14 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
 
         CoroutineScope(Dispatchers.Main).launch {
             getBusEntireRoute(choiceRoute.busId.toInt())
-            setAdapter()
-        }
 
-        // 네이버 지도
-        val mapView = binding.routeMap
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
+            setAdapter()
+
+            // 네이버 지도
+            val mapView = binding.routeMap
+            mapView.onCreate(savedInstanceState)
+            mapView.getMapAsync(this@CommuteBusEntireRouteFragment)
+        }
 
         return binding.root
     }

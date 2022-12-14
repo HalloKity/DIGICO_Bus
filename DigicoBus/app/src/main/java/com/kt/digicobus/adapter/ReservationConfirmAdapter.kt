@@ -79,14 +79,15 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             val resultList = getBusEntireRoute(ticketContentsList[position].busId)
             setAdapter(holder.recyclerview, resultList)
 
-            // setting data.choiceRoute for map
-            val pos = ticketContentsList[position]
-            data.choiceRoute = CommuteBusInfo(busId = pos.busId.toString())
+
         }
 
         // 지도로 보기
         holder.viewMap.setOnClickListener {
             holder.itemView.findNavController().navigate(R.id.action_ReservationConfirmFragment_to_CommuteBusEntireRouteFragment)
+
+            // setting data.choiceRoute for map-
+            data.choiceRoute = CommuteBusInfo(busId = ticketContentsList[position].busId.toString())
         }
 
         // 예약 취소

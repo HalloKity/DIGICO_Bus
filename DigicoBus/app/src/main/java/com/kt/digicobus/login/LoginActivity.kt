@@ -16,10 +16,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val items = resources.getStringArray(R.array.login_spinner_array)
-        val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
-        binding.spinner.adapter = myAdapter
-
         binding.btnLogin.setOnClickListener{
             // 로그인
             val userId = binding.editId.text.toString()

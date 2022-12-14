@@ -40,6 +40,6 @@ class data{
         var busStopList = mutableListOf<BusStopContent>()
 
         // login
-        val userList = mutableListOf(UserForLogin("10150000", "1234"), UserForLogin("1","1"), UserForLogin("", ""))
+        val userList = mutableListOf(UserForLogin("10153648", "1111"), UserForLogin("1","1"), UserForLogin("", ""))
     }
 }

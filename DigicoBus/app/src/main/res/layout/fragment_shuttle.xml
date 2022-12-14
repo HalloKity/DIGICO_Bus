@@ -10,74 +10,133 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/icon_location"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_location_shuttle"
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/icon_location"
-            app:layout_constraintStart_toEndOf="@+id/icon_location"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="판교사옥"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.naver.maps.map.MapView
             android:id="@+id/naver_map"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:layout_constraintTop_toBottomOf="@id/spinner"
-            app:layout_constraintStart_toStartOf="parent"/>
-        
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
         <TextView
-            android:id="@+id/tv_shuttle"
+            android:id="@+id/tv_title_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="셔틀버스"
-            android:textColor="@color/black"
-            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
             android:fontFamily="@font/noto_sans_kr_bold"
-            android:layout_marginLeft="5dp"
+            android:text="판교사옥"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/naver_map" />
+        <ImageView
+            android:id="@+id/icon_twoway_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_twoway_arrow"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@id/tv_title_company"
             app:layout_constraintTop_toBottomOf="@id/naver_map"/>
-
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/tab_view"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            app:elevation="1dp"
-            app:menu="@menu/shuttle_tab_menu"
-            app:labelVisibilityMode="labeled"
-            android:background="@color/white"
+        <TextView
+            android:id="@+id/tv_title_station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="판교역"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_shuttle"/>
+            app:layout_constraintTop_toBottomOf="@id/naver_map" />
 
-        <fragment
-            android:id="@+id/nav_host"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:layout_constraintTop_toBottomOf="@id/tab_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:navGraph="@navigation/nav_graph_shuttle"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_company">
+
+            <TextView
+                android:id="@+id/tv_operating_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="운행시간"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/constraint_sub"/>
+
+            <TextView
+                android:id="@+id/tv_operating_time_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07:00 ~ 20:00"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_operating_time" />
+
+            <TextView
+                android:id="@+id/tv_service_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="운행간격"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_operating_time_content" />
+
+            <TextView
+                android:id="@+id/tv_service_interval_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15분 간격 순환운행"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_service_interval" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+        <!--            android:id="@+id/tab_view"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            app:elevation="1dp"-->
+        <!--            app:menu="@menu/shuttle_tab_menu"-->
+        <!--            app:labelVisibilityMode="labeled"-->
+        <!--            android:background="@color/white"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_shuttle"/>-->
+
+        <!--        <fragment-->
+        <!--            android:id="@+id/nav_host"-->
+        <!--            android:name="androidx.navigation.fragment.NavHostFragment"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:defaultNavHost="true"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_title_shuttle"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.0"-->
+        <!--            app:navGraph="@navigation/nav_graph_shuttle"/>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,17 +33,12 @@ class ShuttleFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         binding = FragmentShuttleBinding.inflate(layoutInflater)
 
-        //spinner
-        val items = resources.getStringArray(R.array.shuttle_spinner_array)
-        val myAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, items)
-        binding.spinner.adapter = myAdapter
-
         //출퇴근 fragment 연결
-        val navHostFragment =
-            childFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        val navController = navHostFragment.navController
+//        val navHostFragment =
+//            childFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+//        val navController = navHostFragment.navController
 //        OverScrollDecoratorHelper.setUpOverScroll(R.id.nav_host, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
-        NavigationUI.setupWithNavController(binding.tabView, navController)
+//        NavigationUI.setupWithNavController(binding.tabView, navController)
 
         // 네이버 지도
         mapView = binding.naverMap
