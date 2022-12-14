@@ -8,12 +8,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -35,6 +37,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import java.time.LocalDate
 
 class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>,
                                 val onClickReservationCancelBtn: (Int) -> Unit)
@@ -52,6 +55,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         return ReservationHolder(itemView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ReservationHolder, position: Int) {
         // card setting
         setHolderData(holder, ticketContentsList[position])
@@ -88,7 +92,10 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             data.choiceRoute = CommuteBusInfo(busId = ticketContentsList[position].busId.toString())
 
             // start activity
-            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java)
+            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java).apply {
+                if(ticketContentsList[position].reserveDate == LocalDate.now().toString())
+                    putExtra("needBusMarker", true)
+            }
             context.startActivity(intent)
         }
 

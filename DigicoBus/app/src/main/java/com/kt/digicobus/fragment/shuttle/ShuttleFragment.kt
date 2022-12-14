@@ -57,7 +57,7 @@ class ShuttleFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-        val naverMapAPIService = NaverMapAPIService(naverMap)
+        val naverMapAPIService = NaverMapAPIService(naverMap, true)
 
         // 판교사옥, 판교역 위치
         val latlngOffice = LatLng(37.407385, 127.090450)

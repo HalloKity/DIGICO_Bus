@@ -34,11 +34,14 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private var prevMarker : Marker? = null
 
     private lateinit var busEntireRouteList: MutableList<BusStopContent>
+    private var needBusMarker = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommuteBusEntireRouteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        needBusMarker = intent.getBooleanExtra("needBusMarker", false)
 
         // 뒤로 가기
         binding.btnBack.setOnClickListener {
@@ -47,7 +50,6 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
         CoroutineScope(Dispatchers.Main).launch {
             getBusEntireRoute(data.choiceRoute.busId.toInt())
-
             setAdapter()
 
             // 네이버 지도
@@ -109,7 +111,7 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-        naverMapAPIService = NaverMapAPIService(naverMap)
+        naverMapAPIService = NaverMapAPIService(naverMap, needBusMarker)
 
         for (i in 1 until busEntireRouteList.size) {
             val latlngStart = LatLng(busEntireRouteList[i - 1].locationLatitude, busEntireRouteList[i - 1].locationLongitude)
