@@ -47,8 +47,8 @@
 
             <ImageView
                 android:id="@+id/img_qr_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/img_qr_code"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -272,13 +272,13 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:background="@drawable/img_border_gray"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center_vertical"/>
             </FrameLayout>
 

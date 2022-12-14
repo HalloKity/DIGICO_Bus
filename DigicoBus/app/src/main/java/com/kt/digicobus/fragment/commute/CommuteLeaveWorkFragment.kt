@@ -13,6 +13,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.LeaveTicketListAdapter
 import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.allList
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
@@ -35,7 +36,6 @@ class CommuteLeaveWorkFragment : Fragment() {
         ctx = context
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,9 +43,9 @@ class CommuteLeaveWorkFragment : Fragment() {
         binding = FragmentCommuteLeaveWorkBinding.inflate(layoutInflater)
 
         goToHomeRouteList = mutableListOf()
-        for(i in 0 until commuteBusInfoList.size){
-            if(commuteBusInfoList[i].commuteId.toInt() == 1){
-                goToHomeRouteList.add(commuteBusInfoList[i])
+        for(i in 0 until allList.size){
+            if(allList[i].commuteId.toInt() == 1){
+                goToHomeRouteList.add(allList[i])
             }
         }
 

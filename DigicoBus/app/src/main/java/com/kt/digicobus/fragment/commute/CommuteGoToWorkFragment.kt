@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketListAdapter
+import com.kt.digicobus.data.data.Companion.allList
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
@@ -112,7 +113,7 @@ class CommuteGoToWorkFragment : Fragment() {
             if (response.code() == 200) {
                 var resp = response.body()
 
-                var allList = (resp as List<CommuteBusInfo>).toMutableList()
+                allList = (resp as List<CommuteBusInfo>).toMutableList()
 
                 //통근버스 리스트 초기화
                 commuteBusInfoList = mutableListOf()

@@ -25,6 +25,8 @@ class data{
         var icon_name_list = mutableListOf("공지사항","예약내역","FAQ","설정")
 
         // 전체 통근 노선도
+        var allList = mutableListOf<CommuteBusInfo>()
+        // 출근 통근 노선도
         var commuteBusInfoList = mutableListOf<CommuteBusInfo>()
 
         //선택한 출근길 값

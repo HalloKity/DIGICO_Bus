@@ -26,6 +26,7 @@
         android:textColor="@color/black"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_text" />
 
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="판교역동편(07570) 승차 > 금토동삼거리(05256) 하차"
         android:textColor="@color/black"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_start"
         app:layout_constraintTop_toBottomOf="@id/tv_text" />
@@ -44,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="3dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="[퇴근]"
         android:textColor="@color/black"
@@ -55,7 +57,7 @@
         android:id="@+id/tv_end_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="3dp"
         android:text="금토동삼거리(05256) 승차 > 판교역동편(07570) 하차"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
