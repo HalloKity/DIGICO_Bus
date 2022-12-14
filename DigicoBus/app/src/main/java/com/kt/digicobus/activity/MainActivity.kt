@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     // 뒤로가기 버튼을 눌렀던 시간 저장
     private var backKeyPressedTime: Long = 0
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
