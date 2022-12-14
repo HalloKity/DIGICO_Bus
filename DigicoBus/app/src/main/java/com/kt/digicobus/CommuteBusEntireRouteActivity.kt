@@ -1,21 +1,16 @@
-package com.kt.digicobus.fragment.commute
+package com.kt.digicobus
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kt.digicobus.GOGenieApplication
-import com.kt.digicobus.R
 import com.kt.digicobus.adapter.BusStopListAdapter
 import com.kt.digicobus.data.BusStopContent
-import com.kt.digicobus.data.data.Companion.choiceRoute
+import com.kt.digicobus.data.data
 import com.kt.digicobus.data.model.BusEntireRoute
-import com.kt.digicobus.databinding.FragmentCommuteBusEntireRouteBinding
+import com.kt.digicobus.databinding.ActivityCommuteBusEntireRouteBinding
+import com.kt.digicobus.fragment.commute.TAG
 import com.kt.digicobus.naverMap.NaverMapAPIService
 import com.kt.digicobus.service.CommuteService
 import com.naver.maps.geometry.LatLng
@@ -28,53 +23,43 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-//통근버스 - 전체 노선 보기
-class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
-    private lateinit var binding: FragmentCommuteBusEntireRouteBinding
+class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivityCommuteBusEntireRouteBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var busStopListAdapter: BusStopListAdapter
     private lateinit var naverMapAPIService : NaverMapAPIService
 
-    private lateinit var ctx: Context
     private var prevMarker : Marker? = null
 
     private lateinit var busEntireRouteList: MutableList<BusStopContent>
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        ctx = context
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCommuteBusEntireRouteBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityCommuteBusEntireRouteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // 뒤로 가기
         binding.btnBack.setOnClickListener {
-            activity?.onBackPressed()
+            finish()
         }
 
         CoroutineScope(Dispatchers.Main).launch {
-            getBusEntireRoute(choiceRoute.busId.toInt())
+            getBusEntireRoute(data.choiceRoute.busId.toInt())
 
             setAdapter()
 
             // 네이버 지도
             val mapView = binding.routeMap
             mapView.onCreate(savedInstanceState)
-            mapView.getMapAsync(this@CommuteBusEntireRouteFragment)
+            mapView.getMapAsync(this@CommuteBusEntireRouteActivity)
         }
-
-        return binding.root
     }
 
     private fun setAdapter() {
 
         // RecyclerView 객체 생성
         recyclerView = binding.recyclerview
-        recyclerView.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         OverScrollDecoratorHelper.setUpOverScroll(
             recyclerView,
             OverScrollDecoratorHelper.ORIENTATION_VERTICAL
@@ -82,7 +67,7 @@ class CommuteBusEntireRouteFragment : Fragment(), OnMapReadyCallback {
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
         busStopListAdapter =
-            BusStopListAdapter(ctx, binding, R.layout.listview_detail_bus_info, busEntireRouteList, ::onClickItem)
+            BusStopListAdapter(this, R.layout.listview_detail_bus_info, busEntireRouteList, ::onClickItem)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = busStopListAdapter
