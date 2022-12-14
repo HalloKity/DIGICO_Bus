@@ -17,10 +17,12 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kt.digicobus.CommuteBusEntireRouteActivity
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data
@@ -84,10 +86,12 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
 
         // 지도로 보기
         holder.viewMap.setOnClickListener {
-            holder.itemView.findNavController().navigate(R.id.action_ReservationConfirmFragment_to_CommuteBusEntireRouteFragment)
-
-            // setting data.choiceRoute for map-
+            // setting data.choiceRoute for map
             data.choiceRoute = CommuteBusInfo(busId = ticketContentsList[position].busId.toString())
+
+            // start activity
+            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java)
+            context.startActivity(intent)
         }
 
         // 예약 취소

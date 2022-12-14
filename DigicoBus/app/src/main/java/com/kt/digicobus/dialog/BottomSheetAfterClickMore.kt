@@ -1,5 +1,6 @@
 package com.kt.digicobus.dialog
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kt.digicobus.CommuteBusEntireRouteActivity
 import com.kt.digicobus.R
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.naver.maps.geometry.LatLng
@@ -49,8 +51,11 @@ class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
         // 전체 노선 보기
         val totalMap = view.findViewById<LinearLayout>(R.id.layout_linear_total_map)
         totalMap.setOnClickListener {
-            findNavController().navigate(R.id.action_CommuteFragment_to_CommuteBusEntireRouteFragment)
             dismiss()
+
+            // start activity
+            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java)
+            context?.startActivity(intent)
         }
 
 

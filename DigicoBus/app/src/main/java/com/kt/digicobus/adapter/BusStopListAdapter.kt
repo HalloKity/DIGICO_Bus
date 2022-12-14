@@ -11,10 +11,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.BusStopContent
-import com.kt.digicobus.databinding.FragmentCommuteBusEntireRouteBinding
 import kotlinx.android.synthetic.main.listview_detail_bus_info.view.*
 
-class BusStopListAdapter(var context: Context, var binding: FragmentCommuteBusEntireRouteBinding, private val resource: Int, var busStopList: MutableList<BusStopContent>,
+class BusStopListAdapter(var context: Context, private val resource: Int, var busStopList: MutableList<BusStopContent>,
                             val onClickItem: (Int) -> Unit)
     : RecyclerView.Adapter<BusStopHolder>() {
 
