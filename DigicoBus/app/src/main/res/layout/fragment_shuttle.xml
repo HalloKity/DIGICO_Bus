@@ -10,28 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="판교셔틀"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.naver.maps.map.MapView
-            android:id="@+id/naver_map"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
         <LinearLayout
             android:id="@+id/layout_linear"
             android:layout_width="wrap_content"
@@ -40,7 +18,7 @@
             android:gravity="center_horizontal|center_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/naver_map">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_title_company"
@@ -74,20 +52,28 @@
                 android:gravity="left"/>
         </LinearLayout>
 
-        <View
-            android:id="@+id/line1"
+        <com.naver.maps.map.MapView
+            android:id="@+id/naver_map"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_line"
+            android:layout_height="300dp"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_linear"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_linear" />
+
+<!--        <View-->
+<!--            android:id="@+id/line1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/gray_line"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/layout_linear"/>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_sub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_linear">
+            app:layout_constraintTop_toBottomOf="@id/naver_map">
 
             <TextView
                 android:id="@+id/tv_operating_time"

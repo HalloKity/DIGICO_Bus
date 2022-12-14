@@ -11,6 +11,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.kt.digicobus.R
 import com.kt.digicobus.databinding.FragmentShuttleBinding
+import com.kt.digicobus.dialog.DialogAfterSeatChoice
+import com.kt.digicobus.dialog.DialogNuribus
 import com.kt.digicobus.naverMap.NaverMapAPIService
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapView
@@ -39,6 +41,13 @@ class ShuttleFragment : Fragment(), OnMapReadyCallback {
 //        val navController = navHostFragment.navController
 //        OverScrollDecoratorHelper.setUpOverScroll(R.id.nav_host, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 //        NavigationUI.setupWithNavController(binding.tabView, navController)
+
+        binding.tvTitleEtcContent.setOnClickListener{
+            //알림창 띄우기
+            var dialog_listener = DialogNuribus(ctx)
+            //다이얼로그 띄우기
+            dialog_listener.show()
+        }
 
         // 네이버 지도
         mapView = binding.naverMap
