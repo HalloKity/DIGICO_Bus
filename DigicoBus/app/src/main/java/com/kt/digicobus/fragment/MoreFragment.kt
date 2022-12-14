@@ -1,19 +1,21 @@
 package com.kt.digicobus.fragment
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.*
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MoreListAdapter
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.icon_list
 import com.kt.digicobus.data.data.Companion.icon_name_list
 import com.kt.digicobus.databinding.FragmentMoreBinding
+import com.kt.digicobus.login.LoginActivity
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class MoreFragment : Fragment() {
@@ -35,6 +37,13 @@ class MoreFragment : Fragment() {
         binding = FragmentMoreBinding.inflate(layoutInflater)
 
         setAdapter()
+
+        binding.btnLogout.setOnClickListener{
+            var intent = Intent(activity,LoginActivity::class.java)
+//            intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION)
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent);
+        }
 
         return binding.root
     }

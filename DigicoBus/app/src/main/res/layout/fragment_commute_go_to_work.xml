@@ -94,11 +94,23 @@
             app:layout_constraintTop_toBottomOf="@id/layout_linear_title_place"/>
 
         <TextView
+            android:id="@+id/tv_title_nosun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="노선"
+            android:layout_marginLeft="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line1"
+            app:layout_constraintBottom_toTopOf="@id/line2"/>
+
+        <TextView
             android:id="@+id/tv_title_stop_station"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="정차역"
+            android:layout_marginLeft="20dp"
             app:layout_constraintEnd_toStartOf="@+id/tv_title_start_time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line1"
@@ -109,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="출발시간"
-            android:layout_marginRight="55dp"
+            android:layout_marginRight="50dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             app:layout_constraintTop_toBottomOf="@id/line1"
             app:layout_constraintBottom_toTopOf="@id/line2"

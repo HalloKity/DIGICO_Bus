@@ -29,7 +29,6 @@ class CommuteGoToWorkFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var ticketListAdapter: TicketListAdapter
 
-
     private lateinit var ctx: Context
 
     override fun onAttach(context: Context) {
