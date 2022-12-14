@@ -58,7 +58,7 @@ class DialogAfterSeatChoice(
         } else {
             // 예약 취소
             val tvText = findViewById<TextView>(R.id.tv_text)
-            tvText.text = "${reservation.reserveDate}\n${reservation.mainPlace} > ${reservation.detailPlace}\n취소하시겠습니까?"
+            tvText.text = "${reservation.reserveDate}\n${reservation.mainPlace} > ${reservation.officePlace}\n취소하시겠습니까?"
         }
 
 
