@@ -43,7 +43,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
 
         //좌석 0개면 배경화면 및 좌석 색 회색으로 처리
         if(holder.layout.tv_left_seat.text == "0"){
-            holder.layout.item_day_layout.setBackgroundColor(Color.argb(70,170,170,170))
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.white))
             holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
             holder.layout.tv_seok.setTextColor(Color.rgb(170,170,170))
         }
@@ -130,7 +130,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
         //이번달 지난날 , 지난 달 날짜
         if((date.date > dayList[position].date && date.month == dayList[position].month) ||
             (date.year > dayList[position].year && date.month > dayList[position].month) ){
-            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_100))
             holder.layout.item_day_layout.isClickable = false
             holder.layout.tv_left_seat.text = ""
             holder.layout.tv_seok.text = ""
@@ -145,7 +145,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
                 (date.year == dayList[position].year && date.month < dayList[position].month) ||
                 (date.year == dayList[position].year && date.month > dayList[position].month)
             ){
-                holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_70))
+                holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_100))
                 holder.layout.item_day_layout.isClickable = false
                 holder.layout.tv_left_seat.text = ""
                 holder.layout.tv_seok.text = ""

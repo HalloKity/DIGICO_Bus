@@ -1,6 +1,7 @@
 package com.kt.digicobus.fragment.commute
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -49,14 +50,28 @@ class CommuteCalendarChoiceFragment : Fragment() {
             makeCalendar()
         }
 
-        //출발지 지정
-        binding.tvStartPlace.text = choiceRoute.mainPlace
-        //출발 시간 지정
-        binding.tvStartTime.text = choiceRoute.departureTime
-        //도착지 지정
-        binding.tvEndPlace.text = choiceRoute.officePlace
-        //도착 시간 지정
-        binding.tvEndTime.text = choiceRoute.officeTime
+        //출근인지 퇴근인지
+        if(choiceRoute.commuteId.toInt() == 0){
+            //출발지 지정
+            binding.tvStartPlace.text = choiceRoute.mainPlace
+            //출발 시간 지정
+            binding.tvStartTime.text = choiceRoute.departureTime
+            //도착지 지정
+            binding.tvEndPlace.text = choiceRoute.officePlace
+            //도착 시간 지정
+            binding.tvEndTime.text = choiceRoute.officeTime
+        }else{
+            //출발지 지정
+            binding.tvStartPlace.text =  choiceRoute.officePlace
+            binding.tvStartPlace.setTextColor(Color.parseColor("#656565"))
+            //출발 시간 지정
+            binding.tvStartTime.text = choiceRoute.officeTime
+            //도착지 지정
+            binding.tvEndPlace.text = choiceRoute.mainPlace
+            binding.tvEndPlace.setTextColor(Color.parseColor("#000000"))
+            //도착 시간 지정
+            binding.tvEndTime.text = choiceRoute.departureTime
+        }
 
         // 뒤로가기
         binding.btnBack.setOnClickListener{
