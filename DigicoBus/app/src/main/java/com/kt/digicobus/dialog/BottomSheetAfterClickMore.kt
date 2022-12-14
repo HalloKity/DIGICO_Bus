@@ -7,17 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kt.digicobus.R
 import com.kt.digicobus.activity.CommuteBusEntireRouteActivity
 import com.kt.digicobus.data.model.CommuteBusInfo
-import com.naver.maps.geometry.LatLng
 
 class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
     BottomSheetDialogFragment(){
@@ -54,7 +50,9 @@ class BottomSheetAfterClickMore(var selectBusInfo: CommuteBusInfo) :
             dismiss()
 
             // start activity
-            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java)
+            val intent = Intent(context, CommuteBusEntireRouteActivity::class.java).apply {
+                putExtra("selectedStationId", selectBusInfo.stationId)
+            }
             context?.startActivity(intent)
         }
 

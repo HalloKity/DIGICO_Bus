@@ -14,7 +14,7 @@ import com.kt.digicobus.data.BusStopContent
 import kotlinx.android.synthetic.main.listview_detail_bus_info.view.*
 
 class BusStopListAdapter(var context: Context, private val resource: Int, var busStopList: MutableList<BusStopContent>,
-                            val onClickItem: (Int) -> Unit)
+                            val onClickItem: (Int, Boolean) -> Unit)
     : RecyclerView.Adapter<BusStopHolder>() {
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -43,7 +43,7 @@ class BusStopListAdapter(var context: Context, private val resource: Int, var bu
         }
 
         holder.constraint.setOnClickListener{
-            busStopList[position].isClick = true
+            busStopList[position].isClick = !busStopList[position].isClick
 
             for(i in 0 until busStopList.size){
                 if(i != position){
@@ -51,14 +51,21 @@ class BusStopListAdapter(var context: Context, private val resource: Int, var bu
                 }
             }
             notifyDataSetChanged()
+
+            onClickItem(position, busStopList[position].isClick)
         }
 
         if(!busStopList[position].isClick){
             holder.constraint.setBackgroundColor(context.getColor(R.color.white))
         }else if(busStopList[position].isClick){
             holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
-            onClickItem(position)
+//            onClickItem(position, true)
         }
+
+        // 클릭된게 없으면 전체 노선 보여주기
+//        if (busStopList.none { it.isClick }) {
+//            onClickItem(position, false)
+//        }
     }
 
     override fun getItemCount(): Int {
