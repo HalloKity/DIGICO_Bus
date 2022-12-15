@@ -4,22 +4,23 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.RemainSeat
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import com.kt.digicobus.dialog.DialogAfterSeatChoice
 import com.kt.digicobus.service.CommuteService
+import com.kt.digicobus.service.ReservationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ import kotlinx.coroutines.withContext
 class CommuteCalendarChoiceFragment : Fragment() {
     private lateinit var binding : FragmentCommuteCalendarChoiceBinding
     private lateinit var remainSeatList:MutableList<RemainSeat>
+    private var reservationInfoList = mutableListOf<ReserveSearch>()
 
     private lateinit var ctx: Context
 
@@ -47,6 +49,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             getRemainSeatInfo()
+            getReservationInfo()
             makeCalendar()
         }
 
@@ -91,7 +94,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
     private fun makeCalendar() {
         val monthListManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
-        val monthListAdapter = MonthAdapter(ctx,binding,remainSeatList)
+        val monthListAdapter = MonthAdapter(ctx,binding,remainSeatList, reservationInfoList)
 
         binding.calendarCustom.apply {
             layoutManager = monthListManager
@@ -123,6 +126,22 @@ class CommuteCalendarChoiceFragment : Fragment() {
                 Log.d(TAG, "getRemainSeat: ${remainSeatList.size}")
             } else {
                 Log.d(TAG, "getRemainSeat: error code")
+            }
+        }
+    }
+
+    // 예약내역 가져오기
+    private suspend fun getReservationInfo() {
+        Log.d("[d] debug", "getReservationInfo 실행")
+        withContext(Dispatchers.IO) {
+            val service = GOGenieApplication.retrofit.create(ReservationService::class.java)
+            val response = service.selectAllReservationBusInfo().execute()
+
+            if (response.code() == 200) {
+                var resp = response.body()
+                reservationInfoList = (resp as List<ReserveSearch>).toMutableList()
+            } else {
+                Log.d(TAG, "getAllReservationBusInfo: error code")
             }
         }
     }

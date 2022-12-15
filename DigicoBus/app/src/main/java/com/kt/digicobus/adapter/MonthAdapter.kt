@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.model.RemainSeat
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
-import kotlinx.android.synthetic.main.list_item_day.view.*
 import kotlinx.android.synthetic.main.list_item_month.view.*
 import java.util.*
 
-class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoiceBinding, var remainSeatList: List<RemainSeat>)
+class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoiceBinding,
+                   var remainSeatList: List<RemainSeat>, val reservationInfoList: List<ReserveSearch>)
     : RecyclerView.Adapter<MonthAdapter.MonthView>() {
 
     val center = Int.MAX_VALUE / 2
@@ -62,7 +62,7 @@ class MonthAdapter(var context: Context,var binding: FragmentCommuteCalendarChoi
 
         val dayListManager = GridLayoutManager(holder.layout.context, 5)
         //주말없는 일수를 어댑터에 적용
-        val dayListAdapter = DayAdapter(context, binding, tempMonth, dayListNoSatSun,dayClickCheckList, remainSeatList)
+        val dayListAdapter = DayAdapter(context, binding, tempMonth, dayListNoSatSun,dayClickCheckList, remainSeatList, reservationInfoList)
 
         holder.layout.item_month_day_list.apply {
             layoutManager = dayListManager

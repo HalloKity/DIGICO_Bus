@@ -1,5 +1,6 @@
 package com.kt.digicobus.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
@@ -9,21 +10,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.busRegisterList
 import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.data.model.ReserveRegister
+import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentCommuteCalendarChoiceBinding
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import kotlinx.android.synthetic.main.list_item_month.view.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 const val TAG = "DayAdapter"
 class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int,
-                 val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>, var remainSeatList: List<RemainSeat>)
+                 val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>, var remainSeatList: List<RemainSeat>,
+                 val reservationInfoList: List<ReserveSearch>)
     : RecyclerView.Adapter<DayAdapter.DayView>() {
 
     val ROW = 6
@@ -35,6 +36,7 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
         return DayView(view)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: DayView, position: Int) {
         holder.layout.item_day_layout.setOnClickListener {
             Toast.makeText(holder.layout.context, "${dayList[position]}", Toast.LENGTH_SHORT).show()
@@ -147,6 +149,20 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
             holder.layout.tv_seok.setTextColor(Color.rgb(170,170,170))
         }
+
+        // 예약완료인 날짜
+        val pattern = SimpleDateFormat("yyyy-MM-dd")
+        val dateString = pattern.format(dayList[position])
+
+        Log.d("[d] debug", "dateString : $dateString")
+        Log.d("[d] debug", "filter : ${reservationInfoList.filter { it.reserveDate == dateString }}")
+        Log.d("[d] debug", "reservationInfoList : ${reservationInfoList}")
+
+        if(reservationInfoList.any { it.reserveDate == dateString }) {
+            holder.layout.item_day_layout.isClickable = false
+            holder.layout.item_day_layout.setBackgroundResource(R.drawable.reserved_date_background)
+        }
+//        reservationInfoList.filter { it.reserveDate == dayList[position].toString() }
     }
 
     override fun getItemCount(): Int {
