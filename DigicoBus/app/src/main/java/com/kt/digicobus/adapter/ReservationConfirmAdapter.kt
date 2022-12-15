@@ -81,7 +81,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
 
         CoroutineScope(Dispatchers.Main).launch {
             val resultList = getBusEntireRoute(ticketContentsList[position].busId)
-            setAdapter(holder.recyclerview, resultList)
+            setAdapter(holder.recyclerview, resultList, ticketContentsList[position].reserveDate)
         }
 
         // 지도로 보기
@@ -126,7 +126,7 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         return busEntireRouteList
     }
 
-    private fun setAdapter(recyclerview:RecyclerView, busEntireRouteList: MutableList<BusEntireRoute>){
+    private fun setAdapter(recyclerview:RecyclerView, busEntireRouteList: MutableList<BusEntireRoute>, today:String){
 
         // RecyclerView 객체 생성
         recyclerView = recyclerview
@@ -134,7 +134,8 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        busRouteAdapter = BusRouteAdapter(context, R.layout.listview_specification_bus_route, busEntireRouteList)
+        // 오늘 날짜 넘기기
+        busRouteAdapter = BusRouteAdapter(context, R.layout.listview_specification_bus_route, busEntireRouteList, today)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = busRouteAdapter

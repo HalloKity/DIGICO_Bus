@@ -38,11 +38,6 @@ class data{
         // 통근버스 예약 등록 리스트
         var busRegisterList = mutableListOf<ReserveRegister>()
 
-
-
-        //commuteBusChoiceFragment
-        var busStopList = mutableListOf<BusStopContent>()
-
         // login
         val userList = mutableListOf(UserForLogin("10153648", "1111"), UserForLogin("1","1"), UserForLogin("", ""))
     }
