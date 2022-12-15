@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.kt.digicobus.R
+import com.kt.digicobus.data.data
+import com.kt.digicobus.data.data.Companion.commuteBusInfoList
+import com.kt.digicobus.data.data.Companion.commuteLeaveBusInfoList
 import com.kt.digicobus.databinding.ActivityMainBinding
 
 
@@ -40,8 +43,9 @@ class MainActivity : AppCompatActivity() {
             if (!rect.contains(x, y)) {
                 val imm: InputMethodManager =
                     getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                if (imm != null) imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0)
+                if (imm != null) imm.hideSoftInputFromWindow(focusView.windowToken, 0)
                 focusView.clearFocus()
+
             }
         }
         return super.dispatchTouchEvent(ev)

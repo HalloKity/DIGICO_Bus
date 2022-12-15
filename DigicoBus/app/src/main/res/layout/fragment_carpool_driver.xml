@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".fragment.carpool.CarpoolDriverFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/img_carpool"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="운전자"/>
-
+        android:src="@drawable/img_driver"
+        android:scaleType="fitXY"/>
 </FrameLayout>

@@ -77,6 +77,11 @@ class CommuteLeaveWorkFragment : Fragment() {
                     }
                 }
 
+                for(i in 0 until commuteLeaveBusInfoList.size){
+                    commuteLeaveBusInfoList[i].isClick = false
+                }
+                binding.tvEndPlace  .text = ""
+
                 val adapter = TicketListAdapter(ctx, null, R.layout.listview_ticket, filterList, binding)
                 recyclerView.adapter = adapter
 

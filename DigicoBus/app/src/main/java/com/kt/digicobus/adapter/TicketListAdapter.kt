@@ -57,8 +57,6 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
 
             //만약 좌석이 클릭되었다면
 //            routeChoiceState = 1
-
-
             notifyDataSetChanged()
         }
 

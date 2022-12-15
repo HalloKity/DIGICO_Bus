@@ -44,7 +44,7 @@ class CommuteGoToWorkFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteGoToWorkBinding.inflate(layoutInflater)
 
-        //
+
         commuteLeaveBusInfoList.clear()
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -79,6 +79,11 @@ class CommuteGoToWorkFragment : Fragment() {
                         filterList.add(data)
                     }
                 }
+
+                for(i in 0 until commuteBusInfoList.size){
+                    commuteBusInfoList[i].isClick = false
+                }
+                binding.tvStartPlace.text = ""
 
                 val adapter = TicketListAdapter(ctx, binding, R.layout.listview_ticket, filterList)
                 recyclerView.adapter = adapter
