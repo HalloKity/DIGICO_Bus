@@ -154,15 +154,10 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
         val pattern = SimpleDateFormat("yyyy-MM-dd")
         val dateString = pattern.format(dayList[position])
 
-        Log.d("[d] debug", "dateString : $dateString")
-        Log.d("[d] debug", "filter : ${reservationInfoList.filter { it.reserveDate == dateString }}")
-        Log.d("[d] debug", "reservationInfoList : ${reservationInfoList}")
-
         if(reservationInfoList.any { it.reserveDate == dateString }) {
             holder.layout.item_day_layout.isClickable = false
             holder.layout.item_day_layout.setBackgroundResource(R.drawable.reserved_date_background)
         }
-//        reservationInfoList.filter { it.reserveDate == dayList[position].toString() }
     }
 
     override fun getItemCount(): Int {

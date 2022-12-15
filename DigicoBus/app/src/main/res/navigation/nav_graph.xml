@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_shuttle" />
     <fragment
         android:id="@+id/CarPoolFragment"
-        android:name="com.kt.digicobus.fragment.CarPoolFragment"
+        android:name="com.kt.digicobus.fragment.carpool.CarPoolFragment"
         android:label="fragment_car_pool"
         tools:layout="@layout/fragment_car_pool" />
     <fragment

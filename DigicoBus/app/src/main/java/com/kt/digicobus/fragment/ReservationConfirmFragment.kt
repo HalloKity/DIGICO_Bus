@@ -66,12 +66,30 @@ class ReservationConfirmFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             getAllReservationBusInfo()
             setAdapter()
+
+            // 예매내역이 없을 경우
+            if(ticketList.isNotEmpty()){
+                binding.tvNoReservation.visibility = View.GONE
+                binding.imgNoReservation.visibility = View.GONE
+                binding.recyclerview.visibility = View.VISIBLE
+            }else{
+                binding.tvNoReservation.visibility = View.VISIBLE
+                binding.imgNoReservation.visibility = View.VISIBLE
+                binding.recyclerview.visibility = View.GONE
+            }
         }
+
     }
 
     // 예약 취소
     private fun onClickReservationCancelBtn(position: Int) {
         val dialogCancel = DialogAfterSeatChoice(ctx, null, ticketList[position], setReservationConfirmAdapter = ::setDataAndAdapter)
+//        // 예매내역이 없을 경우
+//        if(ticketList.isNotEmpty()){
+//            binding.tvNoReservation.visibility = View.GONE
+//            binding.imgNoReservation.visibility = View.GONE
+//            binding.recyclerview.visibility = View.VISIBLE
+//        }
         dialogCancel.show()
     }
 
@@ -88,8 +106,6 @@ class ReservationConfirmFragment : Fragment() {
                 for(i in 0 until list.size){
                     var startTime = list[i].departureTime.split(":")
                     var endTime = list[i].officeTime.split(":")
-
-                    println("startTime : ${startTime} , endTime : ${endTime}")
 
                     //시간이 크면
                     if(startTime[0].toInt() > endTime[0].toInt()){

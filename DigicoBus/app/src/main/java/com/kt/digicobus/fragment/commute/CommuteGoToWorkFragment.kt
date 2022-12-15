@@ -15,6 +15,7 @@ import com.kt.digicobus.R
 import com.kt.digicobus.adapter.TicketListAdapter
 import com.kt.digicobus.data.data.Companion.allList
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
+import com.kt.digicobus.data.data.Companion.commuteLeaveBusInfoList
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.service.CommuteService
@@ -42,14 +43,9 @@ class CommuteGoToWorkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCommuteGoToWorkBinding.inflate(layoutInflater)
-//        binding.btnChoice.setOnClickListener {
-//            container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
-////            val transaction: FragmentTransaction = childFragmentManager.beginTransaction()
-////            val fragment1 = CommuteCalendarChoiceFragment()
-////            transaction.replace(R.id.fragment, fragment1)
-////            transaction.commit()
-////            it.findNavController().navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
-//        }
+
+        //
+        commuteLeaveBusInfoList.clear()
 
         CoroutineScope(Dispatchers.Main).launch {
             getAllCommuteBusInfo()
