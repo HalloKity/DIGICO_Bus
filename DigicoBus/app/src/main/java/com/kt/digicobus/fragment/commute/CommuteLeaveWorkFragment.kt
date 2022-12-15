@@ -3,23 +3,20 @@ package com.kt.digicobus.fragment.commute
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
-import com.kt.digicobus.adapter.LeaveTicketListAdapter
 import com.kt.digicobus.adapter.TicketListAdapter
-import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.allList
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
 import com.kt.digicobus.data.data.Companion.commuteLeaveBusInfoList
 import com.kt.digicobus.data.model.CommuteBusInfo
-import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
 import com.kt.digicobus.databinding.FragmentCommuteLeaveWorkBinding
 import com.kt.digicobus.service.CommuteService
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +28,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 class CommuteLeaveWorkFragment : Fragment() {
     private lateinit var binding : FragmentCommuteLeaveWorkBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var ticketListAdapter: LeaveTicketListAdapter
+    private lateinit var ticketListAdapter: TicketListAdapter
 
     private lateinit var ctx: Context
 
@@ -80,7 +77,7 @@ class CommuteLeaveWorkFragment : Fragment() {
                     }
                 }
 
-                val adapter = LeaveTicketListAdapter(ctx, binding, R.layout.listview_ticket, filterList)
+                val adapter = TicketListAdapter(ctx, null, R.layout.listview_ticket, filterList, binding)
                 recyclerView.adapter = adapter
 
                 return false
@@ -95,7 +92,7 @@ class CommuteLeaveWorkFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
         // 2. Adapter 객체 생성(한 행을 위해 반복 생성할 Layout과 데이터 전달)
-        ticketListAdapter = LeaveTicketListAdapter(ctx, binding, R.layout.listview_ticket, commuteLeaveBusInfoList)
+        ticketListAdapter = TicketListAdapter(ctx, null, R.layout.listview_ticket, commuteLeaveBusInfoList, binding)
 
         // 3. RecyclerView와 Adapter 연결
         recyclerView.adapter = ticketListAdapter

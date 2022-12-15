@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
 import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
-import com.kt.digicobus.data.data.Companion.routeChoiceState
 import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.databinding.FragmentCommuteGoToWorkBinding
+import com.kt.digicobus.databinding.FragmentCommuteLeaveWorkBinding
 import com.kt.digicobus.dialog.BottomSheetAfterClickMore
-import kotlin.properties.Delegates
 
-class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding, private val resource: Int, var ticketContentsList: MutableList<CommuteBusInfo>)
+class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWorkBinding?, private val resource: Int,
+                        var ticketContentsList: MutableList<CommuteBusInfo>, var bindingLeaveWork: FragmentCommuteLeaveWorkBinding? = null)
     : RecyclerView.Adapter<TicketHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketHolder {
@@ -44,7 +44,10 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
             choiceRoute = CommuteBusInfo(pos.stationId, pos.busId,pos.commuteId,pos.line,pos.mainPlace,pos.detailPlace,pos.departureTime,pos.officePlace,pos.officeTime,pos.latitude,pos.longitude,pos.isFavorite,pos.isClick)
 
             it.setBackgroundColor(context.resources.getColor(R.color.mint_choice))
-            binding.tvStartPlace.text = ticketContentsList[position].mainPlace
+            if(binding != null)
+                binding!!.tvStartPlace.text = ticketContentsList[position].mainPlace
+            if(bindingLeaveWork != null)
+                bindingLeaveWork!!.tvEndPlace.text = ticketContentsList[position].mainPlace
 
             for(i in 0 until ticketContentsList.size){
                 if(i != position){
@@ -98,16 +101,9 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
             var mainPlace = holder.mainPlace.text.toString()
             var detailPlace = holder.detailPlace.text.toString()
             var departureTime = holder.departureTime.text.toString()
-            var latitude = 0.0
-            var longitude = 0.0
-            // 위도 , 경도 받아오기 로직
-            for(i in commuteBusInfoList.indices){
-                if(commuteBusInfoList[i].mainPlace == mainPlace && commuteBusInfoList[i].detailPlace == detailPlace && commuteBusInfoList[i].departureTime == departureTime){
-                    latitude = commuteBusInfoList[i].latitude?.toDouble()!!
-                    longitude = commuteBusInfoList[i].longitude?.toDouble()!!
-                }
-            }
-            val selectBusInfo = CommuteBusInfo(stationId = stationId, mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude.toString(), longitude = longitude.toString())
+            val latitude = ticketContentsList[position].latitude
+            val longitude = ticketContentsList[position].longitude
+            val selectBusInfo = CommuteBusInfo(stationId = stationId, mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude, longitude = longitude)
             val bottomDialog = BottomSheetAfterClickMore(selectBusInfo)
 
             bottomDialog.show(
