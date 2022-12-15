@@ -40,5 +40,8 @@ class data{
 
         // login
         val userList = mutableListOf(UserForLogin("10153648", "1111"), UserForLogin("1","1"), UserForLogin("", ""))
+
+        // 요일
+        val dayNumToStringList = listOf("", "월", "화", "수", "목", "금", "토", "일")
     }
 }

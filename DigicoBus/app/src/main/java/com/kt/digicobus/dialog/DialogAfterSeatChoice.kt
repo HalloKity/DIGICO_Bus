@@ -5,13 +5,16 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
+import com.kt.digicobus.data.data
 import com.kt.digicobus.data.data.Companion.busRegisterList
 import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.ReserveSearch
@@ -21,6 +24,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class DialogAfterSeatChoice(
@@ -38,27 +43,36 @@ class DialogAfterSeatChoice(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.custom_dialog_after_seat_choice)
 
         if (reservation == null) {
+            // 날짜에 대한 요일 구하기
+            val localDate = LocalDate.parse(busRegisterList[0].reserveDate, DateTimeFormatter.ISO_DATE)
+            val reserveDateString = "${busRegisterList[0].reserveDate} (${data.dayNumToStringList[localDate.dayOfWeek.value]})"
+
             //예약 등록 로직
             //예약내역이 하나일 경우 => 2022.12.7 (목)
             if(busRegisterList.size == 1){
                 //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
-                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate}\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+                findViewById<TextView>(R.id.tv_text).text = "$reserveDateString\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
             }
             //예약 내역이 여러개일 경우 => 2022.12.7 (목) 외 3개
             else{
                 //"2022.12.7 (목)\n인천 간선오거리역 > 판교사옥\n예약하시겠습니까?
-                findViewById<TextView>(R.id.tv_text).text = "${busRegisterList[0].reserveDate} 외 ${busRegisterList.size-1}개\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
+                findViewById<TextView>(R.id.tv_text).text = "$reserveDateString 외 ${busRegisterList.size-1}개\n${choiceRoute.mainPlace} > ${choiceRoute.officePlace}\n예약하시겠습니까?"
             }
         } else {
             // 예약 취소
+            // 날짜에 대한 요일 구하기
+            val localDate = LocalDate.parse(reservation.reserveDate, DateTimeFormatter.ISO_DATE)
+            val reserveDateString = "${reservation.reserveDate} (${data.dayNumToStringList[localDate.dayOfWeek.value]})"
+
             val tvText = findViewById<TextView>(R.id.tv_text)
-            tvText.text = "${reservation.reserveDate}\n${reservation.mainPlace} > ${reservation.officePlace}\n취소하시겠습니까?"
+            tvText.text = "$reserveDateString\n${reservation.mainPlace} > ${reservation.officePlace}\n취소하시겠습니까?"
         }
 
 
