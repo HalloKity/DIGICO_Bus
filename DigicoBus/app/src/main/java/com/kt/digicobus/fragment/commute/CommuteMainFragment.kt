@@ -43,22 +43,21 @@ class CommuteMainFragment : Fragment() {
 //        }
         //전체값으로 데이터 받아서 달력으로 넘어가기 -> 버튼이 메인페이지에 있어서 어쩔 수 없음.
         binding.btnChoice.setOnClickListener {
-            var start_cnt = 0
-            var end_cnt = 0
+            var startCnt = 0
+            var endCnt = 0
             // 만약에 출근에 클릭이 되어있다면
             for(i in 0 until commuteBusInfoList.size){
                 if(commuteBusInfoList[i].isClick){
-                    start_cnt++
-
+                    startCnt++
                 }
             }
             for(i in 0 until commuteLeaveBusInfoList.size){
                 if(commuteLeaveBusInfoList[i].isClick){
-                    end_cnt++
+                    endCnt++
                 }
             }
 
-            if(start_cnt > 0 || end_cnt > 0){
+            if(startCnt > 0 || endCnt > 0){
                 container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
             }else{
                 Toast.makeText(ctx, "노선이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()

@@ -47,6 +47,8 @@ class CommuteLeaveWorkFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteLeaveWorkBinding.inflate(layoutInflater)
 
+        commuteBusInfoList.clear()
+
         CoroutineScope(Dispatchers.Main).launch {
             getAllCommuteBusInfo()
             setAdapter()

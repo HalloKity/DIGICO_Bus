@@ -13,7 +13,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/tab_carpool_view"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             app:elevation="1dp"
             app:menu="@menu/carpool_tab_menu"
             app:itemTextAppearanceActive="@style/BottomNavigationView.Active"

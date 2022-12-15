@@ -14,7 +14,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/top_navigation_view"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             app:elevation="1dp"
             app:menu="@menu/commute_tab_menu"
             app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
