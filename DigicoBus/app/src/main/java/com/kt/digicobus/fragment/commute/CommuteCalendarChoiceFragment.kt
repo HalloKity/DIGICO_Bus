@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kt.digicobus.GOGenieApplication
@@ -29,12 +32,25 @@ import kotlinx.coroutines.withContext
 class CommuteCalendarChoiceFragment : Fragment() {
     private lateinit var binding : FragmentCommuteCalendarChoiceBinding
     private lateinit var remainSeatList:MutableList<RemainSeat>
-
+    private lateinit var callback: OnBackPressedCallback
     private lateinit var ctx: Context
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         ctx = context
+
+        //뒤로가기 버튼 콜백 함수
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     override fun onCreateView(
@@ -43,13 +59,30 @@ class CommuteCalendarChoiceFragment : Fragment() {
     ): View? {
         binding = FragmentCommuteCalendarChoiceBinding.inflate(layoutInflater)
 
-        //캘린더 뼈대
-
         CoroutineScope(Dispatchers.Main).launch {
             getRemainSeatInfo()
             makeCalendar()
         }
 
+        changeDisplayByRoute()
+
+        // 뒤로가기
+        binding.btnBack.setOnClickListener{
+            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
+        }
+
+        //신청하기
+        binding.btnChoice.setOnClickListener{
+            //알림창 띄우기
+            var dialogListener = DialogAfterSeatChoice(ctx, container)
+            //다이얼로그 띄우기
+            dialogListener.show()
+        }
+
+        return binding.root
+    }
+
+    private fun changeDisplayByRoute() {
         //출근인지 퇴근인지
         if(choiceRoute.commuteId.toInt() == 0){
             //출발지 지정
@@ -72,21 +105,6 @@ class CommuteCalendarChoiceFragment : Fragment() {
             //도착 시간 지정
             binding.tvEndTime.text = choiceRoute.departureTime
         }
-
-        // 뒤로가기
-        binding.btnBack.setOnClickListener{
-            container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
-        }
-
-        //신청하기
-        binding.btnChoice.setOnClickListener{
-            //알림창 띄우기
-            var dialog_listener = DialogAfterSeatChoice(ctx, container)
-            //다이얼로그 띄우기
-            dialog_listener.show()
-        }
-
-        return binding.root
     }
 
     private fun makeCalendar() {
