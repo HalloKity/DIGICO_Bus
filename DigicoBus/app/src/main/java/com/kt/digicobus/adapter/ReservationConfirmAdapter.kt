@@ -82,8 +82,6 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
         CoroutineScope(Dispatchers.Main).launch {
             val resultList = getBusEntireRoute(ticketContentsList[position].busId)
             setAdapter(holder.recyclerview, resultList)
-
-
         }
 
         // 지도로 보기

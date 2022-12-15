@@ -72,6 +72,10 @@ class ReservationConfirmFragment : Fragment() {
                 binding.tvNoReservation.visibility = View.GONE
                 binding.imgNoReservation.visibility = View.GONE
                 binding.recyclerview.visibility = View.VISIBLE
+            }else{
+                binding.tvNoReservation.visibility = View.VISIBLE
+                binding.imgNoReservation.visibility = View.VISIBLE
+                binding.recyclerview.visibility = View.GONE
             }
         }
 
@@ -80,6 +84,12 @@ class ReservationConfirmFragment : Fragment() {
     // 예약 취소
     private fun onClickReservationCancelBtn(position: Int) {
         val dialogCancel = DialogAfterSeatChoice(ctx, null, ticketList[position], setReservationConfirmAdapter = ::setDataAndAdapter)
+//        // 예매내역이 없을 경우
+//        if(ticketList.isNotEmpty()){
+//            binding.tvNoReservation.visibility = View.GONE
+//            binding.imgNoReservation.visibility = View.GONE
+//            binding.recyclerview.visibility = View.VISIBLE
+//        }
         dialogCancel.show()
     }
 
