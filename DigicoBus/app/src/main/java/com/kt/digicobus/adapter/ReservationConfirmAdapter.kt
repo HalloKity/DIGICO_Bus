@@ -38,6 +38,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ReservationConfirmAdapter(var context: Context, private val resource: Int,  var ticketContentsList: MutableList<ReserveSearch>,
                                 val onClickReservationCancelBtn: (Int) -> Unit)
@@ -168,8 +169,12 @@ class ReservationConfirmAdapter(var context: Context, private val resource: Int,
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setHolderData (holder: ReservationHolder, item: ReserveSearch) {
-        holder.tv_date.text = item.reserveDate.toString()
+        // 날짜에 대한 요일 구하기
+        val localDate = LocalDate.parse(item.reserveDate, DateTimeFormatter.ISO_DATE)
+
+        holder.tv_date.text = "${item.reserveDate}  ${data.dayNumToStringList[localDate.dayOfWeek.value]}"
         holder.tv_to_place.text = item.mainPlace
         holder.tv_from_place.text = item.officePlace
         holder.tv_to_time.text = item.departureTime
