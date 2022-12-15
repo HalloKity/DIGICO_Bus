@@ -32,7 +32,6 @@ class CommuteLeaveWorkFragment : Fragment() {
     private lateinit var binding : FragmentCommuteLeaveWorkBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var ticketListAdapter: LeaveTicketListAdapter
-    private lateinit var goToHomeRouteList: MutableList<CommuteBusInfo>
 
     private lateinit var ctx: Context
 
@@ -68,8 +67,8 @@ class CommuteLeaveWorkFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 val filterList = mutableListOf<CommuteBusInfo>()
 
-                for (i in 0 until goToHomeRouteList.size) {
-                    val data: CommuteBusInfo = goToHomeRouteList[i]
+                for (i in 0 until commuteLeaveBusInfoList.size) {
+                    val data: CommuteBusInfo = commuteLeaveBusInfoList[i]
 
                     //데이터와 비교해서 내가 쓴 단어가 있다면 (00행, 메인 장소, 디테일 장소)
                     if (data.mainPlace.toLowerCase().contains(newText.toLowerCase())) {
