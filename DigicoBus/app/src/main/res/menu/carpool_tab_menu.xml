@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/CarpoolOccupantFragment"
+        android:title="탑승자"/>
+    <item
+        android:id="@+id/CarpoolDriverFragment"
+        android:title="운전자" />
+</menu>

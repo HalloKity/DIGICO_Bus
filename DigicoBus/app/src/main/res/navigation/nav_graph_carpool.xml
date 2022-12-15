@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/CarpoolOccupantFragment"
+    android:id="@+id/nav_graph_carpool">
+
+    <fragment
+        android:id="@+id/CarpoolOccupantFragment"
+        android:name="com.kt.digicobus.fragment.carpool.CarpoolOccupantFragment"
+        android:label="fragment_carpool_occupant"
+        tools:layout="@layout/fragment_carpool_occupant" >
+        <action
+            android:id="@+id/action_CarpoolOccupantFragment_to_CarpoolDriverFragment"
+            app:destination="@id/CarpoolDriverFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CarpoolDriverFragment"
+        android:name="com.kt.digicobus.fragment.carpool.CarpoolDriverFragment"
+        android:label="fragment_carpool_driver"
+        tools:layout="@layout/fragment_carpool_driver" >
+        <action
+            android:id="@+id/action_CarpoolDriverFragment_to_CarpoolOccupantFragment"
+            app:destination="@id/CarpoolOccupantFragment" />
+    </fragment>
+
+</navigation>

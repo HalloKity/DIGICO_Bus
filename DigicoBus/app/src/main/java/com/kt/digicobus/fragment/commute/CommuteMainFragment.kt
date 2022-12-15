@@ -5,23 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.R
-import com.kt.digicobus.adapter.TicketHolder
-import com.kt.digicobus.adapter.TicketListAdapter
-import com.kt.digicobus.data.data
-import com.kt.digicobus.data.data.Companion.routeChoiceState
-import com.kt.digicobus.databinding.ActivityLoginBinding.inflate
+import com.kt.digicobus.data.data.Companion.allList
+import com.kt.digicobus.data.data.Companion.commuteBusInfoList
+import com.kt.digicobus.data.data.Companion.commuteLeaveBusInfoList
 import com.kt.digicobus.databinding.FragmentCommuteMainBinding
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 
 // 통근버스 1
@@ -50,7 +43,26 @@ class CommuteMainFragment : Fragment() {
 //        }
         //전체값으로 데이터 받아서 달력으로 넘어가기 -> 버튼이 메인페이지에 있어서 어쩔 수 없음.
         binding.btnChoice.setOnClickListener {
-            container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+            var start_cnt = 0
+            var end_cnt = 0
+            // 만약에 출근에 클릭이 되어있다면
+            for(i in 0 until commuteBusInfoList.size){
+                if(commuteBusInfoList[i].isClick){
+                    start_cnt++
+
+                }
+            }
+            for(i in 0 until commuteLeaveBusInfoList.size){
+                if(commuteLeaveBusInfoList[i].isClick){
+                    end_cnt++
+                }
+            }
+
+            if(start_cnt > 0 || end_cnt > 0){
+                container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+            }else{
+                Toast.makeText(ctx, "노선이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //출퇴근 fragment 연결

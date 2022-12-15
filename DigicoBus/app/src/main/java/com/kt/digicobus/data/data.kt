@@ -28,6 +28,8 @@ class data{
         var allList = mutableListOf<CommuteBusInfo>()
         // 출근 통근 노선도
         var commuteBusInfoList = mutableListOf<CommuteBusInfo>()
+        // 퇴근 통근 노선도
+        var commuteLeaveBusInfoList = mutableListOf<CommuteBusInfo>()
 
         //선택한 출근길 값
         var choiceRoute = CommuteBusInfo()
