@@ -34,7 +34,9 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private var prevMarker : Marker? = null
 
     private lateinit var busEntireRouteList: MutableList<BusStopContent>
+
     private var needBusMarker = false
+    private var selectedStationId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,7 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         needBusMarker = intent.getBooleanExtra("needBusMarker", false)
+        selectedStationId = intent.getStringExtra("selectedStationId").toString()
 
         // 뒤로 가기
         binding.btnBack.setOnClickListener {
@@ -89,7 +92,8 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
                 busEntireRouteList = mutableListOf()
                 resultList.forEach { item ->
                     busEntireRouteList.add(
-                        BusStopContent(item.mainPlace, item.departureTime, item.latitude, item.longitude, false)
+                        BusStopContent(item.mainPlace, item.departureTime, item.latitude, item.longitude,
+                            (item.stationId == selectedStationId))
                     )
                 }
 
@@ -99,15 +103,28 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun onClickItem(position: Int) {
+    private fun onClickItem(position: Int, isClick: Boolean) {
         val clickedItem = busEntireRouteList[position]
         val clickedItemLat = LatLng(clickedItem.locationLatitude, clickedItem.locationLongitude)
 
         if (prevMarker != null) {
             naverMapAPIService.removeMarker(prevMarker!!)
         }
-        prevMarker = naverMapAPIService.setMarker(clickedItemLat, clickedItem.busStopLocation)
-        naverMapAPIService.setCameraPositionAndZoom(clickedItemLat, 16.0)
+        if(isClick) {
+            prevMarker = naverMapAPIService.setMarker(clickedItemLat, clickedItem.busStopLocation)
+            naverMapAPIService.setCameraPositionAndZoom(clickedItemLat, 16.0)
+        } else {
+            // 클릭된게 없으면 전체 노선 보여주기
+            showEntireRoute()
+        }
+    }
+
+    private fun showEntireRoute() {
+        // 클릭된게 없으면 전체 노선 보여주기
+        val startLatLng = LatLng(busEntireRouteList[0].locationLatitude, busEntireRouteList[0].locationLongitude)
+        val goalLatLng = LatLng(busEntireRouteList[busEntireRouteList.size-1].locationLatitude, busEntireRouteList[busEntireRouteList.size-1].locationLongitude)
+
+        naverMapAPIService.showPath(startLatLng, goalLatLng)
     }
 
     override fun onMapReady(naverMap: NaverMap) {
@@ -121,8 +138,7 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             naverMapAPIService.setPath(latlngStart, latlngEnd)
         }
 
-        val startLatLng = LatLng(busEntireRouteList[0].locationLatitude, busEntireRouteList[0].locationLongitude)
-        val goalLatLng = LatLng(busEntireRouteList[busEntireRouteList.size-1].locationLatitude, busEntireRouteList[busEntireRouteList.size-1].locationLongitude)
-        naverMapAPIService.showPath(startLatLng, goalLatLng)
+        val clickedIdx = busEntireRouteList.indexOfFirst { it.isClick }
+        onClickItem(clickedIdx, clickedIdx != -1)
     }
 }

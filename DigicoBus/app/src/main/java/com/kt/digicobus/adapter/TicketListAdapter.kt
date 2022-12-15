@@ -94,6 +94,7 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
             var pos = ticketContentsList[position]
             choiceRoute = CommuteBusInfo(pos.stationId, pos.busId,pos.commuteId,pos.line,pos.mainPlace,pos.detailPlace,pos.departureTime,pos.officePlace,pos.officeTime,pos.latitude,pos.longitude,pos.isFavorite,pos.isClick)
 
+            val stationId = ticketContentsList[position].stationId
             var mainPlace = holder.mainPlace.text.toString()
             var detailPlace = holder.detailPlace.text.toString()
             var departureTime = holder.departureTime.text.toString()
@@ -106,7 +107,7 @@ class TicketListAdapter(var context: Context,var binding:FragmentCommuteGoToWork
                     longitude = commuteBusInfoList[i].longitude?.toDouble()!!
                 }
             }
-            val selectBusInfo = CommuteBusInfo(mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude.toString(), longitude = longitude.toString())
+            val selectBusInfo = CommuteBusInfo(stationId = stationId, mainPlace = mainPlace, detailPlace= detailPlace,departureTime=departureTime, latitude = latitude.toString(), longitude = longitude.toString())
             val bottomDialog = BottomSheetAfterClickMore(selectBusInfo)
 
             bottomDialog.show(
