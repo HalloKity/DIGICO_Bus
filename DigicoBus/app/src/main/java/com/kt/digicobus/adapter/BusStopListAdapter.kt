@@ -59,13 +59,7 @@ class BusStopListAdapter(var context: Context, private val resource: Int, var bu
             holder.constraint.setBackgroundColor(context.getColor(R.color.white))
         }else if(busStopList[position].isClick){
             holder.constraint.setBackgroundColor(context.getColor(R.color.mint_dark))
-//            onClickItem(position, true)
         }
-
-        // 클릭된게 없으면 전체 노선 보여주기
-//        if (busStopList.none { it.isClick }) {
-//            onClickItem(position, false)
-//        }
     }
 
     override fun getItemCount(): Int {

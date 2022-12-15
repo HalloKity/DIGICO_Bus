@@ -45,7 +45,6 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
         needBusMarker = intent.getBooleanExtra("needBusMarker", false)
         selectedStationId = intent.getStringExtra("selectedStationId").toString()
-        Log.d("[d] my debugging", "stationId : $selectedStationId")
 
         // 뒤로 가기
         binding.btnBack.setOnClickListener {
@@ -92,10 +91,9 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 busEntireRouteList = mutableListOf()
                 resultList.forEach { item ->
-                    val isClicked = (item.stationId == selectedStationId)
-
                     busEntireRouteList.add(
-                        BusStopContent(item.mainPlace, item.departureTime, item.latitude, item.longitude, isClicked)
+                        BusStopContent(item.mainPlace, item.departureTime, item.latitude, item.longitude,
+                            (item.stationId == selectedStationId))
                     )
                 }
 
@@ -106,8 +104,6 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun onClickItem(position: Int, isClick: Boolean) {
-        Log.d("[d] my debugging", "<CommuteBusEntireRouteActivity> onClickItem 실행")
-
         val clickedItem = busEntireRouteList[position]
         val clickedItemLat = LatLng(clickedItem.locationLatitude, clickedItem.locationLongitude)
 
@@ -132,7 +128,6 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-        Log.d("[d] my debugging", "<CommuteBusEntireRouteActivity> onMapReady 실행")
         naverMapAPIService = NaverMapAPIService(naverMap, needBusMarker)
 
         for (i in 1 until busEntireRouteList.size) {
@@ -143,6 +138,7 @@ class CommuteBusEntireRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             naverMapAPIService.setPath(latlngStart, latlngEnd)
         }
 
-        showEntireRoute()
+        val clickedIdx = busEntireRouteList.indexOfFirst { it.isClick }
+        onClickItem(clickedIdx, clickedIdx != -1)
     }
 }
