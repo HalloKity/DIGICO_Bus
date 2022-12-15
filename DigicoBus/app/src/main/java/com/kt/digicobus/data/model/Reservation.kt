@@ -30,6 +30,9 @@ data class ReserveSearch(
     @SerializedName("station_id")
     val stationId:Int,
 
+    @SerializedName("commute_id")
+    val commuteId: Int,
+
     // 출발 주요 역 (ex. 간선오거리역)
     @SerializedName("main_place")
     val mainPlace:String,

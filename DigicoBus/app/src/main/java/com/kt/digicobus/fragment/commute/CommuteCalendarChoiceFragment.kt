@@ -36,6 +36,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
     private var reservationInfoList = mutableListOf<ReserveSearch>()
 
     private lateinit var ctx: Context
+    private var commuteId : Int? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,6 +61,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCommuteCalendarChoiceBinding.inflate(layoutInflater)
+        commuteId = arguments?.getInt("commuteId", -1)
 
         CoroutineScope(Dispatchers.Main).launch {
             getRemainSeatInfo()
@@ -112,7 +114,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
     private fun makeCalendar() {
         val monthListManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
-        val monthListAdapter = MonthAdapter(ctx,binding,remainSeatList, reservationInfoList)
+        val monthListAdapter = MonthAdapter(ctx,binding,commuteId,remainSeatList, reservationInfoList)
 
         binding.calendarCustom.apply {
             layoutManager = monthListManager

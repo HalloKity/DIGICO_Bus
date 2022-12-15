@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.kt.digicobus.R
-import com.kt.digicobus.data.data.Companion.allList
 import com.kt.digicobus.data.data.Companion.commuteBusInfoList
 import com.kt.digicobus.data.data.Companion.commuteLeaveBusInfoList
 import com.kt.digicobus.databinding.FragmentCommuteMainBinding
@@ -58,7 +57,10 @@ class CommuteMainFragment : Fragment() {
             }
 
             if(startCnt > 0 || endCnt > 0){
-                container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment)
+                val bundle = Bundle()
+                bundle.putInt("commuteId", (if (startCnt > 0) 0 else 1))
+
+                container?.findNavController()?.navigate(R.id.action_CommuteMainFragment_to_CommuteCalendarChoiceFragment, bundle)
             }else{
                 Toast.makeText(ctx, "노선이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
             }

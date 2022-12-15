@@ -23,6 +23,7 @@ import java.util.*
 
 const val TAG = "DayAdapter"
 class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoiceBinding, val tempMonth:Int,
+                 val commuteId: Int?,
                  val dayList: MutableList<Date>, var dayClickCheckList: MutableList<Boolean>, var remainSeatList: List<RemainSeat>,
                  val reservationInfoList: List<ReserveSearch>)
     : RecyclerView.Adapter<DayAdapter.DayView>() {
@@ -153,8 +154,8 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
         // 예약완료인 날짜
         val pattern = SimpleDateFormat("yyyy-MM-dd")
         val dateString = pattern.format(dayList[position])
-
-        if(reservationInfoList.any { it.reserveDate == dateString }) {
+        if(commuteId != null
+            && reservationInfoList.any { it.reserveDate == dateString && it.commuteId == commuteId }) {
             holder.layout.item_day_layout.isClickable = false
             holder.layout.item_day_layout.setBackgroundResource(R.drawable.reserved_date_background)
         }

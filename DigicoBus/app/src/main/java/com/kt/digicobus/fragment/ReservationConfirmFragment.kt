@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.ReservationConfirmAdapter
-import com.kt.digicobus.data.model.CommuteBusInfo
 import com.kt.digicobus.data.model.ReserveSearch
 import com.kt.digicobus.databinding.FragmentReservationConfirmBinding
 import com.kt.digicobus.dialog.DialogAfterSeatChoice
@@ -110,7 +109,7 @@ class ReservationConfirmFragment : Fragment() {
                     //시간이 크면
                     if(startTime[0].toInt() > endTime[0].toInt()){
                         //바꿔서 저장
-                        var newData = ReserveSearch(list[i].reservationId,list[i].reserveDate,list[i].stationId,list[i].officePlace,
+                        var newData = ReserveSearch(list[i].reservationId,list[i].reserveDate,list[i].stationId, list[i].commuteId, list[i].officePlace,
                             list[i].detailPlace, list[i].officeTime, list[i].mainPlace, list[i].departureTime,
                             list[i].busId, list[i].busNumber, list[i].busDriverNumber)
                         ticketList.add(newData)
@@ -119,7 +118,7 @@ class ReservationConfirmFragment : Fragment() {
                     else if(startTime[0].toInt() == endTime[0].toInt()){
                         if(startTime[1].toInt() > endTime[1].toInt()){
                             //바꿔서 저장
-                            var newData = ReserveSearch(list[i].reservationId,list[i].reserveDate,list[i].stationId,list[i].officePlace,
+                            var newData = ReserveSearch(list[i].reservationId,list[i].reserveDate,list[i].stationId, list[i].commuteId,list[i].officePlace,
                                                 list[i].detailPlace, list[i].officeTime, list[i].mainPlace, list[i].departureTime,
                                                 list[i].busId, list[i].busNumber, list[i].busDriverNumber)
                             ticketList.add(newData)
