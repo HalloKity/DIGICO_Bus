@@ -143,14 +143,6 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             //아직 구현 안함
         }
 
-        //좌석 0개면 배경화면 및 좌석 색 회색으로 처리
-        if(holder.layout.tv_left_seat.text == "0"){
-            holder.layout.item_day_layout.isClickable = false
-            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_100))
-            holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
-            holder.layout.tv_seok.setTextColor(Color.rgb(170,170,170))
-        }
-
         // 예약완료인 날짜
         val pattern = SimpleDateFormat("yyyy-MM-dd")
         val dateString = pattern.format(dayList[position])
@@ -158,6 +150,14 @@ class DayAdapter(var context:Context, var binding: FragmentCommuteCalendarChoice
             && reservationInfoList.any { it.reserveDate == dateString && it.commuteId == commuteId }) {
             holder.layout.item_day_layout.isClickable = false
             holder.layout.item_day_layout.setBackgroundResource(R.drawable.reserved_date_background)
+        }
+
+        //좌석 0개면 배경화면 및 좌석 색 회색으로 처리
+        if(holder.layout.tv_left_seat.text == "0"){
+            holder.layout.item_day_layout.isClickable = false
+            holder.layout.item_day_layout.setBackgroundColor(context.resources.getColor(R.color.gray_100))
+            holder.layout.tv_left_seat.setTextColor(Color.rgb(170,170,170))
+            holder.layout.tv_seok.setTextColor(Color.rgb(170,170,170))
         }
     }
 
