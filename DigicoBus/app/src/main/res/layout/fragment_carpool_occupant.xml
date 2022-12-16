@@ -9,7 +9,7 @@
         android:id="@+id/img_carpool"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/img_driver"
+        android:src="@drawable/img_carpool"
         android:scaleType="fitXY"/>
 
 </FrameLayout>
