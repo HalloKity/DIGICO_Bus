@@ -12,7 +12,7 @@ class GOGenieApplication: Application() {
     // 앱 프로세스 소멸로 인해 인스턴스가 소멸된 후 앱이 다시 실행될 때 재생성된다.
     // Manifest에 등록해야 한다.
 
-    private val BOARD_URL = "http://192.168.201.48:7777"
+    private val BOARD_URL = "http://192.168.0.19:7777"
 
     companion object {
         // 전역변수 문법을 통해 Retrofit 인스턴스를 앱 실행 시 1번만 생성하여 사용 (싱글톤 객체)

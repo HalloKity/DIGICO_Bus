@@ -6,6 +6,7 @@
     <!-- 특정 도메인만 허용 -->
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.201.48</domain>
+        <domain includeSubdomains="true">192.168.0.19</domain>
     </domain-config>
 
 </network-security-config>
