@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.kt.digicobus.GOGenieApplication
 import com.kt.digicobus.R
 import com.kt.digicobus.adapter.MonthAdapter
+import com.kt.digicobus.data.data.Companion.busRegisterList
 import com.kt.digicobus.data.data.Companion.choiceRoute
 import com.kt.digicobus.data.model.RemainSeat
 import com.kt.digicobus.data.model.ReserveSearch
@@ -45,6 +46,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
         //뒤로가기 버튼 콜백 함수
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                busRegisterList.clear()
                 findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
             }
         }
@@ -73,6 +75,7 @@ class CommuteCalendarChoiceFragment : Fragment() {
 
         // 뒤로가기
         binding.btnBack.setOnClickListener{
+            busRegisterList.clear()
             container?.findNavController()?.navigate(R.id.action_CommuteCalendarChoiceFragment_to_CommuteMainFragment)
         }
 
